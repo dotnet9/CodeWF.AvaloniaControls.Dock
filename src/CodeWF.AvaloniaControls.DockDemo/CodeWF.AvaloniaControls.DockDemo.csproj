@@ -25,7 +25,6 @@
 		<PackageReference Include="ReactiveUI.Avalonia" />
 		<PackageReference Include="CodeWF.EventBus" />
 		<PackageReference Include="Dock.Model.Avalonia" />
-		<PackageReference Include="Dock.Serializer" />
 		<PackageReference Include="Irihi.Ursa.Themes.Semi" />
 		<PackageReference Include="Semi.Avalonia" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" />
