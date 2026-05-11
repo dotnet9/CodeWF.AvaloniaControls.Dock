@@ -28,7 +28,6 @@
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="AvaloniaUI.DiagnosticsSupport" />
 		<PackageReference Include="ReactiveUI.Avalonia" />
 		<PackageReference Include="Dock.Model.ReactiveUI" />
-		<PackageReference Include="Dock.Avalonia" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" />
 		<PackageReference Include="StaticViewLocator">
 		  <PrivateAssets>all</PrivateAssets>
