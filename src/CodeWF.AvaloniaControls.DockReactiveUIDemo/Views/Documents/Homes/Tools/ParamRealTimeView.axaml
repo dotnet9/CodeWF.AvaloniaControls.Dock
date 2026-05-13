@@ -9,20 +9,29 @@
              x:DataType="vm:ParamRealTimeViewModel"
              x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.ParamRealTimeView">
-    <Border Padding="14" Background="White" CornerRadius="16">
-        <StackPanel Spacing="12">
-            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
+    <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+        <StackPanel Spacing="10">
+            <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
             <StackPanel Spacing="6">
-                <TextBlock Text="CPU 负载 42%" />
-                <ProgressBar Minimum="0" Maximum="100" Value="42" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Foreground="#4B5563" Text="CPU 负载" />
+                    <TextBlock Grid.Column="1" FontWeight="SemiBold" Text="42%" />
+                </Grid>
+                <ProgressBar Height="8" Minimum="0" Maximum="100" Value="42" />
             </StackPanel>
             <StackPanel Spacing="6">
-                <TextBlock Text="内存使用率 68%" />
-                <ProgressBar Minimum="0" Maximum="100" Value="68" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Foreground="#4B5563" Text="内存使用率" />
+                    <TextBlock Grid.Column="1" FontWeight="SemiBold" Text="68%" />
+                </Grid>
+                <ProgressBar Height="8" Minimum="0" Maximum="100" Value="68" />
             </StackPanel>
             <StackPanel Spacing="6">
-                <TextBlock Text="队列深度 23%" />
-                <ProgressBar Minimum="0" Maximum="100" Value="23" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Foreground="#4B5563" Text="队列深度" />
+                    <TextBlock Grid.Column="1" FontWeight="SemiBold" Text="23%" />
+                </Grid>
+                <ProgressBar Height="8" Minimum="0" Maximum="100" Value="23" />
             </StackPanel>
         </StackPanel>
     </Border>

@@ -9,20 +9,20 @@
              x:DataType="vm:LogViewModel"
              x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.LogView">
-    <Border Padding="14" Background="White" CornerRadius="16">
-        <StackPanel Spacing="12">
-            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
+    <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+        <StackPanel Spacing="9">
+            <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                <TextBlock FontWeight="SemiBold" Text="10:14" />
-                <TextBlock Grid.Column="1" Text="分析页签被拖出后，工作区快照已保存。" />
+                <TextBlock FontWeight="SemiBold" Foreground="#24558F" Text="10:14" />
+                <TextBlock Grid.Column="1" Foreground="#4B5563" Text="工作区快照已保存。" TextWrapping="Wrap" />
             </Grid>
             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                <TextBlock FontWeight="SemiBold" Text="10:16" />
-                <TextBlock Grid.Column="1" Text="后台诊断已完成，未发现阻塞性问题。" />
+                <TextBlock FontWeight="SemiBold" Foreground="#1E6B3B" Text="10:16" />
+                <TextBlock Grid.Column="1" Foreground="#4B5563" Text="后台诊断完成。" TextWrapping="Wrap" />
             </Grid>
             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                <TextBlock FontWeight="SemiBold" Text="10:19" />
-                <TextBlock Grid.Column="1" Text="运维人员已通过标题栏菜单重新打开设置文档。" />
+                <TextBlock FontWeight="SemiBold" Foreground="#8A5A00" Text="10:19" />
+                <TextBlock Grid.Column="1" Foreground="#4B5563" Text="重新打开设置文档。" TextWrapping="Wrap" />
             </Grid>
         </StackPanel>
     </Border>

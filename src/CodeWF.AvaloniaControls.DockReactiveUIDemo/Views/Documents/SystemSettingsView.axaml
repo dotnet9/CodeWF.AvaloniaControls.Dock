@@ -1,4 +1,4 @@
-﻿<UserControl
+<UserControl
     x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.SystemSettingsView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,37 +11,56 @@
     x:DataType="vm:SystemSettingsViewModel"
     mc:Ignorable="d">
     <ScrollViewer>
-        <StackPanel Margin="4" Spacing="16">
-            <Border Padding="22" Background="#111827" CornerRadius="20">
-                <StackPanel Spacing="8">
-                    <TextBlock FontSize="26" FontWeight="Bold" Foreground="White" Text="{Binding Title}" />
-                    <TextBlock Foreground="#D1D5DB"
-                               Text="将配置分组、安全开关和部署默认值组织为更像真实管理页的结构。" />
+        <StackPanel Margin="2" Spacing="10">
+            <Border Padding="12"
+                    Background="#FFFFFF"
+                    BorderBrush="#D5DBE5"
+                    BorderThickness="1"
+                    CornerRadius="8">
+                <StackPanel Spacing="3">
+                    <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
+                    <TextBlock Foreground="#697386" Text="工作区安全策略、外壳模式和部署默认值。" />
                 </StackPanel>
             </Border>
 
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
-                <Border Padding="18" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
-                    <StackPanel Spacing="12">
-                        <TextBlock FontWeight="SemiBold" Text="安全控制" />
-                        <CheckBox IsChecked="True" Content="工作区重置前需要确认" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                    <StackPanel Spacing="10">
+                        <TextBlock FontWeight="SemiBold" Foreground="#111827" Text="安全控制" />
+                        <CheckBox IsChecked="True" Content="重置工作区前需要确认" />
                         <CheckBox IsChecked="True" Content="保持嵌入工具隔离" />
-                        <CheckBox IsChecked="False" Content="允许预览功能模块" />
+                        <CheckBox IsChecked="False" Content="启用预览模块" />
                     </StackPanel>
                 </Border>
-                <Border Grid.Column="1" Padding="18" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
-                    <StackPanel Spacing="12">
-                        <TextBlock FontWeight="SemiBold" Text="外壳配置" />
+                <Border Grid.Column="1" Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                    <StackPanel Spacing="10">
+                        <TextBlock FontWeight="SemiBold" Foreground="#111827" Text="外壳配置" />
                         <ComboBox SelectedIndex="0">
                             <ComboBoxItem Content="运维默认" />
                             <ComboBoxItem Content="诊断模式" />
                             <ComboBoxItem Content="极简模式" />
                         </ComboBox>
-                        <TextBlock Foreground="#64748B" Text="该页面演示了无需依赖任何商业 UI 包也能构建专业设置页。" />
+                        <TextBlock Foreground="#697386" Text="当前配置将在新建窗口和重置布局后继续生效。" TextWrapping="Wrap" />
                     </StackPanel>
                 </Border>
             </Grid>
+
+            <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                    <StackPanel Spacing="4">
+                        <TextBlock FontSize="12" Foreground="#697386" Text="主题" />
+                        <TextBlock FontWeight="SemiBold" Text="专业浅色" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="4">
+                        <TextBlock FontSize="12" Foreground="#697386" Text="标题栏" />
+                        <TextBlock FontWeight="SemiBold" Text="深色稳定态" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Spacing="4">
+                        <TextBlock FontSize="12" Foreground="#697386" Text="文档恢复" />
+                        <TextBlock FontWeight="SemiBold" Text="自动定位" />
+                    </StackPanel>
+                </Grid>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
-

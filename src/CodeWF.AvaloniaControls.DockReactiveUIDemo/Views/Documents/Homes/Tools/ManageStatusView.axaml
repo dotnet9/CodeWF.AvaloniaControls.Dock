@@ -9,25 +9,25 @@
              x:DataType="vm:ManageStatusViewModel"
              x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.ManageStatusView">
-    <Border Padding="14" Background="White" CornerRadius="16">
-        <StackPanel Spacing="12">
-            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
+    <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+        <StackPanel Spacing="10">
+            <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                <TextBlock Text="外壳路由服务" />
-                <Border Grid.Column="1" Padding="8,4" Background="#DCFCE7" CornerRadius="999">
-                    <TextBlock Foreground="#166534" Text="健康" />
+                <TextBlock Foreground="#4B5563" Text="外壳路由服务" />
+                <Border Grid.Column="1" Padding="8,3" Background="#EAF7EF" BorderBrush="#B8DFC7" BorderThickness="1" CornerRadius="4">
+                    <TextBlock Foreground="#1E6B3B" FontSize="12" Text="健康" />
                 </Border>
             </Grid>
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                <TextBlock Text="遥测聚合服务" />
-                <Border Grid.Column="1" Padding="8,4" Background="#FEF3C7" CornerRadius="999">
-                    <TextBlock Foreground="#92400E" Text="需关注" />
+                <TextBlock Foreground="#4B5563" Text="遥测聚合服务" />
+                <Border Grid.Column="1" Padding="8,3" Background="#FFF7E6" BorderBrush="#F3D39B" BorderThickness="1" CornerRadius="4">
+                    <TextBlock Foreground="#8A5A00" FontSize="12" Text="需关注" />
                 </Border>
             </Grid>
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                <TextBlock Text="外部同步网关" />
-                <Border Grid.Column="1" Padding="8,4" Background="#FEE2E2" CornerRadius="999">
-                    <TextBlock Foreground="#B91C1C" Text="待检查" />
+                <TextBlock Foreground="#4B5563" Text="外部同步网关" />
+                <Border Grid.Column="1" Padding="8,3" Background="#FCEBEC" BorderBrush="#F0B8BE" BorderThickness="1" CornerRadius="4">
+                    <TextBlock Foreground="#B4232C" FontSize="12" Text="待检查" />
                 </Border>
             </Grid>
         </StackPanel>

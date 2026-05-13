@@ -10,12 +10,12 @@
              x:DataType="vm:ProgInfoViewModel"
              x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.ProgInfoView">
-    <Border Padding="14" Background="White" CornerRadius="16">
-        <StackPanel Spacing="12">
-            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
-            <TextBlock Foreground="#64748B"
-                       Text="多级树结构用于演示在紧凑工具面板中浏览嵌套进程、节点或流水线信息的效果。" />
-            <Border Padding="10" Background="#F8FAFC" CornerRadius="12">
+    <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+        <StackPanel Spacing="10">
+            <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
+            <TextBlock Foreground="#697386"
+                       Text="嵌套进程、节点和流水线层级。" />
+            <Border Padding="8" Background="#F8FAFC" BorderBrush="#E1E7EF" BorderThickness="1" CornerRadius="6">
                 <TreeView ItemsSource="{Binding MultipleLevelItems}">
                     <TreeView.DataTemplates>
                         <TreeDataTemplate DataType="models:FirstItem" ItemsSource="{Binding SecondItems}">

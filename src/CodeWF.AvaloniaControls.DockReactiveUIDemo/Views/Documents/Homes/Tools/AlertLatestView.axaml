@@ -9,28 +9,28 @@
              x:DataType="vm:AlertLatestViewModel"
              x:CompileBindings="True"
              x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.Homes.Tools.AlertLatestView">
-    <Border Padding="14" Background="White" CornerRadius="16">
-        <StackPanel Spacing="12">
-            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" />
-            <Border Padding="10" Background="#FEF2F2" CornerRadius="12">
+    <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+        <StackPanel Spacing="8">
+            <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
+            <Border Padding="9" Background="#FCEBEC" BorderBrush="#F0B8BE" BorderThickness="1" CornerRadius="6">
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
-                    <Border Width="10" Height="10" Background="#DC2626" CornerRadius="999" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="1" Text="冷却回路压力低于阈值。" />
-                    <TextBlock Grid.Column="2" Foreground="#B91C1C" Text="P1" />
+                    <Border Width="8" Height="8" Background="#B4232C" CornerRadius="4" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="冷却回路压力低于阈值。" TextWrapping="Wrap" />
+                    <TextBlock Grid.Column="2" Foreground="#B4232C" FontWeight="SemiBold" Text="P1" />
                 </Grid>
             </Border>
-            <Border Padding="10" Background="#FFF7ED" CornerRadius="12">
+            <Border Padding="9" Background="#FFF7E6" BorderBrush="#F3D39B" BorderThickness="1" CornerRadius="6">
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
-                    <Border Width="10" Height="10" Background="#F97316" CornerRadius="999" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="1" Text="备份流程延迟 3 分钟。" />
-                    <TextBlock Grid.Column="2" Foreground="#C2410C" Text="P2" />
+                    <Border Width="8" Height="8" Background="#D9822B" CornerRadius="4" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="备份流程延迟 3 分钟。" TextWrapping="Wrap" />
+                    <TextBlock Grid.Column="2" Foreground="#8A5A00" FontWeight="SemiBold" Text="P2" />
                 </Grid>
             </Border>
-            <Border Padding="10" Background="#EFF6FF" CornerRadius="12">
+            <Border Padding="9" Background="#EAF2FF" BorderBrush="#BFD4F5" BorderThickness="1" CornerRadius="6">
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
-                    <Border Width="10" Height="10" Background="#2563EB" CornerRadius="999" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="1" Text="维护窗口将于 23:30 开始。" />
-                    <TextBlock Grid.Column="2" Foreground="#1D4ED8" Text="信息" />
+                    <Border Width="8" Height="8" Background="#2F6CAD" CornerRadius="4" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="维护窗口将于 23:30 开始。" TextWrapping="Wrap" />
+                    <TextBlock Grid.Column="2" Foreground="#24558F" FontWeight="SemiBold" Text="信息" />
                 </Grid>
             </Border>
         </StackPanel>

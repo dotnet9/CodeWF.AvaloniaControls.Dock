@@ -10,66 +10,69 @@
     x:CompileBindings="True"
     x:DataType="vm:LogRecordsViewModel"
     mc:Ignorable="d">
-    <Grid RowDefinitions="Auto,*" RowSpacing="16">
-        <Border Padding="22" Background="#111827" CornerRadius="20">
-            <StackPanel Spacing="8">
-                <TextBlock FontSize="26" FontWeight="Bold" Foreground="White" Text="{Binding Title}" />
-                <TextBlock Foreground="#CBD5E1"
-                           Text="这里改为时间线与告警摘要组合，避免普通 Dock 示例继续依赖复杂表格控件。" />
+    <Grid RowDefinitions="Auto,*" RowSpacing="10">
+        <Border Padding="12"
+                Background="#FFFFFF"
+                BorderBrush="#D5DBE5"
+                BorderThickness="1"
+                CornerRadius="8">
+            <StackPanel Spacing="3">
+                <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
+                <TextBlock Foreground="#697386" Text="活动、告警和文档操作按时间顺序归档。" />
             </StackPanel>
         </Border>
 
-        <Grid Grid.Row="1" ColumnDefinitions="1.15*,0.85*" ColumnSpacing="16">
-            <Border Padding="18" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="18">
-                <Grid RowDefinitions="Auto,*" RowSpacing="14">
-                    <StackPanel Spacing="6">
-                        <TextBlock FontSize="20" FontWeight="SemiBold" Text="操作时间线" />
-                        <TextBlock Foreground="#64748B" Text="用日志卡片与阶段标记模拟真实活动记录页，保留文档切换场景，但不再用 DataGrid 承载。" />
+        <Grid Grid.Row="1" ColumnDefinitions="1.15*,0.85*" ColumnSpacing="10">
+            <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                <Grid RowDefinitions="Auto,*" RowSpacing="10">
+                    <StackPanel Spacing="3">
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="#111827" Text="操作时间线" />
+                        <TextBlock Foreground="#697386" Text="最近一次值守操作和自动记录。" />
                     </StackPanel>
 
                     <ScrollViewer Grid.Row="1">
-                        <StackPanel Spacing="12">
-                            <Border Padding="14" Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="14">
+                        <StackPanel Spacing="8">
+                            <Border Padding="12" Background="#F8FAFC" BorderBrush="#E1E7EF" BorderThickness="1" CornerRadius="6">
                                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                                    <Border Width="78" Padding="10,6" Background="#1D4ED822" CornerRadius="999">
-                                        <TextBlock HorizontalAlignment="Center" Foreground="#1D4ED8" FontWeight="SemiBold" Text="10:14" />
+                                    <Border Width="64" Padding="8,4" Background="#EAF2FF" BorderBrush="#BFD4F5" BorderThickness="1" CornerRadius="4">
+                                        <TextBlock HorizontalAlignment="Center" Foreground="#24558F" FontSize="12" FontWeight="SemiBold" Text="10:14" />
                                     </Border>
-                                    <StackPanel Grid.Column="1" Spacing="4">
+                                    <StackPanel Grid.Column="1" Spacing="3">
                                         <TextBlock FontWeight="SemiBold" Text="布局快照已保存" />
-                                        <TextBlock Foreground="#64748B" Text="分析页签被拖出主工作区后，系统已自动记录停靠结构并推送到本地快照。" />
+                                        <TextBlock Foreground="#697386" Text="分析页签拖出主工作区后，系统记录停靠结构并生成本地快照。" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
-                            <Border Padding="14" Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="14">
+                            <Border Padding="12" Background="#F8FAFC" BorderBrush="#E1E7EF" BorderThickness="1" CornerRadius="6">
                                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                                    <Border Width="78" Padding="10,6" Background="#16653422" CornerRadius="999">
-                                        <TextBlock HorizontalAlignment="Center" Foreground="#166534" FontWeight="SemiBold" Text="10:16" />
+                                    <Border Width="64" Padding="8,4" Background="#EAF7EF" BorderBrush="#B8DFC7" BorderThickness="1" CornerRadius="4">
+                                        <TextBlock HorizontalAlignment="Center" Foreground="#1E6B3B" FontSize="12" FontWeight="SemiBold" Text="10:16" />
                                     </Border>
-                                    <StackPanel Grid.Column="1" Spacing="4">
+                                    <StackPanel Grid.Column="1" Spacing="3">
                                         <TextBlock FontWeight="SemiBold" Text="诊断巡检完成" />
-                                        <TextBlock Foreground="#64748B" Text="后台健康检查已完成，本轮未发现阻塞性问题，文档恢复速度保持稳定。" />
+                                        <TextBlock Foreground="#697386" Text="后台健康检查未发现阻塞性问题，文档恢复速度稳定。" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
-                            <Border Padding="14" Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="14">
+                            <Border Padding="12" Background="#F8FAFC" BorderBrush="#E1E7EF" BorderThickness="1" CornerRadius="6">
                                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                                    <Border Width="78" Padding="10,6" Background="#D9770622" CornerRadius="999">
-                                        <TextBlock HorizontalAlignment="Center" Foreground="#B45309" FontWeight="SemiBold" Text="10:19" />
+                                    <Border Width="64" Padding="8,4" Background="#FFF7E6" BorderBrush="#F3D39B" BorderThickness="1" CornerRadius="4">
+                                        <TextBlock HorizontalAlignment="Center" Foreground="#8A5A00" FontSize="12" FontWeight="SemiBold" Text="10:19" />
                                     </Border>
-                                    <StackPanel Grid.Column="1" Spacing="4">
+                                    <StackPanel Grid.Column="1" Spacing="3">
                                         <TextBlock FontWeight="SemiBold" Text="重新打开设置文档" />
-                                        <TextBlock Foreground="#64748B" Text="值守人员通过标题栏菜单重新定位到系统设置页，外壳命令链路响应正常。" />
+                                        <TextBlock Foreground="#697386" Text="值守人员通过标题栏菜单定位到系统设置页。" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
-                            <Border Padding="14" Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="14">
+                            <Border Padding="12" Background="#F8FAFC" BorderBrush="#E1E7EF" BorderThickness="1" CornerRadius="6">
                                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                                    <Border Width="78" Padding="10,6" Background="#7C3AED22" CornerRadius="999">
-                                        <TextBlock HorizontalAlignment="Center" Foreground="#7C3AED" FontWeight="SemiBold" Text="10:23" />
+                                    <Border Width="64" Padding="8,4" Background="#F4ECFF" BorderBrush="#D8C7F5" BorderThickness="1" CornerRadius="4">
+                                        <TextBlock HorizontalAlignment="Center" Foreground="#6D3CB3" FontSize="12" FontWeight="SemiBold" Text="10:23" />
                                     </Border>
-                                    <StackPanel Grid.Column="1" Spacing="4">
+                                    <StackPanel Grid.Column="1" Spacing="3">
                                         <TextBlock FontWeight="SemiBold" Text="告警路由同步" />
-                                        <TextBlock Foreground="#64748B" Text="活动流规则已同步到外部通知通道，后续仅需关注是否出现新的高优先级异常。" />
+                                        <TextBlock Foreground="#697386" Text="活动流规则同步到外部通知通道。" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -78,21 +81,21 @@
                 </Grid>
             </Border>
 
-            <StackPanel Grid.Column="1" Spacing="16">
-                <Border Padding="18" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="18">
-                    <StackPanel Spacing="10">
-                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="事件分类" />
-                        <TextBlock Foreground="#64748B" Text="布局类：8" />
-                        <TextBlock Foreground="#64748B" Text="运维类：14" />
-                        <TextBlock Foreground="#64748B" Text="告警类：3" />
+            <StackPanel Grid.Column="1" Spacing="10">
+                <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                    <StackPanel Spacing="8">
+                        <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="事件分类" />
+                        <TextBlock Foreground="#4B5563" Text="布局类：8" />
+                        <TextBlock Foreground="#4B5563" Text="运维类：14" />
+                        <TextBlock Foreground="#4B5563" Text="告警类：3" />
                     </StackPanel>
                 </Border>
-                <Border Padding="18" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="18">
-                    <StackPanel Spacing="10">
-                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="需复核事项" />
-                        <TextBlock Foreground="#64748B" Text="检查 10:19 后的设置页缓存是否正确回收。" />
-                        <TextBlock Foreground="#64748B" Text="确认日志轮转策略不会打断夜间导出任务。" />
-                        <TextBlock Foreground="#64748B" Text="跟踪新一轮通知通道回执是否按时返回。" />
+                <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                    <StackPanel Spacing="8">
+                        <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="需复核事项" />
+                        <TextBlock Foreground="#4B5563" Text="检查设置页缓存是否正确回收。" TextWrapping="Wrap" />
+                        <TextBlock Foreground="#4B5563" Text="确认日志轮转不打断夜间导出。" TextWrapping="Wrap" />
+                        <TextBlock Foreground="#4B5563" Text="跟踪通知通道回执。" TextWrapping="Wrap" />
                     </StackPanel>
                 </Border>
             </StackPanel>

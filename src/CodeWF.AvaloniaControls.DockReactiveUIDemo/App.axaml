@@ -26,7 +26,6 @@
         <semi:DockSemiTheme />
         <codewf:DockCodeWFTheme />
         <StyleInclude Source="Index.axaml" />
-        <!-- 无障碍滚动条：默认常显且加宽，方便老年用户识别和拖动。 -->
         <Style Selector="ScrollViewer">
             <Setter Property="AllowAutoHide" Value="False" />
         </Style>
@@ -40,7 +39,7 @@
             <TrayIcon Icon="/Assets/logo.ico" Clicked="OpenMainWindow_Clicked" >
                 <TrayIcon.Menu>
                     <NativeMenu>
-                        <NativeMenuItem Header="测试应用" />
+                        <NativeMenuItem Header="Dock ReactiveUI Demo" />
                         <NativeMenuItem Header="显示主窗口" Click="OpenMainWindow_Clicked" />
                         <NativeMenuItemSeparator />
                         <NativeMenuItem Header="退出" Click="Exit_Clicked" />

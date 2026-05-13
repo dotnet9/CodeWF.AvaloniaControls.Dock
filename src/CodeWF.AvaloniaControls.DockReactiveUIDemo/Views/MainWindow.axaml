@@ -21,7 +21,7 @@
         <Color x:Key="CaptionButtonForeground">#FFFFFF</Color>
     </u:UrsaWindow.Resources>
     <u:UrsaWindow.LeftContent>
-        <Grid Height="40" Margin="3" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
+        <Grid Height="40" Margin="4" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="9">
             <Image Width="24"
                    Height="24"
                    Margin="8,0,0,0"
@@ -32,9 +32,9 @@
                    Source="/Assets/logo.png" />
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Foreground="White"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Foreground="#F8FAFC"
                        IsHitTestVisible="False"
                        Text="{Binding Title}" />
         </Grid>
@@ -42,63 +42,57 @@
     <u:UrsaWindow.RightContent>
         <views:TitleBarRightContentView VerticalAlignment="Top" />
     </u:UrsaWindow.RightContent>
-    <Border Background="#F3F6FB">
-        <Grid Margin="22" RowDefinitions="Auto,*" RowSpacing="18">
-            <Border Padding="28"
-                    CornerRadius="24"
-                    Background="#111827">
-                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="18">
-                    <StackPanel Spacing="8">
-                        <TextBlock FontSize="34"
-                                   FontWeight="Bold"
-                                   Foreground="White"
-                                   Text="ReactiveUI 运维工作区" />
-                        <TextBlock MaxWidth="760"
-                                   Foreground="#BFDBFE"
-                                   Text="这是一个适合监控类桌面工作区的 Dock + ReactiveUI 示例，将总览面板、活动流、工具面板和可拆分文档整合在同一外壳中。" />
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Top">
-                        <Border Padding="12,6" Background="#1D4ED855" CornerRadius="999">
-                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="ReactiveUI" />
+    <Border Background="#EEF2F6">
+        <Grid Margin="14" RowDefinitions="Auto,*" RowSpacing="10">
+            <Border Padding="14,12"
+                    Background="#FFFFFF"
+                    BorderBrush="#D5DBE5"
+                    BorderThickness="1"
+                    CornerRadius="8">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="8">
+                    <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   Foreground="#111827"
+                                   Text="运维工作台" />
+                        <Border Padding="8,3" Background="#EAF2FF" BorderBrush="#BFD4F5" BorderThickness="1" CornerRadius="4">
+                            <TextBlock FontSize="12" Foreground="#24558F" Text="生产一线" />
                         </Border>
-                        <Border Padding="12,6" Background="#0F766E55" CornerRadius="999">
-                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="Dock 工作区" />
-                        </Border>
-                        <Border Padding="12,6" Background="#B4530955" CornerRadius="999">
-                            <TextBlock Foreground="White" FontWeight="SemiBold" Text="Ursa 标题栏" />
+                        <Border Padding="8,3" Background="#EAF7EF" BorderBrush="#B8DFC7" BorderThickness="1" CornerRadius="4">
+                            <TextBlock FontSize="12" Foreground="#1E6B3B" Text="运行正常" />
                         </Border>
                     </StackPanel>
 
-                    <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnDefinitions="*,*,*" ColumnSpacing="12">
-                        <Border Padding="16" Background="#F8FBFF" CornerRadius="16">
-                            <StackPanel Spacing="6">
-                                <TextBlock FontWeight="SemiBold" Text="总览看板" />
-                                <TextBlock Foreground="#64748B" Text="适合承载 KPI 卡片、实时状态和一目了然的运行概览。" />
-                            </StackPanel>
-                        </Border>
-                        <Border Grid.Column="1" Padding="16" Background="#F8FBFF" CornerRadius="16">
-                            <StackPanel Spacing="6">
-                                <TextBlock FontWeight="SemiBold" Text="文档与工具" />
-                                <TextBlock Foreground="#64748B" Text="将日志、设置、用户信息和重点数据任务作为可拆分文档保留下来。" />
-                            </StackPanel>
-                        </Border>
-                        <Border Grid.Column="2" Padding="16" Background="#F8FBFF" CornerRadius="16">
-                            <StackPanel Spacing="6">
-                                <TextBlock FontWeight="SemiBold" Text="开源基线" />
-                                <TextBlock Foreground="#64748B" Text="在坚持免费依赖链路的同时保持可信的产品化视觉表现。" />
-                            </StackPanel>
-                        </Border>
+                    <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="22">
+                        <StackPanel>
+                            <TextBlock FontSize="12" Foreground="#697386" Text="在线节点" />
+                            <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="#111827" Text="28" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock FontSize="12" Foreground="#697386" Text="待处理告警" />
+                            <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="#B45309" Text="2" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock FontSize="12" Foreground="#697386" Text="接口延迟" />
+                            <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="#111827" Text="14 ms" />
+                        </StackPanel>
                     </Grid>
+
+                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="24">
+                        <TextBlock Foreground="#4B5563" Text="班次：A 组" />
+                        <TextBlock Foreground="#4B5563" Text="窗口：08:00 - 20:00" />
+                        <TextBlock Foreground="#4B5563" Text="变更冻结：未启用" />
+                    </StackPanel>
                 </Grid>
             </Border>
 
             <Border Grid.Row="1"
-                    Background="White"
-                    BorderBrush="#DCE3EE"
+                    Background="#FFFFFF"
+                    BorderBrush="#D5DBE5"
                     BorderThickness="1"
-                    CornerRadius="22"
-                    Padding="18">
+                    CornerRadius="8"
+                    Padding="10">
                 <DockControl x:Name="DockControl" Layout="{Binding Layout}" />
             </Border>
         </Grid>

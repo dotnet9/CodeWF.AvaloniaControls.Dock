@@ -1,4 +1,4 @@
-﻿<UserControl
+<UserControl
     x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.Documents.UserCenterView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,43 +11,62 @@
     x:DataType="vm:UserCenterViewModel"
     mc:Ignorable="d">
     <ScrollViewer>
-        <StackPanel Margin="4" Spacing="16">
-            <Border Padding="22" Background="#1D4ED8" CornerRadius="20">
-                <StackPanel Spacing="8">
-                    <TextBlock FontSize="26" FontWeight="Bold" Foreground="White" Text="{Binding Title}" />
-                    <TextBlock Foreground="#DBEAFE"
-                               Text="以更干净的产品化结构展示账户身份、职责范围和近期活动。" />
+        <StackPanel Margin="2" Spacing="10">
+            <Border Padding="12"
+                    Background="#FFFFFF"
+                    BorderBrush="#D5DBE5"
+                    BorderThickness="1"
+                    CornerRadius="8">
+                <StackPanel Spacing="3">
+                    <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
+                    <TextBlock Foreground="#697386" Text="账户身份、权限范围和最近操作。" />
                 </StackPanel>
             </Border>
 
-            <Border Padding="20" Background="White" BorderBrush="#DCE3EE" BorderThickness="1" CornerRadius="16">
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="18">
-                    <Border Width="88" Height="88" Background="#DBEAFE" CornerRadius="22">
+            <Border Padding="14" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <Border Width="64" Height="64" Background="#EAF2FF" BorderBrush="#BFD4F5" BorderThickness="1" CornerRadius="8">
                         <TextBlock HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
-                                   FontSize="32"
-                                   FontWeight="Bold"
-                                   Foreground="#1D4ED8"
+                                   FontSize="24"
+                                   FontWeight="SemiBold"
+                                   Foreground="#24558F"
                                    Text="OS" />
                     </Border>
                     <StackPanel Grid.Column="1" Spacing="6" VerticalAlignment="Center">
-                        <TextBlock FontSize="20" FontWeight="SemiBold" Text="开源运维人员" />
-                        <TextBlock Foreground="#475569" Text="负责整套示例的工作区质量、样例验证和发布一致性。" />
-                        <WrapPanel Margin="0,8,0,0" ItemHeight="36" ItemWidth="140">
-                            <Border Padding="10,6" Background="#EFF6FF" CornerRadius="999">
-                                <TextBlock Text="维护者" />
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="#111827" Text="开源运维人员" />
+                        <TextBlock Foreground="#4B5563" Text="负责工作区质量、样例验证和发布一致性。" TextWrapping="Wrap" />
+                        <WrapPanel Margin="0,6,0,0" ItemHeight="30" ItemWidth="124">
+                            <Border Padding="8,4" Background="#F8FAFC" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="4">
+                                <TextBlock FontSize="12" Text="维护者" />
                             </Border>
-                            <Border Padding="10,6" Background="#F0FDF4" CornerRadius="999">
-                                <TextBlock Text="已验证" />
+                            <Border Padding="8,4" Background="#EAF7EF" BorderBrush="#B8DFC7" BorderThickness="1" CornerRadius="4">
+                                <TextBlock FontSize="12" Foreground="#1E6B3B" Text="已验证" />
                             </Border>
-                            <Border Padding="10,6" Background="#FEF3C7" CornerRadius="999">
-                                <TextBlock Text="已启用双重验证" />
+                            <Border Padding="8,4" Background="#FFF7E6" BorderBrush="#F3D39B" BorderThickness="1" CornerRadius="4">
+                                <TextBlock FontSize="12" Foreground="#8A5A00" Text="双重验证" />
                             </Border>
                         </WrapPanel>
                     </StackPanel>
                 </Grid>
             </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold" Text="权限范围" />
+                        <TextBlock Foreground="#4B5563" Text="布局恢复、文档定位、运行面板查看" />
+                        <TextBlock Foreground="#4B5563" Text="发布审批：只读" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                    <StackPanel Spacing="7">
+                        <TextBlock FontWeight="SemiBold" Text="最近操作" />
+                        <TextBlock Foreground="#4B5563" Text="10:19 重新打开系统设置" />
+                        <TextBlock Foreground="#4B5563" Text="10:14 保存布局快照" />
+                    </StackPanel>
+                </Border>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
-
