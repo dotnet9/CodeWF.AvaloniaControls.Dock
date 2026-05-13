@@ -10,57 +10,106 @@
     x:CompileBindings="True"
     x:DataType="vm:SystemSettingsViewModel"
     mc:Ignorable="d">
-    <ScrollViewer>
-        <StackPanel Margin="2" Spacing="10">
-            <Border Padding="12"
-                    Background="#FFFFFF"
-                    BorderBrush="#D5DBE5"
-                    BorderThickness="1"
-                    CornerRadius="8">
-                <StackPanel Spacing="3">
-                    <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
-                    <TextBlock Foreground="#697386" Text="工作区安全策略、外壳模式和部署默认值。" />
-                </StackPanel>
-            </Border>
-
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
-                    <StackPanel Spacing="10">
-                        <TextBlock FontWeight="SemiBold" Foreground="#111827" Text="安全控制" />
-                        <CheckBox IsChecked="True" Content="重置工作区前需要确认" />
-                        <CheckBox IsChecked="True" Content="保持嵌入工具隔离" />
-                        <CheckBox IsChecked="False" Content="启用预览模块" />
-                    </StackPanel>
+    <Grid Background="#EEF2F6">
+        <ScrollViewer>
+            <StackPanel Margin="2" Spacing="10">
+                <Border Padding="12"
+                        Background="#FFFFFF"
+                        BorderBrush="#D5DBE5"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                        <StackPanel Spacing="3">
+                            <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="#111827" Text="{Binding Title}" />
+                            <TextBlock Foreground="#697386" Text="工作区安全策略、外壳模式和部署默认值。" />
+                        </StackPanel>
+                        <Border VerticalAlignment="Center"
+                                Padding="8,4"
+                                Background="#EAF7EF"
+                                BorderBrush="#B8DFC7"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                            <TextBlock FontSize="12" Foreground="#1E6B3B" FontWeight="SemiBold" Text="已同步" />
+                        </Border>
+                    </Grid>
                 </Border>
-                <Border Grid.Column="1" Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
-                    <StackPanel Spacing="10">
-                        <TextBlock FontWeight="SemiBold" Foreground="#111827" Text="外壳配置" />
-                        <ComboBox SelectedIndex="0">
-                            <ComboBoxItem Content="运维默认" />
-                            <ComboBoxItem Content="诊断模式" />
-                            <ComboBoxItem Content="极简模式" />
-                        </ComboBox>
-                        <TextBlock Foreground="#697386" Text="当前配置将在新建窗口和重置布局后继续生效。" TextWrapping="Wrap" />
-                    </StackPanel>
-                </Border>
-            </Grid>
 
-            <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
-                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
-                    <StackPanel Spacing="4">
-                        <TextBlock FontSize="12" Foreground="#697386" Text="主题" />
-                        <TextBlock FontWeight="SemiBold" Text="专业浅色" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Spacing="4">
-                        <TextBlock FontSize="12" Foreground="#697386" Text="标题栏" />
-                        <TextBlock FontWeight="SemiBold" Text="深色稳定态" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="2" Spacing="4">
-                        <TextBlock FontSize="12" Foreground="#697386" Text="文档恢复" />
-                        <TextBlock FontWeight="SemiBold" Text="自动定位" />
-                    </StackPanel>
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                        <StackPanel Spacing="10">
+                            <TextBlock FontWeight="SemiBold" Foreground="#111827" Text="安全控制" />
+                            <CheckBox IsChecked="True" Content="重置工作区前需要确认" />
+                            <CheckBox IsChecked="True" Content="保持嵌入工具隔离" />
+                            <CheckBox IsChecked="False" Content="启用预览模块" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                        <StackPanel Spacing="10">
+                            <TextBlock FontWeight="SemiBold" Foreground="#111827" Text="外壳配置" />
+                            <ComboBox SelectedIndex="0">
+                                <ComboBoxItem Content="运维默认" />
+                                <ComboBoxItem Content="诊断模式" />
+                                <ComboBoxItem Content="极简模式" />
+                            </ComboBox>
+                            <TextBlock Foreground="#697386" Text="当前配置将在新建窗口和重置布局后继续生效。" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
                 </Grid>
-            </Border>
-        </StackPanel>
-    </ScrollViewer>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                    <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                        <StackPanel Spacing="4">
+                            <TextBlock FontSize="12" Foreground="#697386" Text="主题" />
+                            <TextBlock FontWeight="SemiBold" Text="专业浅色" />
+                            <TextBlock Foreground="#4B5563" Text="统一低饱和状态色" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                        <StackPanel Spacing="4">
+                            <TextBlock FontSize="12" Foreground="#697386" Text="标题栏" />
+                            <TextBlock FontWeight="SemiBold" Text="深色稳定态" />
+                            <TextBlock Foreground="#4B5563" Text="菜单与窗口控制一致" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                        <StackPanel Spacing="4">
+                            <TextBlock FontSize="12" Foreground="#697386" Text="文档恢复" />
+                            <TextBlock FontWeight="SemiBold" Text="自动定位" />
+                            <TextBlock Foreground="#4B5563" Text="关闭后可从菜单恢复" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Grid ColumnDefinitions="1.1*,0.9*" ColumnSpacing="10">
+                    <Border Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="8">
+                            <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="部署参数" />
+                            <Grid Grid.Row="1" ColumnDefinitions="1.1*,*,Auto" ColumnSpacing="10">
+                                <TextBlock Foreground="#697386" Text="参数" />
+                                <TextBlock Grid.Column="1" Foreground="#697386" Text="当前值" />
+                                <TextBlock Grid.Column="2" Foreground="#697386" Text="状态" />
+                            </Grid>
+                            <Grid Grid.Row="2" ColumnDefinitions="1.1*,*,Auto" ColumnSpacing="10">
+                                <TextBlock Text="布局快照间隔" />
+                                <TextBlock Grid.Column="1" Text="5 分钟" />
+                                <TextBlock Grid.Column="2" Foreground="#1E6B3B" FontWeight="SemiBold" Text="正常" />
+                            </Grid>
+                            <Grid Grid.Row="3" ColumnDefinitions="1.1*,*,Auto" ColumnSpacing="10">
+                                <TextBlock Text="日志保留周期" />
+                                <TextBlock Grid.Column="1" Text="14 天" />
+                                <TextBlock Grid.Column="2" Foreground="#8A5A00" FontWeight="SemiBold" Text="待复核" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Column="1" Padding="12" Background="#FFFFFF" BorderBrush="#D5DBE5" BorderThickness="1" CornerRadius="8">
+                        <StackPanel Spacing="8">
+                            <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#111827" Text="审计摘要" />
+                            <TextBlock Foreground="#4B5563" Text="最近 24 小时：3 次配置读取，1 次复选项切换。" TextWrapping="Wrap" />
+                            <TextBlock Foreground="#4B5563" Text="未检测到高风险策略变更。" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

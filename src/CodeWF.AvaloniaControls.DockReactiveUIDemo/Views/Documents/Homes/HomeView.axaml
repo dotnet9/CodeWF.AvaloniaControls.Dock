@@ -10,7 +10,7 @@
     x:CompileBindings="True"
     x:DataType="vm:HomeViewModel"
     mc:Ignorable="d">
-    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10">
+    <Grid Background="#EEF2F6" RowDefinitions="Auto,Auto,*" RowSpacing="10">
         <Border Padding="12"
                 Background="#FFFFFF"
                 BorderBrush="#D5DBE5"
