@@ -20,7 +20,6 @@
         </ResourceDictionary>
     </Application.Resources>
     <Application.Styles>
-        <fluent:FluentTheme />
         <semi:SemiTheme Locale="zh-CN" />
         <uSemi:SemiTheme Locale="zh-CN" />
         <semi:DockSemiTheme />

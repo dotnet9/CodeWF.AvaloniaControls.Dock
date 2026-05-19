@@ -14,8 +14,6 @@
     <File Path="UpdateAssemblyVersion.ps1" />
   </Folder>
   <Folder Name="/demos/">
-    <Project Path="src/CodeWF.AvaloniaControls.DockDemo/CodeWF.AvaloniaControls.DockDemo.csproj" />
-    <Project Path="src/CodeWF.AvaloniaControls.DockPrismDemo/CodeWF.AvaloniaControls.DockPrismDemo.csproj" />
     <Project Path="src/CodeWF.AvaloniaControls.DockReactiveUIDemo/CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj" />
   </Folder>
   <Project Path="src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj" />
