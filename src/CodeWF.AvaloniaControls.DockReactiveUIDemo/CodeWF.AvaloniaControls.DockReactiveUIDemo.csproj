@@ -23,6 +23,7 @@
 		<PackageReference Include="Avalonia" />
 		<PackageReference Include="Avalonia.Desktop" />
 		<PackageReference Include="Avalonia.Fonts.Inter" />
+		<PackageReference Include="Avalonia.Themes.Fluent" />
 		<PackageReference Include="ReactiveUI.Avalonia" />
 		<PackageReference Include="Dock.Model.ReactiveUI" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" />
@@ -31,10 +32,7 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Xaml.Behaviors" />
-		<PackageReference Include="CodeWF.AvaloniaControls.Themes" />
 		<PackageReference Include="CodeWF.EventBus" />
-		<PackageReference Include="Irihi.Ursa.Themes.Semi" />
-		<PackageReference Include="Semi.Avalonia" />
 		<PackageReference Include="CodeWF.Log.Core" />
 		<PackageReference Include="System.Drawing.Common" />
 		<PackageReference Include="YY-Thunks" />

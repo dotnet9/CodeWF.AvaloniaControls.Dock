@@ -1,6 +1,0 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StaticResource x:Key="DocumentControlDividerBackground" ResourceKey="SemiColorBorder" />
-    <StaticResource x:Key="DocumentControlDividerActiveBackground" ResourceKey="SemiColorPrimary" />
-    <StaticResource x:Key="DocumentControlContentBorderBrush" ResourceKey="SemiColorBorder" />
-    <StaticResource x:Key="DocumentControlContentBackground" ResourceKey="SemiColorBackground1" />
-</ResourceDictionary>

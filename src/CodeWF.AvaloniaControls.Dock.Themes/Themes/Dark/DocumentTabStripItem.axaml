@@ -1,9 +1,0 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StaticResource x:Key="DocumentTabStripItemForeground" ResourceKey="SemiColorText2" />
-    <SolidColorBrush x:Key="DocumentTabStripItemBackground" Color="Transparent" />
-    <StaticResource x:Key="DocumentTabStripItemSelectedInactiveBackground" ResourceKey="SemiColorTertiary" />
-    <StaticResource x:Key="DocumentTabStripItemSelectedActiveForeground" ResourceKey="SemiColorText0" />
-    <StaticResource x:Key="DocumentTabStripItemSelectedActiveBackground" ResourceKey="SemiColorPrimary" />
-    <StaticResource x:Key="DocumentTabStripItemUnselectedPointeroverForeground" ResourceKey="SemiColorText0" />
-    <StaticResource x:Key="DocumentTabStripItemUnselectedPointeroverBackground" ResourceKey="SemiColorTertiaryPointerover" />
-</ResourceDictionary>

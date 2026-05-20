@@ -1,10 +1,9 @@
-﻿<u:UrsaWindow
+<Window
     x:Class="CodeWF.AvaloniaControls.DockReactiveUIDemo.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:u="https://irihi.tech/ursa"
     xmlns:views="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.Views"
     xmlns:vm="clr-namespace:CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels"
     x:DataType="vm:MainWindowViewModel"
@@ -17,34 +16,32 @@
     Icon="/Assets/logo.ico"
     mc:Ignorable="d"
     Title="{Binding Title}">
-    <u:UrsaWindow.Resources>
-        <Color x:Key="CaptionButtonForeground">#FFFFFF</Color>
-    </u:UrsaWindow.Resources>
-    <u:UrsaWindow.LeftContent>
-        <Grid Height="40" Margin="4" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="9">
-            <Image Width="24"
-                   Height="24"
-                   Margin="8,0,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   IsHitTestVisible="False"
-                   RenderOptions.BitmapInterpolationMode="HighQuality"
-                   Source="/Assets/logo.png" />
-            <TextBlock Grid.Column="1"
-                       VerticalAlignment="Center"
-                       FontSize="14"
-                       FontWeight="SemiBold"
-                       Foreground="#F8FAFC"
-                       IsHitTestVisible="False"
-                       Text="{Binding Title}" />
-        </Grid>
-    </u:UrsaWindow.LeftContent>
-    <u:UrsaWindow.RightContent>
-        <views:TitleBarRightContentView VerticalAlignment="Top" />
-    </u:UrsaWindow.RightContent>
     <Border Background="#EEF2F6">
-        <Grid Margin="14" RowDefinitions="Auto,*" RowSpacing="10">
-            <Border Padding="14,12"
+        <Grid Margin="14" RowDefinitions="Auto,Auto,*" RowSpacing="10">
+            <Border Padding="12,8"
+                    Background="#2563EB"
+                    CornerRadius="8">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <Image Width="24"
+                           Height="24"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                           Source="/Assets/logo.png" />
+                    <TextBlock Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="#F8FAFC"
+                               IsHitTestVisible="False"
+                               Text="{Binding Title}" />
+                    <views:TitleBarRightContentView Grid.Column="2" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1"
+                    Padding="14,12"
                     Background="#FFFFFF"
                     BorderBrush="#D5DBE5"
                     BorderThickness="1"
@@ -87,7 +84,7 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="1"
+            <Border Grid.Row="2"
                     Background="#FFFFFF"
                     BorderBrush="#D5DBE5"
                     BorderThickness="1"
@@ -97,5 +94,4 @@
             </Border>
         </Grid>
     </Border>
-</u:UrsaWindow>
-
+</Window>

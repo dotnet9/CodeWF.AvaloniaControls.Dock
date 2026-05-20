@@ -5,7 +5,7 @@
 | CodeWF.AvaloniaControls.Dock | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) |
 | CodeWF.AvaloniaControls.Dock.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock.Themes/) |
 
-Dock extension controls and separated Semi-compatible theme resources for Avalonia 12.
+Dock extension controls and Fluent-based theme resources for Avalonia 12.
 
 English | [简体中文](README.zh-CN.md)
 
@@ -21,21 +21,20 @@ Install-Package CodeWF.AvaloniaControls.Dock.Themes
 ```xml
 <Application
     xmlns:codewf="https://codewf.com"
-    xmlns:semi="https://irihi.tech/semi">
+    xmlns:fluent="clr-namespace:Avalonia.Themes.Fluent;assembly=Avalonia.Themes.Fluent">
   <Application.Styles>
-    <semi:SemiTheme Locale="zh-CN" />
-    <codewf:DockSemiTheme />
+    <fluent:FluentTheme />
     <codewf:DockCodeWFTheme />
   </Application.Styles>
 </Application>
 ```
 
-`CodeWF.AvaloniaControls.Dock` contains only reusable Dock controls and converters. `CodeWF.AvaloniaControls.Dock.Themes` contains the Dock theme entry points and all Dock XAML style resources.
+`DockCodeWFTheme` loads the open-source `Dock.Avalonia.Themes.Fluent` theme and applies CodeWF visibility refinements for Dock tool chrome buttons and headers. Remove the old `DockSemiTheme` entry when upgrading to `12.0.3.3`.
 
 ## Repository Layout
 
 - `src/CodeWF.AvaloniaControls.Dock`: reusable Dock control extensions
-- `src/CodeWF.AvaloniaControls.Dock.Themes`: separated Dock theme package and Semi-compatible style resources
+- `src/CodeWF.AvaloniaControls.Dock.Themes`: separated Fluent-based Dock theme package
 - `src/CodeWF.AvaloniaControls.DockReactiveUIDemo`: ReactiveUI sample with nested Dock and process-embedding documentation
 - `CodeWF.AvaloniaControls.Dock.slnx`: solution view for the Dock library, theme package, and sample
 
@@ -47,35 +46,37 @@ Install-Package CodeWF.AvaloniaControls.Dock.Themes
 
 ## Notes
 
-- `CodeWF.AvaloniaControls.DockReactiveUIDemo` uses `CodeWF.AvaloniaControls.Themes` version `12.0.3.3` from NuGet instead of referencing the main `CodeWF.AvaloniaControls` source project.
+- `CodeWF.AvaloniaControls.DockReactiveUIDemo` now uses Avalonia Fluent directly and no longer references a separate application theme package.
 - `Prism.DryIoc.Avalonia` is pinned to `8.1.97.11073` because the `9.x` line is commercial.
-- `Semi.Avalonia.Dock` is not referenced. The Dock-specific Semi style resources are maintained in `CodeWF.AvaloniaControls.Dock.Themes`.
+- The active restore assets for the controls, themes, and sample projects contain no `Semi.Avalonia` or Ursa packages.
 
 ## Third-Party Open Source Audit
 
-Checked on 2026-05-20 with NuGet metadata, restored `project.assets.json`, and upstream source/license links. MIT / Apache-2.0 / BSD are preferred. Source-open non-preferred licenses must be reviewed before use.
+Checked on 2026-05-20 with NuGet metadata, restored `project.assets.json`, package nuspec files, and upstream source/license links. MIT / Apache-2.0 / BSD are preferred. Source-open non-preferred licenses must be reviewed before use.
 
 Remediation:
 
-- Removed `Semi.Avalonia.Dock`; it only provides a Semi Dock theme and no public source repository was found.
-- Split the Dock package into controls and themes. `CodeWF.AvaloniaControls.Dock` no longer references `Dock.Avalonia.Themes.Fluent`; only `CodeWF.AvaloniaControls.Dock.Themes` depends on the open-source Fluent Dock theme package.
-- Added `CodeWF.AvaloniaControls.Dock.Themes` with self-maintained Semi-compatible XAML resources, adapted from the old source snapshot under `E:\github\company\xskj\src\Semi.Avalonia.Dock`.
-- Removed `AvaloniaUI.DiagnosticsSupport` from samples because the package does not publish a clear open-source license or source repository.
+- Removed the previous Dock theme path and replaced it with the open-source `Dock.Avalonia.Themes.Fluent` theme.
+- Added `DockFluentTheme` and rewired `DockCodeWFTheme` to load Fluent plus CodeWF tool chrome visibility refinements.
+- Removed direct and indirect sample dependencies on `CodeWF.AvaloniaControls.Themes`, `Semi.Avalonia`, and Ursa theme packages.
+- Removed self-maintained Dock XAML resources that depended on non-Fluent theme keys.
 
-| Package | License | Source | Status |
+| Package / family | License | Source | Status |
 | --- | --- | --- | --- |
-| `Avalonia` / `Avalonia.Desktop` / `Avalonia.Fonts.Inter` / `Avalonia.Themes.Fluent` | MIT | https://github.com/AvaloniaUI/Avalonia | Approved |
-| `CodeWF.AvaloniaControls.Dock` / `CodeWF.AvaloniaControls.Dock.Themes` | MIT | https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock | Own open-source packages |
-| `CodeWF.AvaloniaControls.Themes` / `CodeWF.EventBus` / `CodeWF.Log.Core` | MIT | CodeWF repositories | Own open-source packages |
-| `Dock.Avalonia` / `Dock.Avalonia.Themes.Fluent` / `Dock.Model.ReactiveUI` | MIT | https://github.com/wieslawsoltes/Dock | Approved |
-| `Irihi.Ursa.Themes.Semi` | MIT | https://github.com/irihitech/Ursa.Avalonia | Approved |
-| `Prism.DryIoc.Avalonia` | MIT | https://github.com/AvaloniaCommunity/Prism.Avalonia | Approved, pinned to 8.x |
-| `ReactiveUI.Avalonia` | MIT | https://github.com/reactiveui/reactiveui | Approved |
-| `Semi.Avalonia` | MIT | https://github.com/irihitech/Semi.Avalonia | Approved, only the open core package is used |
+| `Avalonia`, `Avalonia.Desktop`, `Avalonia.Fonts.Inter`, `Avalonia.Themes.Fluent`, `Avalonia.*` native/platform packages | MIT | https://github.com/AvaloniaUI/Avalonia | Approved |
+| `CodeWF.AvaloniaControls.Dock`, `CodeWF.AvaloniaControls.Dock.Themes` | MIT | https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock | Own open-source packages |
+| `CodeWF.EventBus`, `CodeWF.Log.Core` | MIT | CodeWF repositories | Own open-source packages |
+| `Dock.Avalonia`, `Dock.Avalonia.Themes.Fluent`, `Dock.Model.ReactiveUI`, `Dock.Controls.*`, `Dock.Model`, `Dock.Settings` | MIT | https://github.com/wieslawsoltes/Dock | Approved |
+| `DryIoc.dll` | MIT | https://github.com/dadhi/DryIoc | Approved |
+| `DynamicData`, `ReactiveUI`, `Splat`, `System.Reactive` | MIT | https://github.com/reactiveui | Approved |
+| `HarfBuzzSharp`, `SkiaSharp` and native assets | MIT | https://github.com/mono/SkiaSharp | Approved |
+| `MicroCom.Runtime` | MIT | https://github.com/AvaloniaUI/MicroCom | Approved |
+| `Prism.DryIoc.Avalonia`, `Prism.Avalonia`, `Prism.Core` | MIT | https://github.com/AvaloniaCommunity/Prism.Avalonia | Approved, pinned to 8.x |
 | `StaticViewLocator` | MIT | https://github.com/wieslawsoltes/StaticViewLocator | Approved |
-| `System.Drawing.Common` / `System.Security.Permissions` / `System.Windows.Extensions` | MIT | https://github.com/dotnet/dotnet | Approved, pinned to `10.0.8` |
+| `System.*` runtime extension packages | MIT | https://github.com/dotnet/dotnet | Approved |
+| `Tmds.DBus.Protocol` | MIT | https://github.com/tmds/Tmds.DBus | Approved |
 | `VC-LTL` | EPL-2.0 | https://github.com/Chuyu-Team/VC-LTL5 | Source-open; approved under the source-traceable non-preferred license rule |
 | `Xaml.Behaviors` | MIT | https://github.com/wieslawsoltes/Xaml.Behaviors | Approved |
 | `YY-Thunks` | MIT | https://github.com/Chuyu-Team/YY-Thunks | Approved |
 
-Transitive dependencies from Dock, Avalonia, ReactiveUI, Prism.Avalonia, Semi.Avalonia, Ursa.Avalonia, and SkiaSharp were checked and are source-open under MIT or BSD-style licenses. Active restore assets no longer contain `Semi.Avalonia.Dock`.
+Transitive dependency check result: active restored assets are source-open and license-traceable. No closed or black-box Dock theme package is used.

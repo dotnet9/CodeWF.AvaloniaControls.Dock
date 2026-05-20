@@ -1,6 +1,6 @@
-﻿using Avalonia.Threading;
+using Avalonia.Threading;
+using CodeWF.AvaloniaControls.DockReactiveUIDemo.Collections;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.Models.Documents.Homes.Tools;
-using CodeWF.AvaloniaControls.Extensions;
 using Dock.Model.ReactiveUI.Controls;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -59,4 +59,3 @@ public class ProgInfoViewModel : Tool
         });
     }
 }
-

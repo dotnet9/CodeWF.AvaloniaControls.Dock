@@ -1,0 +1,98 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="DockChromeButtonForegroundBrush" Color="#263648" />
+                    <SolidColorBrush x:Key="DockToolChromeIconBrush" Color="#263648" />
+                    <SolidColorBrush x:Key="DockCodeWFToolChromeButtonPointerOverBackgroundBrush" Color="#E7EEF8" />
+                    <SolidColorBrush x:Key="DockCodeWFToolChromeButtonPressedBackgroundBrush" Color="#D7E4F3" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="DockChromeButtonForegroundBrush" Color="#263648" />
+                    <SolidColorBrush x:Key="DockToolChromeIconBrush" Color="#263648" />
+                    <SolidColorBrush x:Key="DockCodeWFToolChromeButtonPointerOverBackgroundBrush" Color="#E7EEF8" />
+                    <SolidColorBrush x:Key="DockCodeWFToolChromeButtonPressedBackgroundBrush" Color="#D7E4F3" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="DockChromeButtonForegroundBrush" Color="#E5E7EB" />
+                    <SolidColorBrush x:Key="DockToolChromeIconBrush" Color="#E5E7EB" />
+                    <SolidColorBrush x:Key="DockCodeWFToolChromeButtonPointerOverBackgroundBrush" Color="#334155" />
+                    <SolidColorBrush x:Key="DockCodeWFToolChromeButtonPressedBackgroundBrush" Color="#475569" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="ToolChromeControl /template/ TextBlock#PART_Title">
+        <Setter Property="Foreground" Value="{DynamicResource DockChromeButtonForegroundBrush}" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolMenuButton">
+        <Setter Property="Foreground" Value="{DynamicResource DockChromeButtonForegroundBrush}" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="MinWidth" Value="24" />
+        <Setter Property="MinHeight" Value="24" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolPinButton">
+        <Setter Property="Foreground" Value="{DynamicResource DockChromeButtonForegroundBrush}" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="MinWidth" Value="24" />
+        <Setter Property="MinHeight" Value="24" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolCloseButton">
+        <Setter Property="Foreground" Value="{DynamicResource DockChromeButtonForegroundBrush}" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="MinWidth" Value="24" />
+        <Setter Property="MinHeight" Value="24" />
+    </Style>
+
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolMenuButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource DockCodeWFToolChromeButtonPointerOverBackgroundBrush}" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolPinButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource DockCodeWFToolChromeButtonPointerOverBackgroundBrush}" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolCloseButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource DockCodeWFToolChromeButtonPointerOverBackgroundBrush}" />
+    </Style>
+
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolMenuButton:pressed">
+        <Setter Property="Background" Value="{DynamicResource DockCodeWFToolChromeButtonPressedBackgroundBrush}" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolPinButton:pressed">
+        <Setter Property="Background" Value="{DynamicResource DockCodeWFToolChromeButtonPressedBackgroundBrush}" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ Button#PART_ToolCloseButton:pressed">
+        <Setter Property="Background" Value="{DynamicResource DockCodeWFToolChromeButtonPressedBackgroundBrush}" />
+    </Style>
+
+    <Style Selector="ToolChromeControl /template/ Path#PART_ToolMenuPath">
+        <Setter Property="Fill" Value="{DynamicResource DockToolChromeIconBrush}" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ Path#PART_ToolPinPath">
+        <Setter Property="Fill" Value="{DynamicResource DockToolChromeIconBrush}" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ Path#PART_ToolClosePath">
+        <Setter Property="Fill" Value="{DynamicResource DockToolChromeIconBrush}" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <Style Selector="ToolChromeControl /template/ PathIcon#PART_ToolMenuPath">
+        <Setter Property="Foreground" Value="{DynamicResource DockToolChromeIconBrush}" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ PathIcon#PART_ToolPinPath">
+        <Setter Property="Foreground" Value="{DynamicResource DockToolChromeIconBrush}" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="ToolChromeControl /template/ PathIcon#PART_ToolClosePath">
+        <Setter Property="Foreground" Value="{DynamicResource DockToolChromeIconBrush}" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+</Styles>
