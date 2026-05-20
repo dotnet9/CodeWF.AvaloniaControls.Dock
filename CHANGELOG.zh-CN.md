@@ -5,7 +5,7 @@
 ## 12.0.3.3（2026-05-20）
 
 - 将 `CodeWF.AvaloniaControls.Dock.Themes` 重构为只以开源 Fluent Dock 主题作为 Dock 主题底座。
-- 新增 `DockFluentTheme`，并将 `DockCodeWFTheme` 改为加载 Fluent 与 CodeWF Tool 标题栏可见性增强。
+- 将 `DockCodeWFTheme` 改为加载 Fluent 与 CodeWF Tool 标题栏可见性增强。
 - 移除旧 Dock 主题入口，以及依赖非 Fluent 主题键的自维护 XAML 资源。
 - 提升 Tool 标题、菜单、固定和关闭按钮的对比度，使浅色工作区中的 Tool 面板始终清晰可见。
 - ReactiveUI 示例改为直接使用 Avalonia Fluent，并移除额外应用主题包带来的间接依赖。

@@ -2,10 +2,15 @@
 
 English | [Simplified Chinese](CHANGELOG.zh-CN.md)
 
+## 12.0.3.4 (2026-05-20)
+
+- Added the `CodeWFToolChromeControlTheme` resource under `DockCodeWFTheme` for Tool panels that need a business-style title bar with the active tool title on the left, optional custom title-bar content, and only the close button on the right.
+- Kept `DockCodeWFTheme` as the single theme entry point; applications can opt in by applying the resource to `ToolChromeControl`.
+
 ## 12.0.3.3 (2026-05-20)
 
 - Reworked `CodeWF.AvaloniaControls.Dock.Themes` to use the open-source Fluent Dock theme as its only Dock theme base.
-- Added `DockFluentTheme` and rewired `DockCodeWFTheme` to load Fluent plus CodeWF tool chrome visibility refinements.
+- Rewired `DockCodeWFTheme` to load Fluent plus CodeWF tool chrome visibility refinements.
 - Removed the old Dock theme entry point and self-maintained XAML resources that depended on non-Fluent theme keys.
 - Improved Tool chrome title, menu, pin, and close button contrast so tool panels stay readable in light workspaces.
 - Updated the ReactiveUI sample to use Avalonia Fluent directly and removed indirect sample dependencies on extra application theme packages.

@@ -57,7 +57,7 @@ Install-Package CodeWF.AvaloniaControls.Dock.Themes
 本次整改：
 
 - 移除旧 Dock 主题路径，改为基于开源 `Dock.Avalonia.Themes.Fluent`。
-- 新增 `DockFluentTheme`，并将 `DockCodeWFTheme` 改为加载 Fluent 与 CodeWF Tool 标题栏可见性增强。
+- 将 `DockCodeWFTheme` 改为加载 Fluent 与 CodeWF Tool 标题栏可见性增强。
 - 示例工程移除对 `CodeWF.AvaloniaControls.Themes`、`Semi.Avalonia`、Ursa 主题包的直接和间接依赖。
 - 移除依赖非 Fluent 主题键的自维护 Dock XAML 资源。
 

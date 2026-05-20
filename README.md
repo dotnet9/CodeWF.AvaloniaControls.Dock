@@ -31,6 +31,8 @@ Install-Package CodeWF.AvaloniaControls.Dock.Themes
 
 `DockCodeWFTheme` loads the open-source `Dock.Avalonia.Themes.Fluent` theme and applies CodeWF visibility refinements for Dock tool chrome buttons and headers. Remove the old `DockSemiTheme` entry when upgrading to `12.0.3.3`.
 
+`DockCodeWFTheme` also exposes the opt-in `CodeWFToolChromeControlTheme` resource for Tool panels that should render a business-style title bar: the active Tool title is shown on the left, custom title-bar content can be supplied through the `CodeWFToolTitleBarContentTemplate` resource, and only the close button is shown on the right.
+
 ## Repository Layout
 
 - `src/CodeWF.AvaloniaControls.Dock`: reusable Dock control extensions
@@ -57,7 +59,7 @@ Checked on 2026-05-20 with NuGet metadata, restored `project.assets.json`, packa
 Remediation:
 
 - Removed the previous Dock theme path and replaced it with the open-source `Dock.Avalonia.Themes.Fluent` theme.
-- Added `DockFluentTheme` and rewired `DockCodeWFTheme` to load Fluent plus CodeWF tool chrome visibility refinements.
+- Rewired `DockCodeWFTheme` to load Fluent plus CodeWF tool chrome visibility refinements.
 - Removed direct and indirect sample dependencies on `CodeWF.AvaloniaControls.Themes`, `Semi.Avalonia`, and Ursa theme packages.
 - Removed self-maintained Dock XAML resources that depended on non-Fluent theme keys.
 

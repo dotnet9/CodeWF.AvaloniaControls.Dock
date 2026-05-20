@@ -1,8 +1,0 @@
-<Styles
-    x:Class="CodeWF.AvaloniaControls.Dock.Themes.DockFluentTheme"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:fluent="clr-namespace:Dock.Avalonia.Themes.Fluent;assembly=Dock.Avalonia.Themes.Fluent">
-    <fluent:DockFluentTheme />
-    <StyleInclude Source="Themes/Fluent/CodeWF.axaml" />
-</Styles>
