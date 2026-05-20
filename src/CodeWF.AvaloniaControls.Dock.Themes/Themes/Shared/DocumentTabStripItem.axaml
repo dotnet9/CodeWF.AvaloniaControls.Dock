@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StaticResource x:Key="DocumentTabStripItemMinHeight" ResourceKey="SemiHeightControlSmall" />
+    <Thickness x:Key="DocumentTabStripItemPadding">4 0</Thickness>
+    <StaticResource x:Key="DocumentTabStripItemHeaderMargin" ResourceKey="SemiThicknessSuperTight" />
+    <StaticResource x:Key="DocumentTabStripItemSelectedFontWeight" ResourceKey="SemiFontWeightBold" />
+    <x:Double x:Key="DocumentTabStripCloseButtonWidth">18</x:Double>
+    <x:Double x:Key="DocumentTabStripCloseButtonContentWidth">16</x:Double>
+    <CornerRadius x:Key="DocumentTabStripCloseButtonCornerRadius">4</CornerRadius>
+    <Thickness x:Key="DocumentTabStripCloseButtonContentMargin">0 0 -5 0</Thickness>
+</ResourceDictionary>

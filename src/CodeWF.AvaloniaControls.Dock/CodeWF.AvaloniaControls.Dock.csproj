@@ -6,9 +6,9 @@
 		<LangVersion>latest</LangVersion>
 		<OutputType>Library</OutputType>
 		<IsPackable>true</IsPackable>
-		<Description>封装一些基于 Avalonia 的 Dock 扩展控件，依赖 Dock 与 Semi 主题，并提供二次样式封装。Encapsulate some Avalonia Dock extension controls with Semi-based styling.</Description>
+		<Description>封装一些基于 Avalonia 的 Dock 扩展控件，直接依赖开源 Dock.Avalonia。Encapsulate Avalonia Dock extension controls based on the open-source Dock.Avalonia package.</Description>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageTags>avalonia ui,dock,controls,custom,theme</PackageTags>
+		<PackageTags>avalonia ui,dock,controls,custom</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 		<RootNamespace>CodeWF.AvaloniaControls.Dock</RootNamespace>
@@ -16,7 +16,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Semi.Avalonia.Dock" />
+		<PackageReference Include="Dock.Avalonia" />
 	</ItemGroup>
 
 	<ItemGroup>

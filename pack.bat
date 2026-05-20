@@ -18,8 +18,10 @@ echo [2/3] Building solution...
 dotnet build CodeWF.AvaloniaControls.Dock.slnx -c %CONFIGURATION% --no-restore
 if errorlevel 1 goto :error
 
-echo [3/3] Packing library...
+echo [3/3] Packing libraries...
 dotnet pack "src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" -c %CONFIGURATION% --no-build -o "%PACKAGES_DIR%"
+if errorlevel 1 goto :error
+dotnet pack "src\CodeWF.AvaloniaControls.Dock.Themes\CodeWF.AvaloniaControls.Dock.Themes.csproj" -c %CONFIGURATION% --no-build -o "%PACKAGES_DIR%"
 if errorlevel 1 goto :error
 
 echo.

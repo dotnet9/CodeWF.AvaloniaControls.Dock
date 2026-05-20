@@ -46,5 +46,6 @@
 	<ItemGroup>
 		<Content Include="Assets\logo.ico" />
 		<ProjectReference Include="..\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
+		<ProjectReference Include="..\CodeWF.AvaloniaControls.Dock.Themes\CodeWF.AvaloniaControls.Dock.Themes.csproj" />
 	</ItemGroup>
 </Project>

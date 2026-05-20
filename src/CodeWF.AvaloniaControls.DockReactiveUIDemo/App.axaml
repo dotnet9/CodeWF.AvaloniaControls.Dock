@@ -22,7 +22,7 @@
     <Application.Styles>
         <semi:SemiTheme Locale="zh-CN" />
         <uSemi:SemiTheme Locale="zh-CN" />
-        <semi:DockSemiTheme />
+        <codewf:DockSemiTheme />
         <codewf:DockCodeWFTheme />
         <StyleInclude Source="Index.axaml" />
         <Style Selector="ScrollViewer">

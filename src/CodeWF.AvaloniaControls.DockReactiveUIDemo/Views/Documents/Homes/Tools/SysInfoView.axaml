@@ -16,7 +16,7 @@
                 <TextBlock Foreground="#697386" Text="运行时" />
                 <TextBlock Grid.Column="1" Text=".NET 11 预览版" />
                 <TextBlock Grid.Row="1" Foreground="#697386" Text="UI 框架" />
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="Avalonia 12.0.2" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Avalonia 12.0.3" />
                 <TextBlock Grid.Row="2" Foreground="#697386" Text="主题链路" />
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Ursa + Semi" />
                 <TextBlock Grid.Row="3" Foreground="#697386" Text="打包" />

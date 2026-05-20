@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Title>CodeWF.AvaloniaControls.Dock.Themes</Title>
+		<TargetFrameworks>net8.0;net9.0;net10.0;net11.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<OutputType>Library</OutputType>
+		<IsPackable>true</IsPackable>
+		<Description>CodeWF Semi-compatible Dock themes for Avalonia Dock controls. 为 CodeWF Dock 控件提供独立的 Semi 风格主题资源。</Description>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageTags>avalonia ui,dock,theme,semi</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<RootNamespace>CodeWF.AvaloniaControls.Dock.Themes</RootNamespace>
+		<AssemblyName>CodeWF.AvaloniaControls.Dock.Themes</AssemblyName>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Dock.Avalonia" />
+		<PackageReference Include="Dock.Avalonia.Themes.Fluent" />
+		<ProjectReference Include="..\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\CodeWF.AvaloniaControls.Dock\logo.png" Pack="true" PackagePath="" Link="logo.png" />
+	</ItemGroup>
+</Project>
