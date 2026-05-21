@@ -11,7 +11,8 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#FFFFFF" />
-                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#F5FAFF" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#FAFDFF" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarDividerBrush" Color="#DCEBF8" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#111827" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveForegroundBrush" Color="#071B2C" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveIndicatorBrush" Color="#147FE8" />
@@ -21,7 +22,8 @@
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#FFFFFF" />
-                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#F5FAFF" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#FAFDFF" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarDividerBrush" Color="#DCEBF8" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#111827" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveForegroundBrush" Color="#071B2C" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveIndicatorBrush" Color="#147FE8" />
@@ -32,6 +34,7 @@
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#111827" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#162033" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarDividerBrush" Color="#2C3B4E" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#F9FAFB" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveForegroundBrush" Color="#FFFFFF" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveIndicatorBrush" Color="#76A9FF" />
@@ -41,7 +44,8 @@
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Aquatic}">
                     <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#F4FDFF" />
-                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#EAFBFF" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#F6FDFF" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarDividerBrush" Color="#CDE9EF" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#0F3E4A" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveForegroundBrush" Color="#062D36" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveIndicatorBrush" Color="#0EA5B7" />
@@ -51,7 +55,8 @@
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Desert}">
                     <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#FFF9F0" />
-                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#FFF2DE" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#FFF9F0" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarDividerBrush" Color="#E8D9C2" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#4A3214" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveForegroundBrush" Color="#2F1D08" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveIndicatorBrush" Color="#C77B2A" />
@@ -61,7 +66,8 @@
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Dusk}">
                     <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#FFF7F4" />
-                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#FAF0FF" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#FFF8FB" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarDividerBrush" Color="#DDD7EA" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#4B2634" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveForegroundBrush" Color="#2B1535" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveIndicatorBrush" Color="#8A63D2" />
@@ -72,6 +78,7 @@
                 <ResourceDictionary x:Key="{x:Static semi:SemiTheme.NightSky}">
                     <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#0F172A" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveBackgroundBrush" Color="#17213A" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarDividerBrush" Color="#2D3A52" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#F8FAFC" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveForegroundBrush" Color="#FFFFFF" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarActiveIndicatorBrush" Color="#7AA2FF" />
@@ -130,7 +137,7 @@
                                               Grid.Row="1" />
                     <Border x:Name="PART_Border"
                             Background="{DynamicResource CodeWFToolTitleBarBackgroundBrush}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderBrush="{DynamicResource CodeWFToolTitleBarDividerBrush}"
                             Padding="{DynamicResource CodeWFToolTitleBarPadding}"
                             VerticalAlignment="Top"
                             Grid.Row="{Binding GripMode, Converter={x:Static GripModeConverters.GridRowAutoHideConverter}}">
@@ -197,7 +204,7 @@
                         </Grid>
                     </Border>
                     <Panel x:Name="PART_Panel"
-                           Background="{TemplateBinding BorderBrush}"
+                           Background="{DynamicResource CodeWFToolTitleBarDividerBrush}"
                            Height="{DynamicResource DockToolChromeDividerThickness}"
                            VerticalAlignment="Top"
                            Grid.Row="{Binding GripMode, Converter={x:Static GripModeConverters.GridRowAutoHideConverter}}" />
@@ -206,7 +213,7 @@
         </Setter>
 
         <Style Selector="^/template/ Border#PART_Border">
-            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderThickness" Value="0 0 0 1" />
             <Setter Property="IsVisible"
                     Value="{Binding GripMode, Converter={x:Static GripModeConverters.IsVisibleVisibleConverter}}" />
         </Style>
