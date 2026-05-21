@@ -3,6 +3,7 @@
         xmlns:core="using:Dock.Model.Core"
         xmlns:controls="using:Dock.Model.Controls"
         xmlns:converters="using:Dock.Avalonia.Converters"
+        xmlns:semi="https://irihi.tech/semi"
         x:DataType="controls:IToolDock"
         x:CompileBindings="True">
     <Styles.Resources>
@@ -28,6 +29,34 @@
                     <SolidColorBrush x:Key="CodeWFToolTitleBarButtonForegroundBrush" Color="#F9FAFB" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPointerOverBackgroundBrush" Color="#1F2937" />
                     <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPressedBackgroundBrush" Color="#374151" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Aquatic}">
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#F4FDFF" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#0F3E4A" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonForegroundBrush" Color="#0F3E4A" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPointerOverBackgroundBrush" Color="#DDF7FC" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPressedBackgroundBrush" Color="#C3EEF7" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Desert}">
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#FFF9F0" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#4A3214" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonForegroundBrush" Color="#4A3214" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPointerOverBackgroundBrush" Color="#F7E8D2" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPressedBackgroundBrush" Color="#EFD7B5" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="{x:Static semi:SemiTheme.Dusk}">
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#FFF7F4" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#4B2634" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonForegroundBrush" Color="#4B2634" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPointerOverBackgroundBrush" Color="#F7E2E7" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPressedBackgroundBrush" Color="#EDCDD8" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="{x:Static semi:SemiTheme.NightSky}">
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarBackgroundBrush" Color="#0F172A" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarForegroundBrush" Color="#F8FAFC" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonForegroundBrush" Color="#F8FAFC" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPointerOverBackgroundBrush" Color="#1E293B" />
+                    <SolidColorBrush x:Key="CodeWFToolTitleBarButtonPressedBackgroundBrush" Color="#334155" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
@@ -172,11 +201,20 @@
 
         <Style Selector="^/template/ TextBlock#PART_Title">
             <Setter Property="Foreground" Value="{DynamicResource CodeWFToolTitleBarForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="TextAlignment" Value="Left" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="^:active /template/ TextBlock#PART_Title">
+            <Setter Property="Foreground" Value="{DynamicResource CodeWFToolTitleBarForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^:disabled /template/ TextBlock#PART_Title">
+            <Setter Property="Foreground" Value="{DynamicResource CodeWFToolTitleBarForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
         </Style>
 
         <Style Selector="^/template/ ContentControl#PART_TitleBarContent">
@@ -190,6 +228,27 @@
             <Setter Property="Data" Value="{DynamicResource DockToolIconCloseGeometry}" />
             <Setter Property="Stretch" Value="Uniform" />
             <Setter Property="Fill" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^:active /template/ Path#PART_ClosePath">
+            <Setter Property="Fill" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^:disabled /template/ Path#PART_ClosePath">
+            <Setter Property="Fill" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^/template/ Button#PART_CloseButton">
+            <Setter Property="Foreground" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^:active /template/ Button#PART_CloseButton">
+            <Setter Property="Foreground" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^:disabled /template/ Button#PART_CloseButton">
+            <Setter Property="Foreground" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+            <Setter Property="Opacity" Value="1" />
         </Style>
             </ControlTheme>
         </ResourceDictionary>

@@ -18,6 +18,7 @@
 	<ItemGroup>
 		<PackageReference Include="Dock.Avalonia" />
 		<PackageReference Include="Dock.Avalonia.Themes.Fluent" />
+		<PackageReference Include="Semi.Avalonia" />
 		<ProjectReference Include="..\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
 	</ItemGroup>
 
