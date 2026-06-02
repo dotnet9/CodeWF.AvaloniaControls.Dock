@@ -24,6 +24,7 @@
 		<PackageReference Include="Avalonia.Desktop" />
 		<PackageReference Include="Avalonia.Fonts.Inter" />
 		<PackageReference Include="Avalonia.Themes.Fluent" />
+		<PackageReference Include="Semi.Avalonia" />
 		<PackageReference Include="ReactiveUI.Avalonia" />
 		<PackageReference Include="Dock.Model.ReactiveUI" />
 		<PackageReference Include="Prism.DryIoc.Avalonia" />

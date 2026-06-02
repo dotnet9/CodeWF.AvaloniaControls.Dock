@@ -1,22 +1,20 @@
 <Solution>
-  <Folder Name="/solution/">
-    <File Path=".gitignore" />
-    <File Path="CHANGELOG.md" />
-    <File Path="CHANGELOG.zh-CN.md" />
-    <File Path="Directory.Build.props" />
-    <File Path="Directory.Packages.props" />
-    <File Path="global.json" />
-    <File Path="pack.bat" />
-    <File Path="publishbase.bat" />
-    <File Path="Publish.Common.pubxml" />
-    <File Path="publish_all.bat" />
-    <File Path="README.md" />
-    <File Path="README.zh-CN.md" />
-    <File Path="UpdateAssemblyVersion.ps1" />
-  </Folder>
   <Folder Name="/demos/">
     <Project Path="src/CodeWF.AvaloniaControls.DockReactiveUIDemo/CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj" />
   </Folder>
   <Project Path="src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj" />
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="CHANGELOG.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="pack.bat" />
+    <File Path="Publish.Common.pubxml" />
+    <File Path="publishbase.bat" />
+    <File Path="publish_all.bat" />
+    <File Path="README.md" />
+    <File Path="UpdateAssemblyVersion.ps1" />
+  </Folder>
   <Project Path="src/CodeWF.AvaloniaControls.Dock.Themes/CodeWF.AvaloniaControls.Dock.Themes.csproj" />
 </Solution>
