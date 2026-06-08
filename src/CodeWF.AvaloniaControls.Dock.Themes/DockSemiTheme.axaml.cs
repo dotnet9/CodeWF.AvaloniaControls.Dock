@@ -2,6 +2,6 @@
 
 namespace CodeWF.AvaloniaControls.Dock.Themes;
 
-public class DockCodeWFTheme : Styles
+public class DockSemiTheme : Styles
 {
 }

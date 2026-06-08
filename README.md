@@ -1,26 +1,26 @@
 # CodeWF.AvaloniaControls.Dock
 
-| Name | NuGet | Downloads |
-|------|-------|-----------|
+| 名称 | NuGet | 下载量 |
+|------|-------|--------|
 | CodeWF.AvaloniaControls.Dock | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock/) |
 | CodeWF.AvaloniaControls.Dock.Themes | [![NuGet](https://img.shields.io/nuget/v/CodeWF.AvaloniaControls.Dock.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock.Themes/) | [![NuGet](https://img.shields.io/nuget/dt/CodeWF.AvaloniaControls.Dock.Themes.svg)](https://www.nuget.org/packages/CodeWF.AvaloniaControls.Dock.Themes/) |
 
-Dock extension controls and theme resources for Avalonia 12. The repository keeps the reusable Dock controls separate from the Dock theme package so applications can reference only what they need.
+面向 Avalonia 12 的 Dock 扩展控件与主题资源。本仓库将可复用的 Dock 控件和 Dock 主题包拆分维护，应用可以按需只引用需要的部分。
 
-## Install
+## 安装
 
 ```powershell
 Install-Package CodeWF.AvaloniaControls.Dock
 Install-Package CodeWF.AvaloniaControls.Dock.Themes
 ```
 
-Applications that do not already reference Semi should also add `Semi.Avalonia`, because the CodeWF Tool title bar reuses Semi color resources.
+如果应用本身还没有引用 Semi，也需要添加 `Semi.Avalonia`，因为 CodeWF 的 Tool 标题栏会复用 Semi 色彩资源。
 
 ```powershell
 Install-Package Semi.Avalonia
 ```
 
-## Theme Setup
+## 主题配置
 
 ```xml
 <Application
@@ -29,70 +29,70 @@ Install-Package Semi.Avalonia
     xmlns:semi="https://irihi.tech/semi">
   <Application.Styles>
     <fluent:FluentTheme />
-    <semi:SemiTheme Locale="en-US" />
-    <codewf:DockCodeWFTheme />
+    <semi:SemiTheme Locale="zh-CN" />
+    <codewf:DockSemiTheme />
   </Application.Styles>
 </Application>
 ```
 
-`DockCodeWFTheme` loads the open-source `Dock.Avalonia.Themes.Fluent` Dock theme and applies CodeWF refinements for Tool chrome buttons and Tool title bars. Keep the Fluent theme in the application style chain for the base Dock layout, and load `SemiTheme` before `DockCodeWFTheme` so Semi resource keys such as `SemiColorText0`, `SemiColorFill0`, and `SemiColorBorder` are available.
+`DockSemiTheme` 会加载开源的 `Dock.Avalonia.Themes.Fluent` Dock 主题，并应用 CodeWF 对 Tool chrome 按钮和 Tool 标题栏的细节调整。请保留 `FluentTheme`，用于 Dock 基础布局样式链；同时在 `DockSemiTheme` 之前加载 `SemiTheme`，保证 `SemiColorText0`、`SemiColorFill0`、`SemiColorBorder` 等 Semi 资源键可用。
 
-Remove the old `DockSemiTheme` entry when upgrading from earlier configurations. This package does not depend on the non-open-source `Semi.Avalonia.Dock` package.
+从旧配置升级时，请将 `DockCodeWFTheme` 替换为 `DockSemiTheme`。本主题包不依赖非开源的 `Semi.Avalonia.Dock` 包。
 
-## Tool Title Bar
+## Tool 标题栏
 
-`DockCodeWFTheme` exposes `CodeWFToolChromeControlTheme` for Tool panels that need a compact business-style title bar. The default title is left-aligned, uses neutral text, avoids colored active-title styling, and keeps the close button on the right.
+`DockSemiTheme` 提供 `CodeWFToolChromeControlTheme`，用于需要紧凑商务风格标题栏的 Tool 面板。默认标题左对齐，使用中性色文本，不使用彩色激活标题样式，并将关闭按钮保持在右侧。
 
-Applications can override `CodeWFToolTitleTabHeaderTemplate` for Tool-specific title icons and `CodeWFToolTitleBarContentTemplate` for right-side title-bar content. Keep application-specific icons and actions in the application layer; the Dock package only provides the shared title-bar structure and resources.
+应用可以覆盖 `CodeWFToolTitleTabHeaderTemplate` 来提供 Tool 专用标题图标，也可以覆盖 `CodeWFToolTitleBarContentTemplate` 来提供右侧标题栏内容。应用专用图标和操作应留在应用层；Dock 包只提供共享的标题栏结构和资源。
 
-## Repository Layout
+## 仓库结构
 
-- `src/CodeWF.AvaloniaControls.Dock`: reusable Dock control extensions
-- `src/CodeWF.AvaloniaControls.Dock.Themes`: separated Fluent-based Dock theme package using Semi color resource keys
-- `src/CodeWF.AvaloniaControls.DockReactiveUIDemo`: ReactiveUI sample with nested Dock and process-embedding documentation
-- `CodeWF.AvaloniaControls.Dock.slnx`: solution view for the Dock library, theme package, and sample
+- `src/CodeWF.AvaloniaControls.Dock`：可复用的 Dock 控件扩展
+- `src/CodeWF.AvaloniaControls.Dock.Themes`：独立的 Fluent 基础 Dock 主题包，复用 Semi 色彩资源键
+- `src/CodeWF.AvaloniaControls.DockReactiveUIDemo`：包含嵌套 Dock 与进程嵌入说明的 ReactiveUI 示例
+- `CodeWF.AvaloniaControls.Dock.slnx`：Dock 库、主题包和示例项目的解决方案视图
 
-## Scripts
+## 脚本
 
-- `pack.bat`: restores, builds, and packs `CodeWF.AvaloniaControls.Dock` plus `CodeWF.AvaloniaControls.Dock.Themes` into `artifacts/packages`
-- `publish_all.bat`: publishes all Dock sample applications into `publish/`
-- `publishbase.bat`: shared publish helper used by the sample publish script
+- `pack.bat`：还原、构建并打包 `CodeWF.AvaloniaControls.Dock` 和 `CodeWF.AvaloniaControls.Dock.Themes` 到 `artifacts/packages`
+- `publish_all.bat`：将所有 Dock 示例应用发布到 `publish/`
+- `publishbase.bat`：示例发布脚本使用的共享发布辅助脚本
 
-## Notes
+## 说明
 
-- `CodeWF.AvaloniaControls.DockReactiveUIDemo` keeps `Avalonia.Themes.Fluent` for the base style/layout chain, then loads `SemiTheme` so Dock title-bar resources can reuse Semi color tokens.
-- `Prism.DryIoc.Avalonia` is pinned to `8.1.97.11073` because the `9.x` line is commercial.
-- The controls package does not depend on Semi. The theme package references the MIT-licensed `Semi.Avalonia` package for shared color resources only, with no `Semi.Avalonia.Dock` or Ursa dependency.
-- NuGet packages include the simple root logo assets: `logo.png`, `logo.svg`, and `logo.ico`.
+- `CodeWF.AvaloniaControls.DockReactiveUIDemo` 保留 `Avalonia.Themes.Fluent` 作为基础样式和布局链，然后加载 `SemiTheme`，使 Dock 标题栏资源可以复用 Semi 色彩令牌。
+- `Prism.DryIoc.Avalonia` 固定在 `8.1.97.11073`，因为 `9.x` 分支是商业版本。
+- 控件包不依赖 Semi。主题包只引用 MIT 许可的 `Semi.Avalonia` 包来共享色彩资源，不包含 `Semi.Avalonia.Dock` 或 Ursa 依赖。
+- NuGet 包包含根目录下的简单 logo 资源：`logo.png`、`logo.svg` 和 `logo.ico`。
 
-## Third-Party Open Source Audit
+## 第三方开源审计
 
-Checked on 2026-06-02 with NuGet metadata, restored `project.assets.json`, package nuspec files, and upstream source/license links. MIT / Apache-2.0 / BSD are preferred. Source-open non-preferred licenses must be reviewed before use.
+2026-06-02 根据 NuGet 元数据、还原后的 `project.assets.json`、包 nuspec 文件以及上游源码和许可证链接完成检查。优先采用 MIT、Apache-2.0、BSD 许可证。源码可见但不属于优先许可证的依赖，在使用前必须复审。
 
-Remediation:
+整改内容：
 
-- Removed the previous Dock theme path and replaced it with the open-source `Dock.Avalonia.Themes.Fluent` theme.
-- Rewired `DockCodeWFTheme` to load Fluent Dock resources plus CodeWF Tool chrome refinements.
-- Reused open-source Semi color resources for CodeWF Tool title bars without using the non-open-source `Semi.Avalonia.Dock` package.
-- Removed self-maintained Dock XAML resources that depended on non-Fluent theme keys.
+- 移除原有 Dock 主题路径，改为使用开源的 `Dock.Avalonia.Themes.Fluent` 主题。
+- 将 `DockSemiTheme` 接入 Fluent Dock 资源，并叠加 CodeWF Tool chrome 细节调整。
+- 复用开源 Semi 色彩资源，用于 CodeWF Tool 标题栏，不使用非开源的 `Semi.Avalonia.Dock` 包。
+- 移除依赖非 Fluent 主题键的自维护 Dock XAML 资源。
 
-| Package / family | License | Source | Status |
+| 包 / 家族 | 许可证 | 源码 | 状态 |
 | --- | --- | --- | --- |
-| `Avalonia`, `Avalonia.Desktop`, `Avalonia.Fonts.Inter`, `Avalonia.Themes.Fluent`, `Avalonia.*` native/platform packages | MIT | https://github.com/AvaloniaUI/Avalonia | Approved |
-| `CodeWF.AvaloniaControls.Dock`, `CodeWF.AvaloniaControls.Dock.Themes` | MIT | https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock | Own open-source packages |
-| `CodeWF.EventBus`, `CodeWF.Log.Core` | MIT | CodeWF repositories | Own open-source packages |
-| `Dock.Avalonia`, `Dock.Avalonia.Themes.Fluent`, `Dock.Model.ReactiveUI`, `Dock.Controls.*`, `Dock.Model`, `Dock.Settings` | MIT | https://github.com/wieslawsoltes/Dock | Approved |
-| `DryIoc.dll` | MIT | https://github.com/dadhi/DryIoc | Approved |
-| `DynamicData`, `ReactiveUI`, `Splat`, `System.Reactive` | MIT | https://github.com/reactiveui | Approved |
-| `HarfBuzzSharp`, `SkiaSharp` and native assets | MIT | https://github.com/mono/SkiaSharp | Approved |
-| `MicroCom.Runtime` | MIT | https://github.com/AvaloniaUI/MicroCom | Approved |
-| `Prism.DryIoc.Avalonia`, `Prism.Avalonia`, `Prism.Core` | MIT | https://github.com/AvaloniaCommunity/Prism.Avalonia | Approved, pinned to 8.x |
-| `Semi.Avalonia` | MIT | https://github.com/irihitech/Semi.Avalonia | Approved; used for open-source theme resources and color tokens |
-| `StaticViewLocator` | MIT | https://github.com/wieslawsoltes/StaticViewLocator | Approved |
-| `System.*` runtime extension packages | MIT | https://github.com/dotnet/dotnet | Approved |
-| `Tmds.DBus.Protocol` | MIT | https://github.com/tmds/Tmds.DBus | Approved |
-| `VC-LTL` | EPL-2.0 | https://github.com/Chuyu-Team/VC-LTL5 | Source-open; approved under the source-traceable non-preferred license rule |
-| `Xaml.Behaviors` | MIT | https://github.com/wieslawsoltes/Xaml.Behaviors | Approved |
-| `YY-Thunks` | MIT | https://github.com/Chuyu-Team/YY-Thunks | Approved |
+| `Avalonia`, `Avalonia.Desktop`, `Avalonia.Fonts.Inter`, `Avalonia.Themes.Fluent`, `Avalonia.*` 原生 / 平台包 | MIT | https://github.com/AvaloniaUI/Avalonia | 已批准 |
+| `CodeWF.AvaloniaControls.Dock`, `CodeWF.AvaloniaControls.Dock.Themes` | MIT | https://github.com/dotnet9/CodeWF.AvaloniaControls.Dock | 自有开源包 |
+| `CodeWF.EventBus`, `CodeWF.Log.Core` | MIT | CodeWF 仓库 | 自有开源包 |
+| `Dock.Avalonia`, `Dock.Avalonia.Themes.Fluent`, `Dock.Model.ReactiveUI`, `Dock.Controls.*`, `Dock.Model`, `Dock.Settings` | MIT | https://github.com/wieslawsoltes/Dock | 已批准 |
+| `DryIoc.dll` | MIT | https://github.com/dadhi/DryIoc | 已批准 |
+| `DynamicData`, `ReactiveUI`, `Splat`, `System.Reactive` | MIT | https://github.com/reactiveui | 已批准 |
+| `HarfBuzzSharp`, `SkiaSharp` 与原生资源 | MIT | https://github.com/mono/SkiaSharp | 已批准 |
+| `MicroCom.Runtime` | MIT | https://github.com/AvaloniaUI/MicroCom | 已批准 |
+| `Prism.DryIoc.Avalonia`, `Prism.Avalonia`, `Prism.Core` | MIT | https://github.com/AvaloniaCommunity/Prism.Avalonia | 已批准，固定在 8.x |
+| `Semi.Avalonia` | MIT | https://github.com/irihitech/Semi.Avalonia | 已批准；用于开源主题资源和色彩令牌 |
+| `StaticViewLocator` | MIT | https://github.com/wieslawsoltes/StaticViewLocator | 已批准 |
+| `System.*` 运行时扩展包 | MIT | https://github.com/dotnet/dotnet | 已批准 |
+| `Tmds.DBus.Protocol` | MIT | https://github.com/tmds/Tmds.DBus | 已批准 |
+| `VC-LTL` | EPL-2.0 | https://github.com/Chuyu-Team/VC-LTL5 | 源码可见；已按源码可追溯的非优先许可证规则批准 |
+| `Xaml.Behaviors` | MIT | https://github.com/wieslawsoltes/Xaml.Behaviors | 已批准 |
+| `YY-Thunks` | MIT | https://github.com/Chuyu-Team/YY-Thunks | 已批准 |
 
-Transitive dependency check result: active restored assets are source-open and license-traceable. No closed or black-box Dock theme package is used.
+传递依赖检查结果：当前还原的依赖资源均源码可见且许可证可追溯。未使用闭源或黑盒 Dock 主题包。

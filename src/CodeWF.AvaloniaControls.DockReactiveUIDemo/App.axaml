@@ -21,7 +21,7 @@
     <Application.Styles>
         <fluent:FluentTheme />
         <semi:SemiTheme Locale="zh-CN" />
-        <codewf:DockCodeWFTheme />
+        <codewf:DockSemiTheme />
         <StyleInclude Source="Index.axaml" />
         <Style Selector="ScrollViewer">
             <Setter Property="AllowAutoHide" Value="False" />
