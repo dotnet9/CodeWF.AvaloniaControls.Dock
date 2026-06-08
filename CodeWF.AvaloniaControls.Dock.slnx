@@ -5,10 +5,9 @@
   <Project Path="src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj" />
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
-    <File Path="CHANGELOG.md" />
+    <File Path="UpdateLog.md" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
-    <File Path="global.json" />
     <File Path="pack.bat" />
     <File Path="Publish.Common.pubxml" />
     <File Path="publishbase.bat" />
