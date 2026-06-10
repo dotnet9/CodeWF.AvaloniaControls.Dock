@@ -64,7 +64,7 @@
                             <Border Background="{DynamicResource CodeWFToolPanelBackgroundBrush}"
                                     BorderBrush="{DynamicResource CodeWFToolPanelBorderBrush}"
                                     BorderThickness="1"
-                                    IsVisible="{Binding !!VisibleDockables.Count}">
+                                    IsVisible="{Binding !!OpenedDockablesCount}">
                                 <ToolChromeControl IsActive="{Binding IsActive}">
                                     <ToolControl />
                                 </ToolChromeControl>
@@ -162,7 +162,7 @@
                                         </MultiBinding>
                                         <MultiBinding Converter="{x:Static converters:CanRemoveDockableConverter.Instance}">
                                             <Binding Path="(core:IDock).CanCloseLastDockable" FallbackValue="{x:True}" />
-                                            <Binding Path="(core:IDock).VisibleDockables.Count" FallbackValue="0" />
+                                            <Binding Path="(core:IDock).OpenedDockablesCount" FallbackValue="0" />
                                         </MultiBinding>
                                     </MultiBinding>
                                 </Button.IsVisible>
