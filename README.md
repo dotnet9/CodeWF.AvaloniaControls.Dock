@@ -103,3 +103,6 @@ Install-Package Semi.Avalonia
 | `YY-Thunks` | MIT | https://github.com/Chuyu-Team/YY-Thunks | 已批准 |
 
 传递依赖检查结果：当前还原的依赖资源均源码可见且许可证可追溯。未使用闭源或黑盒 Dock 主题包。
+## Package Versioning Convention
+
+Keep NuGet package versions and Central Package Management settings in `Directory.Packages.props`, including shared version properties such as `AvaloniaVersion`. Keep `Directory.Build.props` focused on build, compiler, and NuGet package metadata. When referenced, `VC-LTL` and `YY-Thunks` should use their latest prerelease versions for OS platform compatibility.
