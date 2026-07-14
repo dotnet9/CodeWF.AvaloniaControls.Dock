@@ -60,8 +60,15 @@ public class TitleBarRightContentViewModel : ReactiveObject
 
     #endregion 模块可见状态
 
-    public void RaiseOpenOrLocateDocumentHandler(string documentKey)
+    public void RaiseOpenOrLocateDocumentHandler(object? commandParameter)
     {
+        // Avalonia 12.1 的方法命令只接受无参数或单个 object 参数。
+        // 在入口处完成类型收窄，后续仍使用强类型字符串，避免把弱类型参数扩散到 Dock 查找流程。
+        if (commandParameter is not string documentKey)
+        {
+            return;
+        }
+
         switch (documentKey)
         {
             case nameof(DataManagementViewModel):

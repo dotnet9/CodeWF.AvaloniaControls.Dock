@@ -147,9 +147,11 @@
                                             Content="{Binding ActiveDockable}"
                                             ContentTemplate="{DynamicResource CodeWFToolTitleBarContentTemplate}"
                                             Margin="{DynamicResource CodeWFToolTitleBarContentMargin}" />
+                            <!-- Avalonia 12.1 的编译绑定不再把带 IDockable 参数的接口方法直接推断为 ICommand，
+                                 这里沿用 Dock 上游的方法命令语义，并仅对该命令使用反射绑定。 -->
                             <Button x:Name="PART_CloseButton"
                                     Grid.Column="2"
-                                    Command="{Binding Owner.Factory.CloseDockable}"
+                                    Command="{ReflectionBinding Owner.Factory.CloseDockable}"
                                     CommandParameter="{Binding ActiveDockable}"
                                     Theme="{TemplateBinding CloseButtonTheme}">
                                 <Button.IsVisible>
