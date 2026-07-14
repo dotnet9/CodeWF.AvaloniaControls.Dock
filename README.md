@@ -52,6 +52,8 @@ Install-Package Semi.Avalonia
 
 应用可以覆盖 `CodeWFToolTitleTabHeaderTemplate` 来提供 Tool 专用标题图标，也可以覆盖 `CodeWFToolTitleBarContentTemplate` 来提供右侧标题栏内容。应用专用图标和操作应留在应用层；Dock 包只提供共享的标题栏结构和资源。
 
+代码式创建 Dock 布局时，每个独立 `Factory` 都需要按 Dock 官方示例配置 `HostWindowLocator`，或者由对应 `DockControl` 启用 `InitializeFactory`。嵌套 Dock 使用自己的 Factory 时不能复用外层 Factory 的窗口定位器，否则 Tool/Document 会移出原布局，但无法显示浮动窗体。
+
 ## 仓库结构
 
 - `src/CodeWF.AvaloniaControls.Dock`：可复用的 Dock 控件扩展

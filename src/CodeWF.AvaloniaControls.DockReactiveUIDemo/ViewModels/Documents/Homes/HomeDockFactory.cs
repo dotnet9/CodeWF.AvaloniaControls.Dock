@@ -1,8 +1,11 @@
 ﻿using CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes.Tools;
+using Dock.Avalonia.Controls;
 using Dock.Model.Controls;
 using Dock.Model.Core;
 using Dock.Model.ReactiveUI;
 using Dock.Model.ReactiveUI.Controls;
+using System;
+using System.Collections.Generic;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.ViewModels.Documents.Homes;
 
@@ -90,5 +93,17 @@ public class HomeDockFactory : Factory
         rootDock.VisibleDockables = CreateList<IDockable>(mainLayout);
 
         return rootDock;
+    }
+
+    public override void InitLayout(IDockable layout)
+    {
+        // Home 页面使用独立 Factory，不能复用外层工作区的 HostWindowLocator。
+        // 若不单独注册，Tool 会从嵌套布局移出，但没有实际 HostWindow 承载浮动窗体。
+        HostWindowLocator ??= new Dictionary<string, Func<IHostWindow?>>
+        {
+            [nameof(IDockWindow)] = static () => new HostWindow()
+        };
+
+        base.InitLayout(layout);
     }
 }
