@@ -37,12 +37,12 @@ Install-Package Semi.Avalonia
   <Application.Styles>
     <fluent:FluentTheme />
     <semi:SemiTheme Locale="zh-CN" />
-    <codewf:DockSemiTheme />
+    <codewf:DockSemiTheme Locale="zh-CN" />
   </Application.Styles>
 </Application>
 ```
 
-`DockSemiTheme` 会加载开源的 `Dock.Avalonia.Themes.Fluent` Dock 主题，并应用 CodeWF 对 Tool chrome 按钮和 Tool 标题栏的细节调整。请保留 `FluentTheme`，用于 Dock 基础布局样式链；同时在 `DockSemiTheme` 之前加载 `SemiTheme`，保证 `SemiColorText0`、`SemiColorFill0`、`SemiColorBorder` 等 Semi 资源键可用。
+`DockSemiTheme` 会加载开源的 `Dock.Avalonia.Themes.Fluent` Dock 主题，并应用 CodeWF 对 Tool chrome 按钮和 Tool 标题栏的细节调整。`Locale` 当前支持 `en-US` 和 `zh-CN`，未指定或无法识别时回退到 `en-US`。请保留 `FluentTheme`，用于 Dock 基础布局样式链；同时在 `DockSemiTheme` 之前加载 `SemiTheme`，保证 `SemiColorText0`、`SemiColorFill0`、`SemiColorBorder` 等 Semi 资源键可用。
 
 从旧配置升级时，请将 `DockCodeWFTheme` 替换为 `DockSemiTheme`。本主题包不依赖非开源的 `Semi.Avalonia.Dock` 包。
 

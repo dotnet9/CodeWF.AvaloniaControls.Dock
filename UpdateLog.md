@@ -2,8 +2,8 @@
 
 ## 12.1.0.4 (2026-07-16)
 
-- 新增可选的 `DockZhCnLocale`，统一覆盖 Dock 拖放提示、Document 标签菜单和 Tool 菜单中的用户可见英文。
-- 中文 Locale 与 `DockSemiTheme` 分离，应用可按语言显式加载，不改变通用主题的默认语言。
+- `DockSemiTheme` 新增 `Locale` 属性，统一管理 Dock 拖放提示、Document 标签菜单和 Tool 菜单语言。
+- 内置 `en-US` 和 `zh-CN` 资源；未指定或无法识别语言时回退到 `en-US`，应用只需在主题入口声明语言。
 
 ## 12.1.0.3 (2026-07-16)
 
