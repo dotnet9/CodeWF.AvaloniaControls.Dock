@@ -1,5 +1,12 @@
 # 变更日志
 
+## 12.1.0.3 (2026-07-16)
+
+- 修复 Avalonia 12.1 下 Tool 标题栏关闭按钮无法执行 `IFactory.CloseDockable(IDockable)` 的问题，改用显式命令适配器。
+- 恢复 Tool 标题栏的固定/自动隐藏按钮，并通过原生 `IFactory.PinDockable(IDockable)` 切换状态。
+- Tool 与 Document 增加跟随 Semi 主题的活动/非活动外边框，活动状态使用主题主色强调。
+- Tool 固定、Tool 关闭和 Document 关闭按钮增加跟随当前主题的操作提示，并完整遵守 Dock 能力策略。
+
 ## 12.0.4.12 (2026-06-08)
 
 - 🔨[优化]-补齐根目录 logo.svg、logo.png、logo.ico 三件套，子工程通过 MSBuild Link 引用根 logo，避免维护多份图标副本。

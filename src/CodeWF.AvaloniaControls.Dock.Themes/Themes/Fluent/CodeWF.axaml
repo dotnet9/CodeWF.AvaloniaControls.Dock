@@ -4,6 +4,10 @@
     xmlns:semi="https://irihi.tech/semi">
     <Styles.Resources>
         <ResourceDictionary>
+            <StaticResource x:Key="CodeWFDockInactiveBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="CodeWFDockActiveBorderBrush" ResourceKey="SemiColorPrimary" />
+            <StaticResource x:Key="CodeWFToolPinButtonForegroundBrush" ResourceKey="SemiColorPrimary" />
+            <StaticResource x:Key="CodeWFToolPinButtonActiveForegroundBrush" ResourceKey="SemiColorPrimaryActive" />
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="DockChromeButtonForegroundBrush" Color="#263648" />

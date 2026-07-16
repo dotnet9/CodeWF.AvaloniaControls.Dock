@@ -1,0 +1,82 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:codewfConverters="using:CodeWF.AvaloniaControls.Dock.Converters"
+        xmlns:controls="using:Dock.Avalonia.Controls"
+        xmlns:converters="using:Dock.Avalonia.Converters"
+        xmlns:core="using:Dock.Model.Core"
+        xmlns:dockControls="using:Dock.Model.Controls"
+        x:DataType="dockControls:IDocumentDock"
+        x:CompileBindings="True">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="CodeWFDocumentCloseTemplate"
+                          DataType="core:IDockable">
+                <Button Command="{Binding Owner.Factory, Converter={x:Static codewfConverters:DockFactoryCommandConverter.CloseDockable}}"
+                        CommandParameter="{Binding}"
+                        Theme="{Binding $parent[DocumentTabStrip].CloseButtonTheme}"
+                        ToolTip.Tip="关闭文档；可从工程树重新打开">
+                    <Button.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.And}">
+                            <MultiBinding Converter="{x:Static converters:DockCapabilityConverters.CanCloseMultiConverter}">
+                                <Binding />
+                                <Binding Path="CanClose" />
+                                <Binding Path="DockCapabilityOverrides.CanClose" />
+                                <Binding Path="((core:IDock)Owner).DockCapabilityPolicy.CanClose" />
+                            </MultiBinding>
+                            <MultiBinding Converter="{x:Static converters:CanRemoveDockableConverter.Instance}">
+                                <Binding Path="((core:IDock)Owner).CanCloseLastDockable" FallbackValue="{x:True}" />
+                                <Binding Path="((core:IDock)Owner).VisibleDockables.Count" FallbackValue="0" />
+                            </MultiBinding>
+                            <MultiBinding Converter="{x:Static converters:DocumentCloseButtonVisibilityConverter.Instance}">
+                                <Binding Path="((dockControls:IDocumentDock)Owner).CloseButtonShowMode" FallbackValue="Always" />
+                                <Binding Path="$parent[DocumentTabStripItem].IsSelected" />
+                            </MultiBinding>
+                        </MultiBinding>
+                    </Button.IsVisible>
+                    <Path Margin="{DynamicResource DockTabContentMargin}"
+                          Stretch="Uniform"
+                          UseLayoutRounding="False"
+                          Data="{DynamicResource DockIconCloseGeometry}"
+                          Fill="{Binding $parent[DocumentTabStripItem].Foreground}" />
+                </Button>
+            </DataTemplate>
+
+            <ControlTheme x:Key="{x:Type DocumentDockControl}"
+                          TargetType="DocumentDockControl">
+                <Setter Property="(AutomationProperties.AutomationId)" Value="{Binding Id}" />
+                <Setter Property="(AutomationProperties.Name)" Value="{Binding Title}" />
+                <Setter Property="(DockProperties.IsDragEnabled)" Value="{Binding CanDrag}" />
+                <Setter Property="(DockProperties.IsDropEnabled)" Value="{Binding CanDrop}" />
+                <Setter Property="(DockProperties.DockGroup)" Value="{Binding DockGroup}" />
+                <Setter Property="Template">
+                    <ControlTemplate>
+                        <DockableControl TrackingMode="Visible">
+                            <Grid>
+                                <Panel>
+                                    <DocumentControl IsActive="{Binding IsActive}"
+                                                     IsVisible="{Binding LayoutMode, Converter={x:Static converters:DocumentLayoutModeMatchConverter.Instance}, ConverterParameter=Tabbed}" />
+                                    <controls:MdiDocumentControl IsActive="{Binding IsActive}"
+                                                                  IsVisible="{Binding LayoutMode, Converter={x:Static converters:DocumentLayoutModeMatchConverter.Instance}, ConverterParameter=Mdi}" />
+                                </Panel>
+                                <Border BorderBrush="{DynamicResource CodeWFDockInactiveBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4"
+                                        IsHitTestVisible="False"
+                                        IsVisible="{Binding !IsActive}" />
+                                <Border BorderBrush="{DynamicResource CodeWFDockActiveBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4"
+                                        IsHitTestVisible="False"
+                                        IsVisible="{Binding IsActive}" />
+                            </Grid>
+                        </DockableControl>
+                    </ControlTemplate>
+                </Setter>
+            </ControlTheme>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="DocumentControl">
+        <Setter Property="CloseTemplate" Value="{StaticResource CodeWFDocumentCloseTemplate}" />
+    </Style>
+</Styles>

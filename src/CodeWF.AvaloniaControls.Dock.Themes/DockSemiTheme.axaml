@@ -6,4 +6,5 @@
     <fluent:DockFluentTheme />
     <StyleInclude Source="Themes/Fluent/CodeWF.axaml" />
     <StyleInclude Source="Themes/Fluent/ToolTitleBar.axaml" />
+    <StyleInclude Source="Themes/Fluent/DockPanelBorder.axaml" />
 </Styles>

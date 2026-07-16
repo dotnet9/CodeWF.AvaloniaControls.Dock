@@ -22,7 +22,6 @@
     <ProjectReference Include="..\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\logo.png" Pack="true" PackagePath="" Link="logo.png" />
     <None Include="..\..\logo.svg" Pack="true" PackagePath="" Link="logo.svg" />
     <None Include="..\..\logo.ico" Pack="true" PackagePath="" Link="logo.ico" />
   </ItemGroup>
