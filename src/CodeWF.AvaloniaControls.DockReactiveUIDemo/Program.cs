@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using ReactiveUI.Avalonia;
 using System;
+using System.IO;
+using CodeWF.Log.Core;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo;
 
@@ -12,7 +14,22 @@ internal sealed class Program
         // DockSettings.UseFloatingDockAdorner = true;
         // DockSettings.EnableGlobalDocking = true;
 
-        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        Logger.Initialize(new LoggerOptions
+        {
+            File = new FileLogOptions
+            {
+                DirectoryPath = Path.Combine(Environment.CurrentDirectory, "Log")
+            }
+        });
+
+        try
+        {
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        }
+        finally
+        {
+            Logger.ShutdownAsync().GetAwaiter().GetResult();
+        }
     }
 
     public static AppBuilder BuildAvaloniaApp()
