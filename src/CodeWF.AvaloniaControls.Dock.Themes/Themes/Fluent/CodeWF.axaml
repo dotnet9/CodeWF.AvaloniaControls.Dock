@@ -4,8 +4,47 @@
     xmlns:semi="https://irihi.tech/semi">
     <Styles.Resources>
         <ResourceDictionary>
-            <StaticResource x:Key="CodeWFDockInactiveBorderBrush" ResourceKey="SemiColorBorder" />
-            <StaticResource x:Key="CodeWFDockActiveBorderBrush" ResourceKey="SemiColorPrimary" />
+            <!-- Shared workspace surface tokens used by both Document and Tool chrome. -->
+            <StaticResource x:Key="CodeWFDockWorkbenchBrush" ResourceKey="SemiColorFill0" />
+            <StaticResource x:Key="CodeWFDockPanelBackgroundBrush" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="CodeWFDockHeaderBackgroundBrush" ResourceKey="SemiColorBackground0" />
+            <StaticResource x:Key="CodeWFDockHeaderPointerOverBackgroundBrush" ResourceKey="SemiColorFill0" />
+            <StaticResource x:Key="CodeWFDockPanelBorderBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="CodeWFDockHeaderDividerBrush" ResourceKey="SemiColorBorder" />
+            <StaticResource x:Key="CodeWFDockActiveIndicatorBrush" ResourceKey="SemiColorPrimary" />
+            <StaticResource x:Key="CodeWFDockHeaderForegroundBrush" ResourceKey="SemiColorText0" />
+            <StaticResource x:Key="CodeWFDockHeaderSecondaryForegroundBrush" ResourceKey="SemiColorText2" />
+            <StaticResource x:Key="CodeWFDockInactiveBorderBrush" ResourceKey="CodeWFDockPanelBorderBrush" />
+            <StaticResource x:Key="CodeWFDockActiveBorderBrush" ResourceKey="CodeWFDockPanelBorderBrush" />
+            <StaticResource x:Key="CodeWFDockSplitterBrush" ResourceKey="CodeWFDockWorkbenchBrush" />
+            <StaticResource x:Key="CodeWFDockSplitterPointerOverBrush" ResourceKey="SemiColorFill2" />
+            <CornerRadius x:Key="CodeWFDockPanelCornerRadius">6</CornerRadius>
+            <Thickness x:Key="CodeWFDockPanelBorderThickness">1</Thickness>
+            <Thickness x:Key="CodeWFDockHeaderDividerThickness">0 0 0 1</Thickness>
+            <x:Double x:Key="CodeWFDockHeaderHeight">28</x:Double>
+            <!-- The separator is rendered inside the tab strip; Tool and Document share one layout height. -->
+            <StaticResource x:Key="CodeWFDockDocumentTabStripHeight"
+                            ResourceKey="CodeWFDockHeaderHeight" />
+
+            <!-- Align Fluent document tabs with the shared white workspace header. -->
+            <StaticResource x:Key="DockTabBackgroundBrush" ResourceKey="CodeWFDockHeaderBackgroundBrush" />
+            <StaticResource x:Key="DockTabHoverBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
+            <StaticResource x:Key="DockTabActiveBackgroundBrush" ResourceKey="CodeWFDockHeaderBackgroundBrush" />
+            <StaticResource x:Key="DockTabActiveIndicatorBrush" ResourceKey="CodeWFDockActiveIndicatorBrush" />
+            <StaticResource x:Key="DockTabForegroundBrush" ResourceKey="CodeWFDockHeaderSecondaryForegroundBrush" />
+            <StaticResource x:Key="DockTabSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
+            <StaticResource x:Key="DockTabActiveForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
+            <StaticResource x:Key="DockTabCloseHoverBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
+            <StaticResource x:Key="DockDocumentTabStripBackgroundBrush" ResourceKey="CodeWFDockHeaderBackgroundBrush" />
+            <StaticResource x:Key="DockDocumentTabSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
+            <StaticResource x:Key="DockDocumentTabPointerOverForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
+            <StaticResource x:Key="DockDocumentTabCloseSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderSecondaryForegroundBrush" />
+            <StaticResource x:Key="DockDocumentTabClosePointerOverForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
+            <x:Double x:Key="DockFontSizeNormal">13</x:Double>
+            <StaticResource x:Key="DockDocumentTabStripMinHeight" ResourceKey="CodeWFDockDocumentTabStripHeight" />
+            <StaticResource x:Key="DockDocumentTabItemMinHeight" ResourceKey="CodeWFDockDocumentTabStripHeight" />
+            <x:Double x:Key="DockDocumentTabStripSeparatorSize">1</x:Double>
+            <Thickness x:Key="DockDocumentTabItemPadding">6 0</Thickness>
             <StaticResource x:Key="CodeWFToolPinButtonForegroundBrush" ResourceKey="SemiColorPrimary" />
             <StaticResource x:Key="CodeWFToolPinButtonActiveForegroundBrush" ResourceKey="SemiColorPrimaryActive" />
             <ResourceDictionary.ThemeDictionaries>

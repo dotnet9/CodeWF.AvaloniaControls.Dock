@@ -8,20 +8,22 @@
         x:CompileBindings="True">
     <Styles.Resources>
         <ResourceDictionary>
-            <StaticResource x:Key="CodeWFToolPanelBackgroundBrush" ResourceKey="SemiColorBackground0" />
-            <StaticResource x:Key="CodeWFToolTitleBarBackgroundBrush" ResourceKey="SemiColorFill0" />
-            <StaticResource x:Key="CodeWFToolTitleBarActiveBackgroundBrush" ResourceKey="SemiColorFill0" />
-            <StaticResource x:Key="CodeWFToolTitleBarDividerBrush" ResourceKey="SemiColorBorder" />
-            <StaticResource x:Key="CodeWFToolTitleBarForegroundBrush" ResourceKey="SemiColorText0" />
-            <StaticResource x:Key="CodeWFToolTitleBarActiveForegroundBrush" ResourceKey="SemiColorText0" />
-            <StaticResource x:Key="CodeWFToolTitleBarActiveIndicatorBrush" ResourceKey="SemiColorBorder" />
-            <StaticResource x:Key="CodeWFToolTitleBarButtonForegroundBrush" ResourceKey="SemiColorText2" />
-            <StaticResource x:Key="CodeWFToolTitleBarButtonPointerOverBackgroundBrush" ResourceKey="SemiColorFill2" />
+            <!-- Legacy Tool keys remain extension points and now share the Document surface tokens. -->
+            <StaticResource x:Key="CodeWFToolPanelBackgroundBrush" ResourceKey="CodeWFDockPanelBackgroundBrush" />
+            <StaticResource x:Key="CodeWFToolTitleBarBackgroundBrush" ResourceKey="CodeWFDockHeaderBackgroundBrush" />
+            <StaticResource x:Key="CodeWFToolTitleBarActiveBackgroundBrush" ResourceKey="CodeWFDockHeaderBackgroundBrush" />
+            <StaticResource x:Key="CodeWFToolTitleBarDividerBrush" ResourceKey="CodeWFDockHeaderDividerBrush" />
+            <StaticResource x:Key="CodeWFToolTitleBarForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
+            <StaticResource x:Key="CodeWFToolTitleBarActiveForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
+            <!-- Tool chrome already has a bottom divider; a second underline under the title is visual noise. -->
+            <SolidColorBrush x:Key="CodeWFToolTitleBarActiveIndicatorBrush" Color="Transparent" />
+            <StaticResource x:Key="CodeWFToolTitleBarButtonForegroundBrush" ResourceKey="CodeWFDockHeaderSecondaryForegroundBrush" />
+            <StaticResource x:Key="CodeWFToolTitleBarButtonPointerOverBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
             <StaticResource x:Key="CodeWFToolTitleBarButtonPressedBackgroundBrush" ResourceKey="SemiColorFill2" />
 
-            <x:Double x:Key="CodeWFToolTitleBarHeight">24</x:Double>
+            <StaticResource x:Key="CodeWFToolTitleBarHeight" ResourceKey="CodeWFDockHeaderHeight" />
             <Thickness x:Key="CodeWFToolTitleBarPadding">0</Thickness>
-            <Thickness x:Key="CodeWFToolTitleBarContentMargin">4 0 2 0</Thickness>
+            <Thickness x:Key="CodeWFToolTitleBarContentMargin">6 0 2 0</Thickness>
             <Thickness x:Key="CodeWFToolTitleBarButtonMargin">0</Thickness>
             <Thickness x:Key="CodeWFToolTitleBarButtonPadding">0</Thickness>
             <x:Double x:Key="CodeWFToolTitleBarButtonSize">22</x:Double>
@@ -100,11 +102,11 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Border x:Name="PART_ToolPanelBorder"
-                        Background="{DynamicResource CodeWFToolPanelBackgroundBrush}"
-                        BorderBrush="{DynamicResource CodeWFDockInactiveBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="4"
-                        ClipToBounds="True">
+                         Background="{DynamicResource CodeWFToolPanelBackgroundBrush}"
+                         BorderBrush="{DynamicResource CodeWFDockInactiveBorderBrush}"
+                         BorderThickness="{DynamicResource CodeWFDockPanelBorderThickness}"
+                         CornerRadius="{DynamicResource CodeWFDockPanelCornerRadius}"
+                         ClipToBounds="True">
                     <Grid RowDefinitions="Auto,*">
                         <DockableControl DataContext="{Binding ActiveDockable}"
                                          TrackingMode="Visible"
@@ -224,7 +226,7 @@
         </Style>
 
         <Style Selector="^/template/ Border#PART_Border">
-            <Setter Property="BorderThickness" Value="0 0 0 1" />
+            <Setter Property="BorderThickness" Value="{DynamicResource CodeWFDockHeaderDividerThickness}" />
             <Setter Property="IsVisible"
                     Value="{Binding GripMode, Converter={x:Static GripModeConverters.IsVisibleVisibleConverter}}" />
         </Style>
