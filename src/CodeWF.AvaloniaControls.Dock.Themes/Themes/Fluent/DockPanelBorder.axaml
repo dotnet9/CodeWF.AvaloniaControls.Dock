@@ -83,27 +83,33 @@
                 <Setter Property="Template">
                     <ControlTemplate>
                         <DockableControl TrackingMode="Visible">
-                            <Grid>
+                            <Border Name="PART_DocumentPanelBorder"
+                                    Classes.Active="{Binding IsActive}"
+                                    Background="{DynamicResource CodeWFDockPanelBackgroundBrush}"
+                                    BorderBrush="{DynamicResource CodeWFDockInactiveBorderBrush}"
+                                    BorderThickness="{DynamicResource CodeWFDockDocumentPanelBorderThickness}"
+                                    CornerRadius="{DynamicResource CodeWFDockPanelCornerRadius}"
+                                    ClipToBounds="True">
                                 <Panel>
                                     <DocumentControl IsActive="{Binding IsActive}"
                                                      IsVisible="{Binding LayoutMode, Converter={x:Static converters:DocumentLayoutModeMatchConverter.Instance}, ConverterParameter=Tabbed}" />
                                     <controls:MdiDocumentControl IsActive="{Binding IsActive}"
                                                                   IsVisible="{Binding LayoutMode, Converter={x:Static converters:DocumentLayoutModeMatchConverter.Instance}, ConverterParameter=Mdi}" />
                                 </Panel>
-                                <Border BorderBrush="{DynamicResource CodeWFDockInactiveBorderBrush}"
-                                        BorderThickness="{DynamicResource CodeWFDockPanelBorderThickness}"
-                                        CornerRadius="{DynamicResource CodeWFDockPanelCornerRadius}"
-                                        IsHitTestVisible="False"
-                                        IsVisible="{Binding !IsActive}" />
-                                <Border BorderBrush="{DynamicResource CodeWFDockActiveBorderBrush}"
-                                        BorderThickness="{DynamicResource CodeWFDockPanelBorderThickness}"
-                                        CornerRadius="{DynamicResource CodeWFDockPanelCornerRadius}"
-                                        IsHitTestVisible="False"
-                                        IsVisible="{Binding IsActive}" />
-                            </Grid>
+                            </Border>
                         </DockableControl>
                     </ControlTemplate>
                 </Setter>
+                <Style Selector="^ /template/ Border#PART_DocumentPanelBorder">
+                    <Setter Property="Transitions">
+                        <Transitions>
+                            <BrushTransition Property="BorderBrush" Duration="0:0:0.16" />
+                        </Transitions>
+                    </Setter>
+                </Style>
+                <Style Selector="^ /template/ Border#PART_DocumentPanelBorder.Active">
+                    <Setter Property="BorderBrush" Value="{DynamicResource CodeWFDockActiveBorderBrush}" />
+                </Style>
             </ControlTheme>
         </ResourceDictionary>
     </Styles.Resources>
