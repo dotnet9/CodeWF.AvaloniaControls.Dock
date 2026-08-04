@@ -4,21 +4,21 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <AvaloniaVersion>12.1.1</AvaloniaVersion>
     <DockVersion>12.1.0</DockVersion>
-    <ReactiveUIAvaloniaVersion>12.1.0</ReactiveUIAvaloniaVersion>
+    <ReactiveUIAvaloniaVersion>12.1.1</ReactiveUIAvaloniaVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
-    <PackageVersion Include="CodeWF.EventBus" Version="3.4.5.12" />
-    <PackageVersion Include="CodeWF.Log.Core" Version="12.1.1.1" />
+    <PackageVersion Include="CodeWF.EventBus" Version="3.4.5.13" />
+    <PackageVersion Include="CodeWF.Log.Core" Version="12.1.1.2" />
     <PackageVersion Include="Dock.Avalonia" Version="$(DockVersion)" />
     <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="$(DockVersion)" />
     <PackageVersion Include="Dock.Model.ReactiveUI" Version="$(DockVersion)" />
     <PackageVersion Include="Prism.DryIoc.Avalonia" Version="8.1.97.11073" />
     <PackageVersion Include="ReactiveUI.Avalonia" Version="$(ReactiveUIAvaloniaVersion)" />
-    <PackageVersion Include="Semi.Avalonia" Version="12.1.0" />
+    <PackageVersion Include="Semi.Avalonia" Version="12.1.0.1" />
     <PackageVersion Include="StaticViewLocator" Version="0.4.0" />
     <PackageVersion Include="System.Drawing.Common" Version="10.0.10" />
     <PackageVersion Include="System.Security.Permissions" Version="10.0.10" />
