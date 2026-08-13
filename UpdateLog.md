@@ -1,5 +1,9 @@
 # 变更日志
 
+## 12.1.1.3 (2026-08-13)
+
+- 升级 Dock.Avalonia、Dock.Avalonia.Themes.Fluent 和 Dock.Model.ReactiveUI 到 12.1.0.1。
+
 ## 12.1.0.8 (2026-07-27)
 
 - Tool 面板移除圆角容器外侧的直角背景，面板背景、边框、圆角和裁剪统一由 `PART_ToolPanelBorder` 负责。
