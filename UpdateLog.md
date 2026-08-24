@@ -1,5 +1,10 @@
 # 变更日志
 
+## 12.1.1.4 (2026-08-24)
+
+- 升级 Dock.Avalonia、Dock.Avalonia.Themes.Fluent 和 Dock.Model.ReactiveUI 到 12.1.0.4。
+- 升级 Xaml.Behaviors 到 12.0.7。
+
 ## 12.1.1.3 (2026-08-13)
 
 - 升级 Dock.Avalonia、Dock.Avalonia.Themes.Fluent 和 Dock.Model.ReactiveUI 到 12.1.0.1。

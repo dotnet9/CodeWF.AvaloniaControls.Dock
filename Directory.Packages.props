@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <AvaloniaVersion>12.1.1</AvaloniaVersion>
-    <DockVersion>12.1.0.1</DockVersion>
+    <DockVersion>12.1.0.4</DockVersion>
     <ReactiveUIAvaloniaVersion>12.1.1</ReactiveUIAvaloniaVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -24,7 +24,7 @@
     <PackageVersion Include="System.Security.Permissions" Version="10.0.10" />
     <PackageVersion Include="System.Windows.Extensions" Version="10.0.10" />
     <PackageVersion Include="VC-LTL" Version="5.3.1" />
-    <PackageVersion Include="Xaml.Behaviors" Version="12.0.5" />
+    <PackageVersion Include="Xaml.Behaviors" Version="12.0.7" />
     <PackageVersion Include="YY-Thunks" Version="1.2.2" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.301" />
   </ItemGroup>
