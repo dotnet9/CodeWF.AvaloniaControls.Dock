@@ -4,6 +4,7 @@
 
 - 升级 Dock.Avalonia、Dock.Avalonia.Themes.Fluent 和 Dock.Model.ReactiveUI 到 12.1.0.4。
 - 升级 Xaml.Behaviors 到 12.0.7。
+- 升级 StaticViewLocator 到 0.6.0。
 
 ## 12.1.1.3 (2026-08-13)
 
