@@ -36,9 +36,6 @@
             <DataTemplate x:Key="CodeWFToolTitleTabHeaderTemplate" DataType="core:IDockable">
                 <TextBlock x:Name="PART_Title"
                            Text="{Binding Title}"
-                           Foreground="{DynamicResource CodeWFToolTitleBarForegroundBrush}"
-                           FontSize="13"
-                           FontWeight="SemiBold"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
                            TextAlignment="Left" />
@@ -349,4 +346,8 @@
             </ControlTheme>
         </ResourceDictionary>
     </Styles.Resources>
+
+    <Style Selector="ToolTabStripItem:selected">
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
 </Styles>

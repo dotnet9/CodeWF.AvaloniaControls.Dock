@@ -28,9 +28,9 @@
             <StaticResource x:Key="CodeWFDockDocumentTabStripHeight"
                             ResourceKey="CodeWFDockHeaderHeight" />
 
-            <!-- Align Fluent document tabs with the shared white workspace header. -->
-            <StaticResource x:Key="DockTabBackgroundBrush" ResourceKey="CodeWFDockHeaderBackgroundBrush" />
-            <StaticResource x:Key="DockTabHoverBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
+            <!-- Keep Tool tabs distinct from their content while Document tabs use dedicated tokens below. -->
+            <StaticResource x:Key="DockTabBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
+            <StaticResource x:Key="DockTabHoverBackgroundBrush" ResourceKey="SemiColorFill1" />
             <StaticResource x:Key="DockTabActiveBackgroundBrush" ResourceKey="CodeWFDockHeaderBackgroundBrush" />
             <StaticResource x:Key="DockTabActiveIndicatorBrush" ResourceKey="CodeWFDockActiveIndicatorBrush" />
             <StaticResource x:Key="DockTabForegroundBrush" ResourceKey="CodeWFDockHeaderSecondaryForegroundBrush" />
@@ -43,6 +43,9 @@
             <StaticResource x:Key="DockDocumentTabCloseSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderSecondaryForegroundBrush" />
             <StaticResource x:Key="DockDocumentTabClosePointerOverForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <x:Double x:Key="DockFontSizeNormal">13</x:Double>
+            <StaticResource x:Key="DockToolTabItemMinHeight" ResourceKey="CodeWFDockHeaderHeight" />
+            <Thickness x:Key="DockToolTabItemPadding">8 0</Thickness>
+            <Thickness x:Key="DockToolTabItemSelectedPadding">8 0</Thickness>
             <StaticResource x:Key="DockDocumentTabStripMinHeight" ResourceKey="CodeWFDockDocumentTabStripHeight" />
             <StaticResource x:Key="DockDocumentTabItemMinHeight" ResourceKey="CodeWFDockDocumentTabStripHeight" />
             <x:Double x:Key="DockDocumentTabStripSeparatorSize">1</x:Double>
