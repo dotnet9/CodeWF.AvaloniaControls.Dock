@@ -37,7 +37,7 @@
             <StaticResource x:Key="DockTabSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <StaticResource x:Key="DockTabActiveForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <StaticResource x:Key="DockTabCloseHoverBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
-            <StaticResource x:Key="DockDocumentTabStripBackgroundBrush" ResourceKey="CodeWFDockHeaderBackgroundBrush" />
+            <StaticResource x:Key="DockDocumentTabStripBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
             <StaticResource x:Key="DockDocumentTabSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <StaticResource x:Key="DockDocumentTabPointerOverForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <StaticResource x:Key="DockDocumentTabCloseSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderSecondaryForegroundBrush" />
