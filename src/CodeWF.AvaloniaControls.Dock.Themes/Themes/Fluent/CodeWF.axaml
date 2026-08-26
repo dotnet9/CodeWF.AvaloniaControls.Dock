@@ -23,6 +23,7 @@
             <StaticResource x:Key="CodeWFDockDocumentPanelBorderThickness" ResourceKey="CodeWFDockPanelBorderThickness" />
             <Thickness x:Key="CodeWFDockHeaderDividerThickness">0 0 0 1</Thickness>
             <x:Double x:Key="CodeWFDockHeaderHeight">28</x:Double>
+            <Thickness x:Key="CodeWFDockHeaderPadding">6 0</Thickness>
             <!-- The separator is rendered inside the tab strip; Tool and Document share one layout height. -->
             <StaticResource x:Key="CodeWFDockDocumentTabStripHeight"
                             ResourceKey="CodeWFDockHeaderHeight" />
@@ -45,7 +46,7 @@
             <StaticResource x:Key="DockDocumentTabStripMinHeight" ResourceKey="CodeWFDockDocumentTabStripHeight" />
             <StaticResource x:Key="DockDocumentTabItemMinHeight" ResourceKey="CodeWFDockDocumentTabStripHeight" />
             <x:Double x:Key="DockDocumentTabStripSeparatorSize">1</x:Double>
-            <Thickness x:Key="DockDocumentTabItemPadding">6 0</Thickness>
+            <StaticResource x:Key="DockDocumentTabItemPadding" ResourceKey="CodeWFDockHeaderPadding" />
             <StaticResource x:Key="CodeWFToolPinButtonForegroundBrush" ResourceKey="SemiColorPrimary" />
             <StaticResource x:Key="CodeWFToolPinButtonActiveForegroundBrush" ResourceKey="SemiColorPrimaryActive" />
             <ResourceDictionary.ThemeDictionaries>

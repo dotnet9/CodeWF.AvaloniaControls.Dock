@@ -22,7 +22,7 @@
             <StaticResource x:Key="CodeWFToolTitleBarButtonPressedBackgroundBrush" ResourceKey="SemiColorFill2" />
 
             <StaticResource x:Key="CodeWFToolTitleBarHeight" ResourceKey="CodeWFDockHeaderHeight" />
-            <Thickness x:Key="CodeWFToolTitleBarPadding">0</Thickness>
+            <StaticResource x:Key="CodeWFToolTitleBarPadding" ResourceKey="CodeWFDockHeaderPadding" />
             <Thickness x:Key="CodeWFToolTitleBarContentMargin">6 0 2 0</Thickness>
             <Thickness x:Key="CodeWFToolTitleBarButtonMargin">0</Thickness>
             <Thickness x:Key="CodeWFToolTitleBarButtonPadding">0</Thickness>
