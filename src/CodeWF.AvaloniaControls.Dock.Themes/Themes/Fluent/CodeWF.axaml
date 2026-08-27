@@ -27,6 +27,23 @@
             <!-- The separator is rendered inside the tab strip; Tool and Document share one layout height. -->
             <StaticResource x:Key="CodeWFDockDocumentTabStripHeight"
                             ResourceKey="CodeWFDockHeaderHeight" />
+            <x:Double x:Key="CodeWFDockDocumentTabItemMinWidth">132</x:Double>
+            <CornerRadius x:Key="CodeWFDockDocumentTabItemCornerRadius">6 6 0 0</CornerRadius>
+            <Thickness x:Key="CodeWFDockDocumentTabItemMargin">2 0 0 0</Thickness>
+            <StaticResource x:Key="CodeWFDockDocumentTabSelectedBackgroundBrush"
+                            ResourceKey="CodeWFDockPanelBackgroundBrush" />
+
+            <!-- Tool tabs are a bottom switcher and intentionally do not share Document tab surfaces. -->
+            <StaticResource x:Key="CodeWFToolTabStripBackgroundBrush"
+                            ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
+            <StaticResource x:Key="CodeWFToolTabPointerOverBackgroundBrush"
+                            ResourceKey="SemiColorFill1" />
+            <StaticResource x:Key="CodeWFToolTabSelectedBackgroundBrush"
+                            ResourceKey="CodeWFDockPanelBackgroundBrush" />
+            <StaticResource x:Key="CodeWFToolTabSelectedForegroundBrush"
+                            ResourceKey="CodeWFDockHeaderForegroundBrush" />
+            <StaticResource x:Key="CodeWFToolTabBorderBrush"
+                            ResourceKey="CodeWFDockPanelBorderBrush" />
 
             <!-- Keep Tool tabs distinct from their content while Document tabs use dedicated tokens below. -->
             <StaticResource x:Key="DockTabBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />

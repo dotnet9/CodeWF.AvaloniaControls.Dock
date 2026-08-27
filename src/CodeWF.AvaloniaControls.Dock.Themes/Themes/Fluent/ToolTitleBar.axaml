@@ -347,7 +347,22 @@
         </ResourceDictionary>
     </Styles.Resources>
 
+    <Style Selector="ToolTabStrip">
+        <Setter Property="Background" Value="{DynamicResource CodeWFToolTabStripBackgroundBrush}" />
+    </Style>
+
+    <Style Selector="ToolTabStripItem:pointerover">
+        <Setter Property="Background" Value="{DynamicResource CodeWFToolTabPointerOverBackgroundBrush}" />
+    </Style>
+
     <Style Selector="ToolTabStripItem:selected">
+        <Setter Property="Background" Value="{DynamicResource CodeWFToolTabSelectedBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource CodeWFToolTabSelectedForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource CodeWFToolTabBorderBrush}" />
         <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector="ToolTabStripItem:selected:pointerover">
+        <Setter Property="Background" Value="{DynamicResource CodeWFToolTabSelectedBackgroundBrush}" />
     </Style>
 </Styles>

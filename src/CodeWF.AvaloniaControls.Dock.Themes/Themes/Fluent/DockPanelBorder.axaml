@@ -129,18 +129,20 @@
         <Setter Property="VerticalAlignment" Value="Top" />
     </Style>
 
-    <Style Selector="DocumentTabStripItem">
+    <Style Selector="DocumentTabStrip[Orientation=Horizontal] DocumentTabStripItem">
         <Setter Property="Height" Value="{DynamicResource CodeWFDockDocumentTabStripHeight}" />
         <Setter Property="MinHeight" Value="{DynamicResource CodeWFDockDocumentTabStripHeight}" />
         <Setter Property="MaxHeight" Value="{DynamicResource CodeWFDockDocumentTabStripHeight}" />
+        <Setter Property="MinWidth" Value="{DynamicResource CodeWFDockDocumentTabItemMinWidth}" />
+        <Setter Property="Margin" Value="{DynamicResource CodeWFDockDocumentTabItemMargin}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource CodeWFDockDocumentTabItemCornerRadius}" />
     </Style>
 
-    <Style Selector="DocumentTabStripItem:selected">
-        <Setter Property="Background" Value="{DynamicResource CodeWFDockPanelBackgroundBrush}" />
+    <Style Selector="DocumentTabStrip[Orientation=Horizontal] DocumentTabStripItem:selected">
+        <Setter Property="Background" Value="{DynamicResource CodeWFDockDocumentTabSelectedBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource CodeWFDockHeaderForegroundBrush}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="BorderBrush" Value="{DynamicResource CodeWFDockActiveIndicatorBrush}" />
-        <Setter Property="BorderThickness" Value="0 0 0 2" />
+        <Setter Property="BorderThickness" Value="0" />
     </Style>
 
     <Style Selector="proportional|ProportionalStackPanelSplitter">
