@@ -109,6 +109,7 @@
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           Padding="{TemplateBinding Padding}"
+                                          Margin="10 0 10 0"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch"
                                           HorizontalContentAlignment="Stretch"
