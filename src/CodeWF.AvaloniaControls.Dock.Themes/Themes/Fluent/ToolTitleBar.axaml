@@ -187,7 +187,9 @@
                                         </Button.IsVisible>
                                         <Viewbox Width="{DynamicResource CodeWFToolTitleBarIconSize}"
                                                  Height="{DynamicResource CodeWFToolTitleBarIconSize}">
-                                            <Path x:Name="PART_ClosePath" />
+                                            <Image x:Name="PART_CloseIcon"
+                                                   Source="avares://CodeWF.AvaloniaControls.Dock.Themes/Assets/dock-close.png"
+                                                   Stretch="Uniform" />
                                         </Viewbox>
                                     </Button>
                                 </StackPanel>
@@ -290,18 +292,13 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
-        <Style Selector="^/template/ Path#PART_ClosePath">
-            <Setter Property="Data" Value="{DynamicResource DockToolIconCloseGeometry}" />
-            <Setter Property="Stretch" Value="Uniform" />
-            <Setter Property="Fill" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+        <Style Selector="^/template/ Image#PART_CloseIcon">
             <Setter Property="Opacity" Value="1" />
         </Style>
-        <Style Selector="^:active /template/ Path#PART_ClosePath">
-            <Setter Property="Fill" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+        <Style Selector="^:active /template/ Image#PART_CloseIcon">
             <Setter Property="Opacity" Value="1" />
         </Style>
-        <Style Selector="^:disabled /template/ Path#PART_ClosePath">
-            <Setter Property="Fill" Value="{DynamicResource CodeWFToolTitleBarButtonForegroundBrush}" />
+        <Style Selector="^:disabled /template/ Image#PART_CloseIcon">
             <Setter Property="Opacity" Value="1" />
         </Style>
         <Style Selector="^/template/ Button#PART_CloseButton">
