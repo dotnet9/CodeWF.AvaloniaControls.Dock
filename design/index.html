@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avalonia Dock ReactiveUI Demo 原型</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+    background: #EEF2F6; color: #111827; font-size: 13px;
+    padding: 14px; min-height: 100vh;
+  }
+
+  .card {
+    background: #FFFFFF; border: 1px solid #D5DBE5; border-radius: 8px;
+  }
+  .badge {
+    display: inline-block; padding: 3px 8px; border-radius: 4px;
+    border: 1px solid; font-size: 12px;
+  }
+  .badge.blue  { background: #EAF2FF; border-color: #BFD4F5; color: #24558F; }
+  .badge.green { background: #EAF7EF; border-color: #B8DFC7; color: #1E6B3B; }
+  .badge.amber { background: #FFF7E6; border-color: #F3D39B; color: #8A5A00; }
+  .badge.red   { background: #FCEBEC; border-color: #F0B8BE; color: #B4232C; }
+  .muted { color: #697386; }
+  .text  { color: #4B5563; }
+
+  /* ===== 标题栏（对应 HostWindow / 主窗口标题栏） ===== */
+  .titlebar {
+    background: #2563EB; border-radius: 8px; padding: 8px 12px;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .logo {
+    width: 24px; height: 24px; border-radius: 6px; background: #FFFFFF;
+    color: #2563EB; font-weight: bold; display: flex; align-items: center; justify-content: center;
+  }
+  .titlebar .title { color: #F8FAFC; font-size: 14px; font-weight: 600; flex: 1; }
+  .conn {
+    display: flex; align-items: center; gap: 6px; padding: 5px 9px;
+    border: 1px solid #FFFFFF26; background: #FFFFFF16; border-radius: 6px;
+    color: #F8FAFC; font-size: 12px; font-weight: 600;
+  }
+  .conn .dot { width: 7px; height: 7px; border-radius: 50%; background: #64D78A; }
+
+  .menu { position: relative; }
+  .menu summary {
+    list-style: none; cursor: pointer; color: #F8FAFC; padding: 5px 10px; border-radius: 6px;
+  }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu[open] summary, .menu summary:hover { background: #FFFFFF26; }
+  .menu-pop {
+    position: absolute; right: 0; top: 100%; z-index: 10; min-width: 150px;
+    background: #FFFFFF; border: 1px solid #D5DBE5; border-radius: 8px;
+    box-shadow: 0 8px 20px #00000022; padding: 5px; color: #111827;
+  }
+  .menu-pop .item { padding: 6px 10px; border-radius: 5px; cursor: pointer; white-space: nowrap; }
+  .menu-pop .item:hover { background: #F3F6FA; }
+  .menu-pop hr { border: none; border-top: 1px solid #E1E7EF; margin: 4px 0; }
+
+  /* ===== 工作台信息条 ===== */
+  .header { padding: 12px 14px; margin-bottom: 10px; }
+  .header .row1 { display: flex; align-items: center; gap: 10px; }
+  .header h1 { font-size: 18px; margin-right: 4px; }
+  .header .stats { display: flex; gap: 22px; margin-left: auto; }
+  .header .stats .num { font-size: 16px; font-weight: 600; }
+  .header .row2 { display: flex; gap: 24px; margin-top: 8px; color: #4B5563; }
+
+  /* ===== Dock 区域（对应 DocumentDock 文档页签） ===== */
+  .dock { padding: 0; overflow: hidden; }
+  .tabstrip {
+    display: flex; gap: 2px; background: #E7ECF2;
+    border-bottom: 1px solid #D5DBE5; padding: 6px 8px 0;
+  }
+  .tab {
+    border: 1px solid transparent; border-bottom: none;
+    background: transparent; color: #354052; font-size: 13px;
+    padding: 7px 12px; border-radius: 6px 6px 0 0; cursor: pointer;
+    display: flex; align-items: center; gap: 6px; font-family: inherit;
+  }
+  .tab:hover { background: #F3F6FA; }
+  .tab.active { background: #FFFFFF; border-color: #D5DBE5; color: #111827; font-weight: 600; }
+  .tab .x { color: #697386; font-size: 12px; }
+  .panel { display: none; padding: 10px; }
+  .panel.active { display: block; }
+
+  /* ===== 通用小卡片 / 统计卡 ===== */
+  .stat-card { padding: 12px; }
+  .stat-card .label { font-size: 12px; color: #697386; }
+  .stat-card .value { font-size: 22px; font-weight: 600; margin: 4px 0; }
+  .stat-card .note  { color: #4B5563; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stack { display: flex; flex-direction: column; gap: 10px; }
+
+  /* ===== 首页嵌套工具布局（对应 ToolDock + ProportionalDock） ===== */
+  .home-top { padding: 12px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 18px; }
+  .home-top h2 { font-size: 18px; margin-bottom: 3px; }
+  .home-top button {
+    margin-left: auto; background: #26313F; color: #F8FAFC; border: none;
+    padding: 8px 13px; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .nested { display: grid; grid-template-columns: 7fr 3fr; gap: 8px; }
+  .col { display: flex; flex-direction: column; gap: 8px; }
+  .col.left  .tool.grow { flex: 7; }
+  .col.left  .tool.small { flex: 3; }
+  .col.right > * { flex: 1; }
+  .col.right .tool:nth-child(2) { flex: 1.2; }
+
+  .tool { border: 1px solid #D5DBE5; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+  .tool-bar {
+    background: #F1F4F8; border-bottom: 1px solid #E1E7EF;
+    padding: 6px 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .tool-bar .name { font-weight: 600; color: #354052; flex: 1; }
+  .tool-bar .btn {
+    width: 20px; height: 20px; border-radius: 4px; border: none; background: transparent;
+    color: #697386; cursor: pointer; font-size: 12px; line-height: 1; font-family: inherit;
+  }
+  .tool-bar .btn:hover { background: #E1E7EF; }
+  .tool-body { padding: 10px 12px; flex: 1; min-height: 0; overflow: auto; }
+
+  .progress-row { margin-bottom: 10px; }
+  .progress-row .line { display: flex; justify-content: space-between; margin-bottom: 5px; }
+  .bar { height: 8px; border-radius: 4px; background: #E1E7EF; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: #2563EB; border-radius: 4px; }
+
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; }
+  .kv .k { color: #697386; }
+
+  .alert { border: 1px solid; border-radius: 6px; padding: 7px 9px; display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+  .alert .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .alert .msg { flex: 1; }
+  .alert.red   { background: #FCEBEC; border-color: #F0B8BE; } .alert.red .dot   { background: #B4232C; } .alert.red .lv   { color: #B4232C; font-weight: 600; }
+  .alert.amber { background: #FFF7E6; border-color: #F3D39B; } .alert.amber .dot { background: #D9822B; } .alert.amber .lv { color: #8A5A00; font-weight: 600; }
+  .alert.blue  { background: #EAF2FF; border-color: #BFD4F5; } .alert.blue .dot  { background: #2F6CAD; } .alert.blue .lv  { color: #24558F; font-weight: 600; }
+
+  .status-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .log-row { display: flex; gap: 10px; margin-bottom: 7px; }
+  .log-row .t { font-weight: 600; flex: none; }
+
+  .tree { list-style: none; padding-left: 16px; }
+  .tree li { padding: 2px 0; }
+  .tree > li { padding-left: 0; }
+  .tree li::before { content: "▾ "; color: #697386; }
+  .tree li.leaf::before { content: "· "; }
+
+  .queue-item {
+    border: 1px solid #E1E7EF; background: #F8FAFC; border-radius: 6px;
+    padding: 12px; display: flex; gap: 12px; margin-bottom: 8px;
+  }
+  .queue-item .info { flex: 1; }
+  .queue-item .name { font-weight: 600; margin-bottom: 3px; }
+
+  .timeline-item {
+    border: 1px solid #E1E7EF; background: #F8FAFC; border-radius: 6px;
+    padding: 12px; display: flex; gap: 12px; margin-bottom: 8px;
+  }
+  .timeline-item .time {
+    flex: none; width: 64px; text-align: center; padding: 4px 8px;
+    border-radius: 4px; border: 1px solid; font-size: 12px; font-weight: 600; height: fit-content;
+  }
+  .timeline-item .desc { color: #697386; margin-top: 3px; }
+
+  .check { display: block; margin-bottom: 10px; color: #4B5563; }
+  .tipbar {
+    background: #F8FAFC; border: 1px solid #D5DBE5; border-radius: 6px;
+    padding: 8px 10px; color: #4B5563; margin: 10px 0;
+  }
+  .embed-area {
+    border: 1.5px dashed #B9C4D4; border-radius: 8px; background: #F8FAFC;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; color: #697386; padding: 40px;
+  }
+
+  .avatar {
+    width: 64px; height: 64px; border-radius: 8px; flex: none;
+    background: #EAF2FF; border: 1px solid #BFD4F5; color: #24558F;
+    font-size: 24px; font-weight: 600; display: flex; align-items: center; justify-content: center;
+  }
+  .profile { display: flex; gap: 14px; padding: 14px; }
+  .tags { display: flex; gap: 6px; margin-top: 8px; }
+    width: 64px; height: 64px; border-radius: 8px; flex: none;
+    background: #EAF2FF; border: 1px solid #BFD4F5; color: #24558F;
+    font-size: 24px; font-weight: 600; display: flex; align-items: center; justify-content: center;
+  }
+</style>
+</head>
+<body>
+
+  <!-- 标题栏：主窗口标题 + 右侧连接状态与“工作区”菜单（对应 TitleBarRightContentView） -->
+  <header class="titlebar">
+    <div class="logo">D</div>
+    <span class="title">Avalonia Dock ReactiveUI Demo</span>
+    <span class="conn"><span class="dot"></span>已连接</span>
+    <details class="menu">
+      <summary>工作区 ▾</summary>
+      <div class="menu-pop">
+        <div class="item">网络设置</div>
+        <div class="item">连接</div>
+        <div class="item">断开连接</div>
+        <div class="item">客户端设置</div>
+        <div class="item">更新日志</div>
+        <hr>
+        <div class="item">数据管理</div>
+        <div class="item">系统设置</div>
+        <div class="item">用户中心</div>
+        <div class="item">日志记录</div>
+        <div class="item">帮助文档</div>
+      </div>
+    </details>
+  </header>
+
+  <!-- 工作台信息条 -->
+  <section class="card header">
+    <div class="row1">
+      <h1>运维工作台</h1>
+      <span class="badge blue">生产一线</span>
+      <span class="badge green">运行正常</span>
+      <div class="stats">
+        <div><div class="muted" style="font-size:12px">在线节点</div><div class="num">28</div></div>
+        <div><div class="muted" style="font-size:12px">待处理告警</div><div class="num" style="color:#B45309">2</div></div>
+        <div><div class="muted" style="font-size:12px">接口延迟</div><div class="num">14 ms</div></div>
+      </div>
+    </div>
+    <div class="row2">
+      <span>班次：A 组</span><span>窗口：08:00 - 20:00</span><span>变更冻结：未启用</span>
+    </div>
+  </section>
+
+  <!-- Dock 区域：文档页签（DocumentDock）+ 各文档内容 -->
+  <main class="card dock">
+    <nav class="tabstrip">
+      <button class="tab active" data-panel="p-home">总览看板 <span class="x">×</span></button>
+      <button class="tab" data-panel="p-data">数据管理 <span class="x">×</span></button>
+      <button class="tab" data-panel="p-settings">系统设置 <span class="x">×</span></button>
+      <button class="tab" data-panel="p-user">用户中心 <span class="x">×</span></button>
+      <button class="tab" data-panel="p-log">日志记录 <span class="x">×</span></button>
+      <button class="tab" data-panel="p-help">帮助文档 <span class="x">×</span></button>
+    </nav>
+
+    <!-- 总览看板：嵌套 Dock（左侧 2 个工具 + 右侧 4 个工具） -->
+    <section class="panel active" id="p-home">
+      <div class="card home-top">
+        <div>
+          <h2>总览看板</h2>
+          <div class="muted">产线状态、工具面板和活动记录集中在当前工作区。</div>
+        </div>
+        <button>重置嵌套布局</button>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="card stat-card"><div class="label">关键告警</div><div class="value" style="color:#B45309">2</div><div class="note">5 分钟内处理</div></div>
+        <div class="card stat-card"><div class="label">在线工具</div><div class="value">6</div><div class="note">全部可用</div></div>
+        <div class="card stat-card"><div class="label">工作区可用性</div><div class="value" style="color:#1E6B3B">99.98%</div><div class="note">近 24 小时</div></div>
+      </div>
+
+      <div class="nested" style="min-height:640px">
+        <!-- 左列（70%）：实时参数 + 进程视图 -->
+        <div class="col left">
+          <div class="tool small">
+            <div class="tool-bar"><span class="name">实时参数</span><button class="btn" title="固定">▣</button><button class="btn" title="关闭">✕</button></div>
+            <div class="tool-body">
+              <div class="progress-row"><div class="line"><span class="text">CPU 负载</span><b>42%</b></div><div class="bar"><i style="width:42%"></i></div></div>
+              <div class="progress-row"><div class="line"><span class="text">内存使用率</span><b>68%</b></div><div class="bar"><i style="width:68%"></i></div></div>
+              <div class="progress-row"><div class="line"><span class="text">队列深度</span><b>23%</b></div><div class="bar"><i style="width:23%"></i></div></div>
+            </div>
+          </div>
+          <div class="tool grow">
+            <div class="tool-bar"><span class="name">进程视图</span><button class="btn" title="固定">▣</button><button class="btn" title="关闭">✕</button></div>
+            <div class="tool-body">
+              <div class="muted" style="margin-bottom:6px">嵌套进程、节点和流水线层级。</div>
+              <div style="background:#F8FAFC;border:1px solid #E1E7EF;border-radius:6px;padding:8px">
+                <ul class="tree">
+                  <li>一级项 1
+                    <ul class="tree">
+                      <li>二级项 1
+                        <ul class="tree">
+                          <li class="leaf">三级项 1</li>
+                          <li class="leaf">三级项 2</li>
+                        </ul>
+                      </li>
+                      <li>二级项 2</li>
+                    </ul>
+                  </li>
+                  <li>一级项 2</li>
+                  <li>一级项 3</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右列（30%）：运行状态 / 最新告警 / 系统信息 / 活动日志 -->
+        <div class="col right">
+          <div class="tool">
+            <div class="tool-bar"><span class="name">运行状态</span><button class="btn" title="固定">▣</button><button class="btn" title="关闭">✕</button></div>
+            <div class="tool-body">
+              <div class="status-row"><span class="text">外壳路由服务</span><span class="badge green">健康</span></div>
+              <div class="status-row"><span class="text">遥测聚合服务</span><span class="badge amber">需关注</span></div>
+              <div class="status-row"><span class="text">外部同步网关</span><span class="badge red">待检查</span></div>
+            </div>
+          </div>
+          <div class="tool">
+            <div class="tool-bar"><span class="name">最新告警</span><button class="btn" title="固定">▣</button><button class="btn" title="关闭">✕</button></div>
+            <div class="tool-body">
+              <div class="alert red"><span class="dot"></span><span class="msg">冷却回路压力低于阈值。</span><span class="lv">P1</span></div>
+              <div class="alert amber"><span class="dot"></span><span class="msg">备份流程延迟 3 分钟。</span><span class="lv">P2</span></div>
+              <div class="alert blue"><span class="dot"></span><span class="msg">维护窗口将于 23:30 开始。</span><span class="lv">信息</span></div>
+            </div>
+          </div>
+          <div class="tool">
+            <div class="tool-bar"><span class="name">系统信息</span><button class="btn" title="固定">▣</button><button class="btn" title="关闭">✕</button></div>
+            <div class="tool-body">
+              <div class="kv">
+                <span class="k">运行时</span><span>.NET 11 预览版</span>
+                <span class="k">UI 框架</span><span>Avalonia 12.0.3</span>
+                <span class="k">主题链路</span><span>Fluent Dock</span>
+                <span class="k">打包</span><span>win-x64 / linux-x64</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool">
+            <div class="tool-bar"><span class="name">活动日志</span><button class="btn" title="固定">▣</button><button class="btn" title="关闭">✕</button></div>
+            <div class="tool-body">
+              <div class="log-row"><span class="t" style="color:#24558F">10:14</span><span class="text">工作区快照已保存。</span></div>
+              <div class="log-row"><span class="t" style="color:#1E6B3B">10:16</span><span class="text">后台诊断完成。</span></div>
+              <div class="log-row"><span class="t" style="color:#8A5A00">10:19</span><span class="text">重新打开设置文档。</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 数据管理 -->
+    <section class="panel" id="p-data">
+      <div class="card" style="padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:16px">
+        <div>
+          <h2 style="font-size:18px;margin-bottom:3px">数据管理</h2>
+          <div class="muted">发布计划、资源池和审批流统一跟踪。</div>
+        </div>
+        <span class="badge amber" style="margin-left:auto">审批中</span>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="card stat-card"><div class="label">待审核计划</div><div class="value">12</div><div class="note">参数、版本和批量调度</div></div>
+        <div class="card stat-card"><div class="label">运行资源池</div><div class="value">28</div><div class="note">26 台可接管</div></div>
+        <div class="card stat-card"><div class="label">变更任务</div><div class="value" style="color:#B45309">5</div><div class="note">今日仍需跟进</div></div>
+      </div>
+      <div class="grid2">
+        <div class="card" style="padding:12px">
+          <h3 style="font-size:16px;margin-bottom:3px">发布编排</h3>
+          <div class="muted" style="margin-bottom:10px">任务状态和回滚步骤按值守顺序排列。</div>
+          <div class="queue-item">
+            <div class="info"><div class="name">参数模板同步</div><div class="muted">3 套工艺参数等待东区窗口确认。</div></div>
+            <span class="badge blue" style="height:fit-content">待确认</span>
+          </div>
+          <div class="queue-item">
+            <div class="info"><div class="name">数据归档清理</div><div class="muted">回收 14 天前缓存，保留告警快照。</div></div>
+            <span class="badge amber" style="height:fit-content">排队中</span>
+          </div>
+          <div class="queue-item">
+            <div class="info"><div class="name">灰度版本发布</div><div class="muted">2 个备用节点热切后推广到主线。</div></div>
+            <span class="badge green" style="height:fit-content">已就绪</span>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card" style="padding:12px">
+            <h3 style="font-size:15px;margin-bottom:8px">今日值守要点</h3>
+            <div class="text" style="margin-bottom:6px">19:30 前完成东区参数模板复核。</div>
+            <div class="text" style="margin-bottom:6px">灰度节点观察窗口不少于 30 分钟。</div>
+            <div class="text">夜间清理不得影响日志保留周期。</div>
+          </div>
+          <div class="card" style="padding:12px">
+            <h3 style="font-size:15px;margin-bottom:8px">审批流</h3>
+            <div style="color:#1E6B3B;margin-bottom:6px">运维负责人：已审批</div>
+            <div style="color:#8A5A00;margin-bottom:6px">工艺负责人：待审批</div>
+            <div class="text">质量追溯：无需审批</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 系统设置 -->
+    <section class="panel" id="p-settings">
+      <div class="card" style="padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:16px">
+        <div>
+          <h2 style="font-size:18px;margin-bottom:3px">系统设置</h2>
+          <div class="muted">工作区安全策略、外壳模式和部署默认值。</div>
+        </div>
+        <span class="badge green" style="margin-left:auto">已同步</span>
+      </div>
+      <div class="grid2" style="margin-bottom:10px">
+        <div class="card" style="padding:12px">
+          <h3 style="margin-bottom:10px">安全控制</h3>
+          <label class="check"><input type="checkbox" checked> 重置工作区前需要确认</label>
+          <label class="check"><input type="checkbox" checked> 保持嵌入工具隔离</label>
+          <label class="check"><input type="checkbox"> 启用预览模块</label>
+        </div>
+        <div class="card" style="padding:12px">
+          <h3 style="margin-bottom:10px">外壳配置</h3>
+          <select style="padding:6px 10px;border:1px solid #D5DBE5;border-radius:6px;font-family:inherit">
+            <option>运维默认</option><option>诊断模式</option><option>极简模式</option>
+          </select>
+          <div class="muted" style="margin-top:8px">当前配置将在新建窗口和重置布局后继续生效。</div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="card stat-card"><div class="label">主题</div><div style="font-weight:600;margin:4px 0">专业浅色</div><div class="note">统一低饱和状态色</div></div>
+        <div class="card stat-card"><div class="label">标题栏</div><div style="font-weight:600;margin:4px 0">深色稳定态</div><div class="note">菜单与窗口控制一致</div></div>
+        <div class="card stat-card"><div class="label">文档恢复</div><div style="font-weight:600;margin:4px 0">自动定位</div><div class="note">关闭后可从菜单恢复</div></div>
+      </div>
+      <div class="grid2">
+        <div class="card" style="padding:12px">
+          <h3 style="font-size:15px;margin-bottom:8px">部署参数</h3>
+          <div class="kv" style="grid-template-columns:1.2fr 1fr auto">
+            <span class="k">参数</span><span class="k">当前值</span><span class="k">状态</span>
+            <span>布局快照间隔</span><span>5 分钟</span><b style="color:#1E6B3B">正常</b>
+            <span>日志保留周期</span><span>14 天</span><b style="color:#8A5A00">待复核</b>
+          </div>
+        </div>
+        <div class="card" style="padding:12px">
+          <h3 style="font-size:15px;margin-bottom:8px">审计摘要</h3>
+          <div class="text" style="margin-bottom:6px">最近 24 小时：3 次配置读取，1 次复选项切换。</div>
+          <div class="text">未检测到高风险策略变更。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 用户中心 -->
+    <section class="panel" id="p-user">
+      <div class="card" style="padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:16px">
+        <div>
+          <h2 style="font-size:18px;margin-bottom:3px">用户中心</h2>
+          <div class="muted">账户身份、权限范围和最近操作。</div>
+        </div>
+        <span class="badge green" style="margin-left:auto">在线</span>
+      </div>
+      <div class="grid2" style="margin-bottom:10px">
+        <div class="card profile">
+          <div class="avatar">OS</div>
+          <div>
+            <div style="font-size:18px;font-weight:600;margin-bottom:4px">开源运维人员</div>
+            <div class="text">负责工作区质量、样例验证和发布一致性。</div>
+            <div class="tags">
+              <span class="badge" style="background:#F8FAFC;border-color:#D5DBE5;color:#111827">维护者</span>
+              <span class="badge green">已验证</span>
+              <span class="badge amber">双重验证</span>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:12px">
+          <h3 style="font-size:15px;margin-bottom:8px">账户状态</h3>
+          <div class="status-row"><span class="text">会话</span><b style="color:#1E6B3B">活动</b></div>
+          <div class="status-row"><span class="text">权限组</span><b>运维</b></div>
+          <div class="status-row"><span class="text">上次验证</span><b>10:12</b></div>
+        </div>
+      </div>
+      <div class="grid2" style="margin-bottom:10px">
+        <div class="card" style="padding:12px">
+          <h3 style="margin-bottom:8px">权限范围</h3>
+          <div class="text" style="margin-bottom:6px">布局恢复、文档定位、运行面板查看</div>
+          <div class="text" style="margin-bottom:6px">发布审批：只读</div>
+          <div class="text">系统设置：可查看、可切换本地偏好</div>
+        </div>
+        <div class="card" style="padding:12px">
+          <h3 style="margin-bottom:8px">最近操作</h3>
+          <div class="text" style="margin-bottom:6px">10:19 重新打开系统设置</div>
+          <div class="text" style="margin-bottom:6px">10:16 查看诊断巡检结果</div>
+          <div class="text">10:14 保存布局快照</div>
+        </div>
+      </div>
+      <div class="card" style="padding:12px">
+        <div class="grid3">
+          <div><div class="muted" style="font-size:12px">本周登录</div><div style="font-size:20px;font-weight:600">18</div></div>
+          <div><div class="muted" style="font-size:12px">文档恢复</div><div style="font-size:20px;font-weight:600">7</div></div>
+          <div><div class="muted" style="font-size:12px">待确认通知</div><div style="font-size:20px;font-weight:600;color:#8A5A00">2</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 日志记录 -->
+    <section class="panel" id="p-log">
+      <div class="card" style="padding:12px;margin-bottom:10px">
+        <h2 style="font-size:18px;margin-bottom:3px">日志记录</h2>
+        <div class="muted">活动、告警和文档操作按时间顺序归档。</div>
+      </div>
+      <div class="grid2">
+        <div class="card" style="padding:12px">
+          <h3 style="font-size:16px;margin-bottom:3px">操作时间线</h3>
+          <div class="muted" style="margin-bottom:10px">最近一次值守操作和自动记录。</div>
+          <div class="timeline-item"><span class="time" style="background:#EAF2FF;border-color:#BFD4F5;color:#24558F">10:14</span>
+            <div><b>布局快照已保存</b><div class="desc">分析页签拖出主工作区后，系统记录停靠结构并生成本地快照。</div></div></div>
+          <div class="timeline-item"><span class="time" style="background:#EAF7EF;border-color:#B8DFC7;color:#1E6B3B">10:16</span>
+            <div><b>诊断巡检完成</b><div class="desc">后台健康检查未发现阻塞性问题，文档恢复速度稳定。</div></div></div>
+          <div class="timeline-item"><span class="time" style="background:#FFF7E6;border-color:#F3D39B;color:#8A5A00">10:19</span>
+            <div><b>重新打开设置文档</b><div class="desc">值守人员通过标题栏菜单定位到系统设置页。</div></div></div>
+          <div class="timeline-item"><span class="time" style="background:#F4ECFF;border-color:#D8C7F5;color:#6D3CB3">10:23</span>
+            <div><b>告警路由同步</b><div class="desc">活动流规则同步到外部通知通道。</div></div></div>
+        </div>
+        <div class="stack">
+          <div class="card" style="padding:12px">
+            <h3 style="font-size:15px;margin-bottom:8px">事件分类</h3>
+            <div class="text" style="margin-bottom:6px">布局类：8</div>
+            <div class="text" style="margin-bottom:6px">运维类：14</div>
+            <div class="text">告警类：3</div>
+          </div>
+          <div class="card" style="padding:12px">
+            <h3 style="font-size:15px;margin-bottom:8px">需复核事项</h3>
+            <div class="text" style="margin-bottom:6px">检查设置页缓存是否正确回收。</div>
+            <div class="text" style="margin-bottom:6px">确认日志轮转不打断夜间导出。</div>
+            <div class="text">跟踪通知通道回执。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 帮助文档：进程嵌入宿主区 -->
+    <section class="panel" id="p-help">
+      <div class="card" style="padding:12px">
+        <h2 style="font-size:18px;margin-bottom:3px">帮助文档</h2>
+        <div class="muted">内嵌进程和宿主窗口状态。</div>
+      </div>
+      <div class="tipbar">嵌入进程路径：CodeWF.AvaloniaControls.DockReactiveUIDemo.exe</div>
+      <div class="grid2">
+        <div class="card" style="padding:8px">
+          <div class="embed-area">
+            <div style="font-size:22px;font-weight:600">❐</div>
+            <div>进程嵌入区域（ProcessEmbedHost 宿主窗口）</div>
+            <div style="font-size:12px">被嵌入的外部进程窗口显示在此区域</div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card" style="padding:12px">
+            <h3 style="font-size:15px;margin-bottom:8px">宿主状态</h3>
+            <div class="status-row"><span class="text">进程句柄</span><b>已请求</b></div>
+            <div class="status-row"><span class="text">窗口嵌入</span><b style="color:#1E6B3B">运行中</b></div>
+          </div>
+          <div class="card" style="padding:12px">
+            <h3 style="font-size:15px;margin-bottom:8px">检查项</h3>
+            <div class="text" style="margin-bottom:6px">保持 Dock 页签切换响应。</div>
+            <div class="text" style="margin-bottom:6px">嵌入窗口关闭时释放外部进程。</div>
+            <div class="text">标题栏菜单仍可定位文档。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+  // 文档页签切换（对应 DocumentDock 的 ActiveDockable 切换）
+  function activateTab(tab) {
+    document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+    document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.panel).classList.add('active');
+  }
+  document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function (e) {
+      if (e.target.classList.contains('x')) return; // 点关闭按钮时不切换
+      activateTab(tab);
+      history.replaceState(null, '', '#' + tab.dataset.panel);
+    });
+  });
+  // 支持 #p-data 形式的锚点直达
+  var initial = location.hash && document.querySelector('.tab[data-panel="' + location.hash.slice(1) + '"]');
+  if (initial) activateTab(initial);
+</script>
+</body>
+</html>
