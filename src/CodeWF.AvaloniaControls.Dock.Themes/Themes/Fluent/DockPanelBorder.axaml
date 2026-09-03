@@ -53,31 +53,31 @@
 
             <DataTemplate x:Key="CodeWFDocumentEmptyContentTemplate"
                           x:CompileBindings="False">
-                <StackPanel HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Spacing="8">
-                    <Image Width="256"
-                           Height="256"
-                           Source="avares://CodeWF.AvaloniaControls.Dock.Themes/Assets/empty-background.png"
-                           Stretch="Uniform"
-                           RenderOptions.BitmapInterpolationMode="HighQuality" />
-                    <TextBlock Text="{Binding [0]}"
-                               FontFamily="{DynamicResource CodeWFDocumentEmptyContentFontFamily}"
-                               FontSize="16"
-                               FontWeight="Normal"
-                               LetterSpacing="0"
-                               Foreground="#262626"
-                               TextAlignment="Center"
-                               HorizontalAlignment="Center" />
-                    <TextBlock Text="{Binding [1]}"
-                               FontFamily="{DynamicResource CodeWFDocumentEmptyContentFontFamily}"
-                               FontSize="12"
-                               FontWeight="Normal"
-                               LetterSpacing="0"
-                               Foreground="#8C8C8C"
-                               TextAlignment="Center"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
+              <StackPanel HorizontalAlignment="Center"
+                          VerticalAlignment="Center">
+                <Image Width="256"
+                       Height="256"
+                       Source="avares://CodeWF.AvaloniaControls.Dock.Themes/Assets/empty-background.png"
+                       Stretch="Uniform"
+                       RenderOptions.BitmapInterpolationMode="HighQuality" />
+                <TextBlock Text="{Binding [0]}"
+                           FontFamily="{DynamicResource CodeWFDocumentEmptyContentFontFamily}"
+                           FontSize="16"
+                           FontWeight="Normal"
+                           LetterSpacing="0"
+                           Foreground="#262626"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Margin="0 -30 0 8"/>
+                <TextBlock Text="{Binding [1]}"
+                           FontFamily="{DynamicResource CodeWFDocumentEmptyContentFontFamily}"
+                           FontSize="12"
+                           FontWeight="Normal"
+                           LetterSpacing="0"
+                           Foreground="#8C8C8C"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center" />
+              </StackPanel>
             </DataTemplate>
 
             <ControlTheme x:Key="CodeWFDocumentCloseButtonTheme"
