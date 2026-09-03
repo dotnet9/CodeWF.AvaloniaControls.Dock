@@ -27,7 +27,7 @@
             <Thickness x:Key="CodeWFToolTitleBarButtonMargin">0</Thickness>
             <Thickness x:Key="CodeWFToolTitleBarButtonPadding">0</Thickness>
             <x:Double x:Key="CodeWFToolTitleBarButtonSize">22</x:Double>
-            <x:Double x:Key="CodeWFToolTitleBarIconSize">9</x:Double>
+            <x:Double x:Key="CodeWFToolTitleBarIconSize">16</x:Double>
 
             <DataTemplate x:Key="CodeWFToolTitleBarContentTemplate" DataType="core:IDockable">
                 <Panel />
@@ -136,14 +136,16 @@
                                 <ContentControl x:Name="PART_TitlePresenter"
                                                 Grid.Column="0"
                                                 Content="{Binding ActiveDockable}"
-                                                ContentTemplate="{DynamicResource CodeWFToolTitleTabHeaderTemplate}" />
+                                                ContentTemplate="{DynamicResource CodeWFToolTitleTabHeaderTemplate}"
+                                                Margin="10 0 0 0" />
                                 <ContentControl x:Name="PART_TitleBarContent"
                                                 Grid.Column="1"
                                                 Content="{Binding ActiveDockable}"
                                                 ContentTemplate="{DynamicResource CodeWFToolTitleBarContentTemplate}"
                                                 Margin="{DynamicResource CodeWFToolTitleBarContentMargin}" />
                                 <StackPanel Grid.Column="2"
-                                            Orientation="Horizontal">
+                                            Orientation="Horizontal"
+                                            Margin="0 0 10 0">
                                     <Button x:Name="PART_PinButton"
                                             Command="{Binding Owner.Factory, Converter={x:Static codewfConverters:DockFactoryCommandConverter.PinDockable}}"
                                             CommandParameter="{Binding ActiveDockable}"
@@ -193,6 +195,14 @@
                                         </Viewbox>
                                     </Button>
                                 </StackPanel>
+                                <Border x:Name="PART_HeaderDivider"
+                                        Grid.ColumnSpan="3"
+                                        Background="{DynamicResource CodeWFToolTitleBarDividerBrush}"
+                                        Height="{DynamicResource DockToolChromeDividerThickness}"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Bottom"
+                                        Margin="10 0 10 0"
+                                        IsHitTestVisible="False" />
                             </Grid>
                         </Border>
                         <Panel x:Name="PART_Panel"
@@ -218,7 +228,7 @@
         </Style>
 
         <Style Selector="^/template/ Border#PART_Border">
-            <Setter Property="BorderThickness" Value="{DynamicResource CodeWFDockHeaderDividerThickness}" />
+            <Setter Property="BorderThickness" Value="0" />
             <Setter Property="IsVisible"
                     Value="{Binding GripMode, Converter={x:Static GripModeConverters.IsVisibleVisibleConverter}}" />
         </Style>
