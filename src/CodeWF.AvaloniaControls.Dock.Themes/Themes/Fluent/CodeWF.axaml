@@ -32,6 +32,7 @@
             <Thickness x:Key="CodeWFDockDocumentTabItemMargin">2 0 0 0</Thickness>
             <StaticResource x:Key="CodeWFDockDocumentTabSelectedBackgroundBrush"
                             ResourceKey="CodeWFDockPanelBackgroundBrush" />
+            <FontFamily x:Key="CodeWFDocumentEmptyContentFontFamily">Noto Sans SC</FontFamily>
 
             <!-- Tool tabs are a bottom switcher and intentionally do not share Document tab surfaces. -->
             <StaticResource x:Key="CodeWFToolTabStripBackgroundBrush"

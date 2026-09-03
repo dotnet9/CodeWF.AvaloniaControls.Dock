@@ -51,6 +51,37 @@
                            Padding="4 0" />
             </DataTemplate>
 
+            <DataTemplate x:Key="CodeWFDocumentEmptyContentTemplate"
+                          x:CompileBindings="False">
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="8">
+                    <Image Width="256"
+                           Height="256"
+                           Source="avares://CodeWF.AvaloniaControls.Dock.Themes/Assets/empty-background.png"
+                           Stretch="Uniform"
+                           RenderOptions.BitmapInterpolationMode="HighQuality" />
+                    <TextBlock Text="{Binding [0]}"
+                               FontFamily="{DynamicResource CodeWFDocumentEmptyContentFontFamily}"
+                               FontSize="16"
+                               FontWeight="Normal"
+                               LineHeight="16"
+                               LetterSpacing="0"
+                               Foreground="#262626"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding [1]}"
+                               FontFamily="{DynamicResource CodeWFDocumentEmptyContentFontFamily}"
+                               FontSize="12"
+                               FontWeight="Normal"
+                               LineHeight="12"
+                               LetterSpacing="0"
+                               Foreground="#8C8C8C"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </DataTemplate>
+
             <ControlTheme x:Key="CodeWFDocumentCloseButtonTheme"
                           TargetType="Button"
                           BasedOn="{StaticResource {x:Type Button}}">
@@ -115,6 +146,14 @@
     <Style Selector="DocumentControl">
         <Setter Property="CloseTemplate" Value="{StaticResource CodeWFDocumentCloseTemplate}" />
         <Setter Property="CloseButtonTheme" Value="{StaticResource CodeWFDocumentCloseButtonTheme}" />
+        <Setter Property="EmptyContentTemplate" Value="{StaticResource CodeWFDocumentEmptyContentTemplate}" />
+        <Setter Property="HeaderTemplate" Value="{StaticResource CodeWFDocumentHeaderTemplate}" />
+    </Style>
+
+    <Style Selector="MdiDocumentControl">
+        <Setter Property="CloseTemplate" Value="{StaticResource CodeWFDocumentCloseTemplate}" />
+        <Setter Property="CloseButtonTheme" Value="{StaticResource CodeWFDocumentCloseButtonTheme}" />
+        <Setter Property="EmptyContentTemplate" Value="{StaticResource CodeWFDocumentEmptyContentTemplate}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource CodeWFDocumentHeaderTemplate}" />
     </Style>
 
