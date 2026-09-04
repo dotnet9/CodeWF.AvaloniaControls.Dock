@@ -18,7 +18,7 @@
             <StaticResource x:Key="CodeWFDockActiveBorderBrush" ResourceKey="CodeWFDockPanelBorderBrush" />
             <StaticResource x:Key="CodeWFDockSplitterBrush" ResourceKey="CodeWFDockWorkbenchBrush" />
             <StaticResource x:Key="CodeWFDockSplitterPointerOverBrush" ResourceKey="SemiColorFill2" />
-            <CornerRadius x:Key="CodeWFDockPanelCornerRadius">6</CornerRadius>
+            <CornerRadius x:Key="CodeWFDockPanelCornerRadius">8</CornerRadius>
             <Thickness x:Key="CodeWFDockPanelBorderThickness">1</Thickness>
             <StaticResource x:Key="CodeWFDockDocumentPanelBorderThickness" ResourceKey="CodeWFDockPanelBorderThickness" />
             <Thickness x:Key="CodeWFDockHeaderDividerThickness">0 0 0 1</Thickness>
