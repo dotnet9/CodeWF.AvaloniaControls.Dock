@@ -46,7 +46,8 @@
             <DataTemplate x:Key="CodeWFDocumentHeaderTemplate"
                           DataType="core:IDockable">
                 <TextBlock Text="{Binding Title}"
-                           FontSize="13"
+                           FontSize="14"
+                           FontWeight="Bold"
                            VerticalAlignment="Center"
                            Padding="4 0" />
             </DataTemplate>
@@ -178,7 +179,7 @@
     <Style Selector="DocumentTabStrip[Orientation=Horizontal] DocumentTabStripItem:selected">
         <Setter Property="Background" Value="{DynamicResource CodeWFDockDocumentTabSelectedBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource CodeWFDockHeaderForegroundBrush}" />
-        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="BorderThickness" Value="0" />
     </Style>
 
