@@ -19,6 +19,8 @@
             <StaticResource x:Key="CodeWFDockSplitterBrush" ResourceKey="CodeWFDockWorkbenchBrush" />
             <StaticResource x:Key="CodeWFDockSplitterPointerOverBrush" ResourceKey="SemiColorFill2" />
             <CornerRadius x:Key="CodeWFDockPanelCornerRadius">8</CornerRadius>
+            <CornerRadius x:Key="CodeWFDockPanelHeaderCornerRadius">7 7 0 0</CornerRadius>
+            <CornerRadius x:Key="CodeWFDockPanelContentCornerRadius">0 0 7 7</CornerRadius>
             <Thickness x:Key="CodeWFDockPanelBorderThickness">1</Thickness>
             <StaticResource x:Key="CodeWFDockDocumentPanelBorderThickness" ResourceKey="CodeWFDockPanelBorderThickness" />
             <Thickness x:Key="CodeWFDockHeaderDividerThickness">0 0 0 1</Thickness>
@@ -55,7 +57,7 @@
             <StaticResource x:Key="DockTabSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <StaticResource x:Key="DockTabActiveForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <StaticResource x:Key="DockTabCloseHoverBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
-            <StaticResource x:Key="DockDocumentTabStripBackgroundBrush" ResourceKey="CodeWFDockHeaderPointerOverBackgroundBrush" />
+            <StaticResource x:Key="DockDocumentTabStripBackgroundBrush" ResourceKey="CodeWFDockPanelBackgroundBrush" />
             <StaticResource x:Key="DockDocumentTabSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <StaticResource x:Key="DockDocumentTabPointerOverForegroundBrush" ResourceKey="CodeWFDockHeaderForegroundBrush" />
             <StaticResource x:Key="DockDocumentTabCloseSelectedForegroundBrush" ResourceKey="CodeWFDockHeaderSecondaryForegroundBrush" />

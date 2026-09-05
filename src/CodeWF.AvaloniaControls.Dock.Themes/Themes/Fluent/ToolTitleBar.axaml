@@ -105,18 +105,24 @@
                          CornerRadius="{DynamicResource CodeWFDockPanelCornerRadius}"
                          ClipToBounds="True">
                     <Grid RowDefinitions="Auto,*">
-                        <ContentPresenter x:Name="PART_ContentPresenter"
-                                          Content="{TemplateBinding Content}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          Padding="{TemplateBinding Padding}"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch"
-                                          HorizontalContentAlignment="Stretch"
-                                          VerticalContentAlignment="Stretch"
-                                          Grid.Row="1" />
+                        <Border x:Name="PART_ContentBorder"
+                                Grid.Row="1"
+                                Background="{DynamicResource CodeWFToolPanelBackgroundBrush}"
+                                CornerRadius="{DynamicResource CodeWFDockPanelContentCornerRadius}"
+                                ClipToBounds="True">
+                            <ContentPresenter x:Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Padding="{TemplateBinding Padding}"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch"
+                                              HorizontalContentAlignment="Stretch"
+                                              VerticalContentAlignment="Stretch" />
+                        </Border>
                         <Border x:Name="PART_Border"
                                 Background="{DynamicResource CodeWFToolTitleBarBackgroundBrush}"
                                 BorderBrush="{DynamicResource CodeWFToolTitleBarDividerBrush}"
+                                CornerRadius="{DynamicResource CodeWFDockPanelHeaderCornerRadius}"
                                 Padding="{DynamicResource CodeWFToolTitleBarPadding}"
                                 VerticalAlignment="Top"
                                 Grid.Row="{Binding GripMode, Converter={x:Static GripModeConverters.GridRowAutoHideConverter}}">
