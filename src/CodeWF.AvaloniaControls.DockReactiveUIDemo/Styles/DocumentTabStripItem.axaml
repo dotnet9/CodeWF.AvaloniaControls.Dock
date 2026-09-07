@@ -6,10 +6,23 @@
     </Border>
   </Design.PreviewWith>
 
-  <!-- Add Styles Here -->
+  <!-- 文档页签对齐 design/index.html 原型：38px 页签条内 32px 页签上浮 6px，灰底白底激活页签带边框 -->
   <Style Selector="DocumentTabStripItem">
       <Setter Property="MinWidth" Value="132" />
       <Setter Property="CornerRadius" Value="6 6 0 0" />
-      <Setter Property="Padding" Value="11 7" />
+      <Setter Property="Padding" Value="12 0" />
+      <Setter Property="Height" Value="32" />
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="MaxHeight" Value="32" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Margin" Value="2 6 0 0" />
+      <Setter Property="Foreground" Value="#354052" />
+  </Style>
+  <Style Selector="DocumentTabStripItem:selected">
+      <Setter Property="Background" Value="#FFFFFF" />
+      <Setter Property="Foreground" Value="#111827" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="#D5DBE5" />
   </Style>
 </Styles>

@@ -1,0 +1,35 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="using:Dock.Model.Core">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+    </Border>
+  </Design.PreviewWith>
+
+  <!-- 文档标题 13px 常规字重，颜色随页签状态（对齐 design/index.html 原型） -->
+  <Style Selector="DocumentControl">
+    <Setter Property="HeaderTemplate">
+      <Setter.Value>
+        <DataTemplate x:DataType="core:IDockable">
+          <TextBlock Text="{Binding Title}"
+                     FontSize="13"
+                     VerticalAlignment="Center"
+                     Padding="0" />
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style Selector="MdiDocumentControl">
+    <Setter Property="HeaderTemplate">
+      <Setter.Value>
+        <DataTemplate x:DataType="core:IDockable">
+          <TextBlock Text="{Binding Title}"
+                     FontSize="13"
+                     VerticalAlignment="Center"
+                     Padding="0" />
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</Styles>

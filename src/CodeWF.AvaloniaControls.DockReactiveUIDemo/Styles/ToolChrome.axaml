@@ -1,0 +1,40 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+    </Border>
+  </Design.PreviewWith>
+
+  <!--
+    工具标题栏对齐 design/index.html 原型：常态与激活均为 #F1F4F8 底、13px 半粗标题。
+    ToolDockControl 模板未给 ToolChromeControl 指定 Theme，实际渲染的是基础 Fluent chrome，
+    因此这里按 CodeWF.axaml 的同款方式用外部样式装饰其模板部件。
+  -->
+  <Style Selector="ToolChromeControl /template/ Grid#PART_Grip">
+      <Setter Property="Background" Value="#F1F4F8" />
+      <Setter Property="MinHeight" Value="32" />
+  </Style>
+  <Style Selector="ToolChromeControl:active /template/ Grid#PART_Grip">
+      <Setter Property="Background" Value="#F1F4F8" />
+  </Style>
+  <Style Selector="ToolChromeControl /template/ TextBlock#PART_Title">
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="#354052" />
+  </Style>
+  <Style Selector="ToolChromeControl:active /template/ TextBlock#PART_Title">
+      <Setter Property="Foreground" Value="#354052" />
+  </Style>
+
+  <!-- 工具页签条（ToolControl 内的 ToolTabStrip）配色对齐原型 -->
+  <Style Selector="ToolTabStripItem">
+      <Setter Property="Foreground" Value="#354052" />
+      <Setter Property="FontSize" Value="13" />
+  </Style>
+  <Style Selector="ToolTabStripItem:selected">
+      <Setter Property="Background" Value="#FFFFFF" />
+      <Setter Property="Foreground" Value="#111827" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+  </Style>
+</Styles>

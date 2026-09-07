@@ -8,4 +8,6 @@
 
   <!-- Add Styles Here -->
   <StyleInclude Source="DocumentTabStripItem.axaml" />
+  <StyleInclude Source="DocumentControl.axaml" />
+  <StyleInclude Source="ToolChrome.axaml" />
 </Styles>

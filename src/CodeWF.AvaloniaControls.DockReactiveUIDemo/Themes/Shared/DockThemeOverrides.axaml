@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:core="using:Dock.Model.Core">
+  <!--
+    Demo 级 Dock 视觉覆盖，取值与 design/index.html 原型保持一致。
+    通过 App.Resources 覆盖 SDK 主题的 DynamicResource 键，不修改 CodeWF.AvaloniaControls.Dock.Themes。
+  -->
+
+  <!-- 文档页签条：灰蓝底、高 38，底部 1px 分隔线 -->
+  <SolidColorBrush x:Key="DockDocumentTabStripBackgroundBrush">#E7ECF2</SolidColorBrush>
+  <x:Double x:Key="CodeWFDockDocumentTabStripHeight">38</x:Double>
+  <x:Double x:Key="DockDocumentTabStripSeparatorSize">1</x:Double>
+  <x:Boolean x:Key="DockDocumentTabStripSeparatorVisible">True</x:Boolean>
+  <SolidColorBrush x:Key="DockSeparatorBrush">#D5DBE5</SolidColorBrush>
+  <SolidColorBrush x:Key="DockTabHoverBackgroundBrush">#F3F6FA</SolidColorBrush>
+
+  <!--
+    工具页签（ToolControl 内 ToolTabStrip）标题模板：13px 半粗。
+    工具标题栏背景由 Styles/ToolChrome.axaml 的模板部件样式负责（基础 chrome 才是实际渲染的模板）。
+  -->
+  <DataTemplate x:Key="CodeWFToolTitleTabHeaderTemplate"
+                x:DataType="core:IDockable"
+                x:CompileBindings="True">
+    <TextBlock Text="{Binding Title}"
+               FontSize="13"
+               FontWeight="SemiBold"
+               Foreground="#354052"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               TextAlignment="Left" />
+  </DataTemplate>
+</ResourceDictionary>
