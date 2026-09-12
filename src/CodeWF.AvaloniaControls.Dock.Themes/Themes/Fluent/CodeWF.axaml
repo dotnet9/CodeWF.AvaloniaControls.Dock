@@ -2,6 +2,17 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:semi="https://irihi.tech/semi">
+    <!-- Dock's ContentPresenters otherwise keep their default left alignment.
+         Stretch the layout children so GridDock's star column receives the full
+         RootDock width, including space released by hidden side Tools. -->
+    <Style Selector="ItemsControl.ProportionalStackPanel > ContentPresenter">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="ItemsControl.GridDock > ContentPresenter">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    </Style>
     <Styles.Resources>
         <ResourceDictionary>
             <!-- Shared workspace surface tokens used by both Document and Tool chrome. -->
@@ -227,5 +238,10 @@
     <Style Selector="ToolChromeControl /template/ Button#PART_ToolCloseButton Path">
         <Setter Property="Fill" Value="{DynamicResource DockToolChromeIconBrush}" />
         <Setter Property="Opacity" Value="1" />
+    </Style>
+    <!-- RootDock's deferred content must stretch so a GridDock star column can consume the window. -->
+    <Style Selector="RootDockControl /template/ DeferredContentControl#PART_MainContent">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
     </Style>
 </Styles>
