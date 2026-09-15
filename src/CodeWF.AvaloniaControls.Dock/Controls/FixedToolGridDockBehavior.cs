@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -96,10 +97,7 @@ public static class FixedToolGridDockBehavior
         if (control.Tag is Subscription) return;
         var subscription = new Subscription(control, dock);
         control.Tag = subscription;
-        if (dock is INotifyPropertyChanged notify) notify.PropertyChanged += subscription.OnPropertyChanged;
-        if (dock.VisibleDockables is INotifyCollectionChanged collection)
-            collection.CollectionChanged += subscription.OnCollectionChanged;
-        subscription.SubscribeChildren();
+        subscription.SubscribeDockTree();
         control.LayoutUpdated += subscription.OnLayoutUpdated;
     }
 
@@ -115,14 +113,31 @@ public static class FixedToolGridDockBehavior
         // ItemsPanelRoot can still be null while DeferredContentControl is
         // materializing the template. The panel itself is the only Grid in the
         // GridDockControl template, so find it directly once it exists.
-        var grid = control.GetVisualDescendants().OfType<Grid>().FirstOrDefault();
+        // GridDockControl templates can contain nested content Grids. The
+        // layout grid is the one with the five columns supplied by DockFactory;
+        // prefer it so a document view cannot be mistaken for the host grid.
+        var grid = control.GetVisualDescendants().OfType<Grid>()
+            .FirstOrDefault(candidate => candidate.ColumnDefinitions.Count == 5);
         if (grid is null)
             return;
 
         var visible = dock.VisibleDockables ?? Array.Empty<IDockable>();
         var left = visible.Any(item => item.Column == 0 && HasVisibleContent(item));
         var right = visible.Any(item => item.Column == 4 && HasVisibleContent(item));
-        grid.ColumnDefinitions = ColumnDefinitions.Parse($"{(left ? 200 : 0)}, {(left ? 4 : 0)}, *, {(right ? 4 : 0)}, {(right ? 280 : 0)}");
+        var definitions = new[]
+        {
+            new GridLength(left ? 200 : 0),
+            new GridLength(left ? 4 : 0),
+            new GridLength(1, GridUnitType.Star),
+            new GridLength(right ? 4 : 0),
+            new GridLength(right ? 280 : 0)
+        };
+        if (grid.ColumnDefinitions.Count == definitions.Length &&
+            grid.ColumnDefinitions.Select((column, index) => column.Width == definitions[index]).All(match => match))
+            return;
+
+        grid.ColumnDefinitions = ColumnDefinitions.Parse(
+            $"{(left ? 200 : 0)}, {(left ? 4 : 0)}, *, {(right ? 4 : 0)}, {(right ? 280 : 0)}");
         grid.InvalidateMeasure();
         grid.InvalidateArrange();
     }
@@ -141,6 +156,8 @@ public static class FixedToolGridDockBehavior
     {
         private readonly GridDockControl _control;
         private readonly IDock _dock;
+        private readonly HashSet<INotifyPropertyChanged> _propertySources = new();
+        private readonly HashSet<INotifyCollectionChanged> _collectionSources = new();
 
         public Subscription(GridDockControl control, IDock dock)
         {
@@ -148,24 +165,48 @@ public static class FixedToolGridDockBehavior
             _dock = dock;
         }
 
-        public void SubscribeChildren()
+        public void SubscribeDockTree()
         {
-            if (_dock.VisibleDockables is null) return;
-            foreach (var child in _dock.VisibleDockables.OfType<INotifyPropertyChanged>())
-                child.PropertyChanged += OnChildPropertyChanged;
+            foreach (var source in _propertySources)
+                source.PropertyChanged -= OnChildPropertyChanged;
+            foreach (var source in _collectionSources)
+                source.CollectionChanged -= OnCollectionChanged;
+
+            _propertySources.Clear();
+            _collectionSources.Clear();
+            SubscribeDock(_dock);
         }
 
-        public void OnPropertyChanged(object? sender, PropertyChangedEventArgs e) => Apply(_control, _dock);
+        private void SubscribeDock(IDock dock)
+        {
+            if (dock is INotifyPropertyChanged notify)
+                SubscribePropertySource(notify);
+            if (dock.VisibleDockables is not INotifyCollectionChanged collection)
+                return;
+
+            _collectionSources.Add(collection);
+            collection.CollectionChanged += OnCollectionChanged;
+            foreach (var child in dock.VisibleDockables ?? Array.Empty<IDockable>())
+            {
+                if (child is INotifyPropertyChanged childNotify)
+                    SubscribePropertySource(childNotify);
+
+                if (child is IDock childDock)
+                    SubscribeDock(childDock);
+            }
+        }
+
+        private void SubscribePropertySource(INotifyPropertyChanged source)
+        {
+            if (_propertySources.Add(source))
+                source.PropertyChanged += OnChildPropertyChanged;
+        }
+
         public void OnChildPropertyChanged(object? sender, PropertyChangedEventArgs e) => Apply(_control, _dock);
 
         public void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.OldItems is not null)
-                foreach (var child in e.OldItems.OfType<INotifyPropertyChanged>())
-                    child.PropertyChanged -= OnChildPropertyChanged;
-            if (e.NewItems is not null)
-                foreach (var child in e.NewItems.OfType<INotifyPropertyChanged>())
-                    child.PropertyChanged += OnChildPropertyChanged;
+            SubscribeDockTree();
             Apply(_control, _dock);
         }
         public void OnLayoutUpdated(object? sender, EventArgs e)
@@ -173,18 +214,20 @@ public static class FixedToolGridDockBehavior
             if (_control.GetVisualDescendants().OfType<Grid>().FirstOrDefault() is not Grid)
                 return;
 
-            _control.LayoutUpdated -= OnLayoutUpdated;
+            // A Tool can be hidden after the initial layout and the change may
+            // only invalidate the nested ToolDock. Reapply on later layout
+            // passes so the outer Grid releases the hidden side column too.
             Apply(_control, _dock);
         }
 
         public void Dispose()
         {
-            if (_dock is INotifyPropertyChanged notify) notify.PropertyChanged -= OnPropertyChanged;
-            if (_dock.VisibleDockables is INotifyCollectionChanged collection)
-                collection.CollectionChanged -= OnCollectionChanged;
-            if (_dock.VisibleDockables is not null)
-                foreach (var child in _dock.VisibleDockables.OfType<INotifyPropertyChanged>())
-                    child.PropertyChanged -= OnChildPropertyChanged;
+            foreach (var source in _propertySources)
+                source.PropertyChanged -= OnChildPropertyChanged;
+            foreach (var source in _collectionSources)
+                source.CollectionChanged -= OnCollectionChanged;
+            _propertySources.Clear();
+            _collectionSources.Clear();
             _control.LayoutUpdated -= OnLayoutUpdated;
         }
     }
