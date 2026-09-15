@@ -332,9 +332,22 @@ public static class FixedToolGridDockBehavior
             return true;
         }
 
-        private Grid? FindLayoutGrid(int columnCount) =>
-            _control.GetVisualDescendants().OfType<Grid>()
-                .FirstOrDefault(grid => grid.ColumnDefinitions.Count == columnCount);
+        private Grid? FindLayoutGrid(int columnCount)
+        {
+            var gridDockItems = _control.GetVisualDescendants()
+                .OfType<ItemsControl>()
+                .Where(items => items.Classes.Contains("GridDock"));
+
+            var matchingItems = gridDockItems.FirstOrDefault(items =>
+                ReferenceEquals(items.DataContext, Dock));
+            var itemsControl = matchingItems ?? gridDockItems.FirstOrDefault();
+            var grid = itemsControl?.ItemsPanelRoot as Grid;
+
+            return grid is { } layoutGrid &&
+                   layoutGrid.ColumnDefinitions.Count == columnCount
+                ? layoutGrid
+                : null;
+        }
 
         private void SaveCurrentWidths(IEnumerable<int> columns)
         {

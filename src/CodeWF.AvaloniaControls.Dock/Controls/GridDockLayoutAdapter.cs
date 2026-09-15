@@ -94,8 +94,17 @@ public interface IGridDockLayoutAdapter
 public sealed class GridDockColumnLayoutAdapter : IGridDockLayoutAdapter
 {
     private readonly GridDockRegionDefinition[] _regions;
+    private readonly string? _targetDockId;
 
     public GridDockColumnLayoutAdapter(
+        int columnCount,
+        params GridDockRegionDefinition[] regions)
+        : this(null, columnCount, regions)
+    {
+    }
+
+    public GridDockColumnLayoutAdapter(
+        string? targetDockId,
         int columnCount,
         params GridDockRegionDefinition[] regions)
     {
@@ -113,14 +122,21 @@ public sealed class GridDockColumnLayoutAdapter : IGridDockLayoutAdapter
         }
 
         ColumnCount = columnCount;
+        _targetDockId = targetDockId;
         _regions = regions.ToArray();
     }
 
     public int ColumnCount { get; }
 
-    public GridDockLayoutState GetLayoutState(IDock rootDock)
+    public GridDockLayoutState? GetLayoutState(IDock rootDock)
     {
         ArgumentNullException.ThrowIfNull(rootDock);
+
+        if (_targetDockId is not null &&
+            !string.Equals(rootDock.Id, _targetDockId, StringComparison.Ordinal))
+        {
+            return null;
+        }
 
         return new GridDockLayoutState(
             ColumnCount,
