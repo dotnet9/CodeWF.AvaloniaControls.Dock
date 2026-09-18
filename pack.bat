@@ -19,9 +19,9 @@ dotnet build CodeWF.AvaloniaControls.Dock.slnx -c %CONFIGURATION% --no-restore
 if errorlevel 1 goto :error
 
 echo [3/3] Packing libraries...
-dotnet pack "src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" -c %CONFIGURATION% --no-build -o "%PACKAGES_DIR%"
+dotnet pack "src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" -c %CONFIGURATION% --no-build -p:GeneratePackageOnBuild=false -o "%PACKAGES_DIR%"
 if errorlevel 1 goto :error
-dotnet pack "src\CodeWF.AvaloniaControls.Dock.Themes\CodeWF.AvaloniaControls.Dock.Themes.csproj" -c %CONFIGURATION% --no-build -o "%PACKAGES_DIR%"
+dotnet pack "src\CodeWF.AvaloniaControls.Dock.Themes\CodeWF.AvaloniaControls.Dock.Themes.csproj" -c %CONFIGURATION% --no-build -p:GeneratePackageOnBuild=false -o "%PACKAGES_DIR%"
 if errorlevel 1 goto :error
 
 for /r "%PACKAGES_DIR%" %%F in (*.pdb) do del /q "%%F" 2>nul

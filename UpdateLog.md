@@ -1,5 +1,10 @@
 # 变更日志
 
+## 12.1.2.2 (2026-09-18)
+
+- 新增 `GridDock` 布局适配 API，支持固定 Tool 区域与 Dock 网格区域映射。
+- 两个 NuGet 包统一使用 `net11.0`。
+
 ## 12.1.1.4 (2026-08-24)
 
 - 升级 Dock.Avalonia、Dock.Avalonia.Themes.Fluent 和 Dock.Model.ReactiveUI 到 12.1.0.4。
