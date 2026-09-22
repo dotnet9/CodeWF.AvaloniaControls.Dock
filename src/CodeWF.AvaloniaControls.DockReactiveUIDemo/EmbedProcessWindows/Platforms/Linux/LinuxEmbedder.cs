@@ -207,7 +207,8 @@ public class LinuxEmbedder : INativeProcessEmbedder
 
         try
         {
-            X11Api.XQueryTree(_x11Display, window, out _, out _, out children, out childCount);
+            if (X11Api.XQueryTree(_x11Display, window, out _, out _, out children, out childCount) == 0)
+                return IntPtr.Zero;
 
             if (children == IntPtr.Zero) return IntPtr.Zero;
 
@@ -220,46 +221,57 @@ public class LinuxEmbedder : INativeProcessEmbedder
 
                 if (GetWindowPID(child) == targetPid)
                 {
-                    X11Api.XFree(children);
                     return child;
                 }
 
                 var found = SearchWindowTree(child, targetPid);
                 if (found != IntPtr.Zero)
                 {
-                    X11Api.XFree(children);
                     return found;
                 }
             }
-
-            X11Api.XFree(children);
         }
-        catch { }
+        catch (Exception ex)
+        {
+            Logger.Error("遍历 X11 窗口树异常", ex);
+        }
+        finally
+        {
+            if (children != IntPtr.Zero)
+                X11Api.XFree(children);
+        }
 
         return IntPtr.Zero;
     }
 
     private int GetWindowPID(IntPtr window)
     {
+        var prop = IntPtr.Zero;
         try
         {
             var atom = X11Api.XInternAtom(_x11Display, "_NET_WM_PID", true);
             if (atom == IntPtr.Zero) return -1;
 
-            var prop = IntPtr.Zero;
-            X11Api.XGetWindowProperty(_x11Display, window, atom, IntPtr.Zero, new IntPtr(1), false,
+            var result = X11Api.XGetWindowProperty(_x11Display, window, atom, IntPtr.Zero, new IntPtr(1), false,
                 (IntPtr)X11Constants.AnyPropertyType, out _, out _, out var nItems, out _, out prop);
 
-            if (prop != IntPtr.Zero && nItems.ToInt64() > 0)
+            if (result != 0 || prop == IntPtr.Zero || nItems.ToInt64() <= 0)
+                return -1;
+
+            return Marshal.ReadInt32(prop);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("读取 X11 窗口进程号异常", ex);
+            return -1;
+        }
+        finally
+        {
+            if (prop != IntPtr.Zero)
             {
-                var pid = Marshal.ReadInt32(prop);
                 X11Api.XFree(prop);
-                return pid;
             }
         }
-        catch { }
-
-        return -1;
     }
 
 
