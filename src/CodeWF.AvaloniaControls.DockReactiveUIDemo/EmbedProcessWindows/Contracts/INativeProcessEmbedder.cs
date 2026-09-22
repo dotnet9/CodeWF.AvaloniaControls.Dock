@@ -9,12 +9,17 @@ namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Contrac
 public interface INativeProcessEmbedder
 {
     /// <summary>
-    /// 创建并嵌入第三方进程窗口
+    /// 在后台准备第三方进程及其窗口句柄。
+    /// </summary>
+    void Prepare();
+
+    /// <summary>
+    /// 将已准备好的第三方进程窗口嵌入父级平台句柄。
     /// </summary>
     /// <param name="parent">父级平台句柄</param>
     /// <param name="createDefault">创建默认句柄的回退函数</param>
     /// <returns>嵌入后的窗口句柄</returns>
-    IPlatformHandle CreateWindow(IPlatformHandle parent, Func<IPlatformHandle> createDefault);
+    IPlatformHandle AttachWindow(IPlatformHandle parent, Func<IPlatformHandle> createDefault);
 
     /// <summary>
     /// 关闭已嵌入的第三方进程

@@ -15,9 +15,7 @@ internal class WindowsWindowHandle : PlatformHandle, INativeControlHostDestroyab
 
     public void Destroy()
     {
-        if (Handle != IntPtr.Zero)
-        {
-            Win32Api.DestroyWindow(Handle);
-        }
+        // The HWND belongs to the external process. Process shutdown owns its
+        // lifetime; destroying it here can leave that process in a bad state.
     }
 }

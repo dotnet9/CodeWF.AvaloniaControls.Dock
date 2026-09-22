@@ -18,12 +18,9 @@ internal class LinuxWindowHandle : PlatformHandle, INativeControlHostDestroyable
 
     public void Destroy()
     {
-        if (_x11Display == IntPtr.Zero || Handle == IntPtr.Zero)
-        {
-            return;
-        }
-
-        X11Api.XDestroyWindow(_x11Display, Handle);
+        // The handle belongs to the external process. Destroying it here can
+        // terminate the child window before the embedder has restored it.
+        SetDisplayInvalid();
     }
 
     public void SetDisplayInvalid()

@@ -17,7 +17,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        PropertyChanged += async (s, e) => 
+        PropertyChanged += (s, e) =>
         {
             if(e.Property == WindowStateProperty && OperatingSystem.IsWindows())
             {

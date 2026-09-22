@@ -39,11 +39,11 @@ public class HelpDocumentationViewModel : Document
         var exe = string.Empty;
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            exe = Path.Combine(Directory.GetCurrentDirectory(), "CodeWF.AvaloniaControls.DockReactiveUIDemo.exe");
+            exe = Path.Combine(AppContext.BaseDirectory, "CodeWF.AvaloniaControls.DockReactiveUIDemo.exe");
         }
         else
         {
-            exe = Path.Combine(Directory.GetCurrentDirectory(), "CodeWF.AvaloniaControls.DockReactiveUIDemo");
+            exe = Path.Combine(AppContext.BaseDirectory, "CodeWF.AvaloniaControls.DockReactiveUIDemo");
         }
 
         Tip = exe;
@@ -59,7 +59,7 @@ public class HelpDocumentationViewModel : Document
 
     public override bool OnClose()
     {
-        _embedWindow?.Embedder?.Close();
+        _embedWindow?.Close();
         EventBus.EventBus.Default.Publish(new CloseDocumentCommand(Id));
         return base.OnClose();
     }

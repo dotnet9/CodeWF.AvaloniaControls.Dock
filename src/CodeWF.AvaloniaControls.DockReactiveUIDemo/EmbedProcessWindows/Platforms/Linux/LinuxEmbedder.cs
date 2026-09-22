@@ -18,6 +18,7 @@ public class LinuxEmbedder : INativeProcessEmbedder
     private LinuxWindowHandle? _windowHandle;
     private readonly ProcessEmbedOptions _options;
     private IntPtr _x11Display;
+    private static int _x11ThreadsInitialized;
 
     public IntPtr ProcessWindowHandle { get; private set; }
 
@@ -26,46 +27,47 @@ public class LinuxEmbedder : INativeProcessEmbedder
         _options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
-    public IPlatformHandle CreateWindow(IPlatformHandle parent, Func<IPlatformHandle> createDefault)
+    public void Prepare()
+    {
+        Logger.Info($"开始嵌入进程: {_options.ProcessPath}");
+
+        if (Interlocked.Exchange(ref _x11ThreadsInitialized, 1) == 0)
+            X11Api.XInitThreads();
+
+        _x11Display = X11Api.XOpenDisplay(IntPtr.Zero);
+        if (_x11Display == IntPtr.Zero)
+            throw new InvalidOperationException("无法打开 X11 显示");
+        Logger.Info($"X11 显示打开成功: {_x11Display}");
+
+        _process = StartProcess();
+        Logger.Info($"进程启动成功，PID: {_process.Id}");
+
+        ProcessWindowHandle = FindWindowByPID(_process.Id);
+        Logger.Info($"找到窗口句柄: {ProcessWindowHandle}");
+        if (ProcessWindowHandle == IntPtr.Zero)
+            throw new InvalidOperationException("找不到第三方进程窗口");
+    }
+
+    public IPlatformHandle AttachWindow(IPlatformHandle parent, Func<IPlatformHandle> createDefault)
     {
         try
         {
-            Logger.Info($"开始嵌入进程: {_options.ProcessPath}");
-
-            _x11Display = X11Api.XOpenDisplay(IntPtr.Zero);
-            if (_x11Display == IntPtr.Zero)
-            {
-                throw new InvalidOperationException("无法打开 X11 显示");
-            }
-            Logger.Info($"X11 显示打开成功: {_x11Display}");
-
-            _process = StartProcess();
-            Logger.Info($"进程启动成功，PID: {_process.Id}");
-
-            ProcessWindowHandle = FindWindowByPID(_process.Id);
-            Logger.Info($"找到窗口句柄: {ProcessWindowHandle}");
-
             if (ProcessWindowHandle == IntPtr.Zero)
-            {
-                throw new InvalidOperationException("找不到第三方进程窗口");
-            }
+                Prepare();
 
             Logger.Info($"父窗口句柄: {parent.Handle}");
 
             // 修改窗口属性，确保窗口正确嵌入
             ModifyWindowAttributes();
             X11Api.XFlush(_x11Display);
-            Thread.Sleep(50);
 
             // 先取消映射窗口，再重父化，最后重新映射
             int unmapResult = X11Api.XUnmapWindow(_x11Display, ProcessWindowHandle);
             Logger.Info($"XUnmapWindow 结果: {unmapResult}");
             X11Api.XFlush(_x11Display);
-            Thread.Sleep(50);
 
             ReParentWindow(parent);
             X11Api.XFlush(_x11Display);
-            Thread.Sleep(50);
 
             int mapResult = X11Api.XMapWindow(_x11Display, ProcessWindowHandle);
             Logger.Info($"XMapWindow 结果: {mapResult}");
@@ -77,12 +79,13 @@ public class LinuxEmbedder : INativeProcessEmbedder
 
             _windowHandle = new LinuxWindowHandle(ProcessWindowHandle, "ProcWinHandle", _x11Display);
             Logger.Info($"创建窗口句柄完成");
-        
+
             return _windowHandle;
         }
         catch (Exception ex)
         {
             Logger.Error($"Linux 平台嵌入进程异常({_options.ProcessPath})", ex, "启动第三方进程异常，请联系管理员！");
+            Close();
             return createDefault();
         }
     }
@@ -162,7 +165,6 @@ public class LinuxEmbedder : INativeProcessEmbedder
             throw new InvalidOperationException("无法启动第三方进程");
         }
 
-        Thread.Sleep(_options.WindowSearchDelayMs);
         return _process;
     }
 
@@ -265,7 +267,7 @@ public class LinuxEmbedder : INativeProcessEmbedder
     {
         try
         {
-            if (ProcessWindowHandle != IntPtr.Zero)
+            if (_x11Display != IntPtr.Zero && ProcessWindowHandle != IntPtr.Zero)
             {
                 var rootReturn = X11Api.XDefaultRootWindow(_x11Display);
                 X11Api.XReparentWindow(_x11Display, ProcessWindowHandle, rootReturn, 0, 0);
@@ -286,6 +288,8 @@ public class LinuxEmbedder : INativeProcessEmbedder
 
             _process?.Dispose();
             _process = null;
+            ProcessWindowHandle = IntPtr.Zero;
+            _windowHandle = null;
         }
         catch (Exception ex)
         {

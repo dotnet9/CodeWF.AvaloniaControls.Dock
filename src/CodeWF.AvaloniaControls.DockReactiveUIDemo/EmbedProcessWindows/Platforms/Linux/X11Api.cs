@@ -11,6 +11,9 @@ public static class X11Api
     private const string LibX11 = "libX11.so.6";
 
     [DllImport(LibX11)]
+    public static extern int XInitThreads();
+
+    [DllImport(LibX11)]
     public static extern IntPtr XOpenDisplay(IntPtr display);
 
     [DllImport(LibX11)]

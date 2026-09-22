@@ -25,13 +25,21 @@ public class WindowsEmbedder : INativeProcessEmbedder
         _options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
-    public IPlatformHandle CreateWindow(IPlatformHandle parent, Func<IPlatformHandle> createDefault)
+    public void Prepare()
+    {
+        if (_process is { HasExited: false } && ProcessWindowHandle != IntPtr.Zero)
+            return;
+
+        _process = StartProcess();
+        ProcessWindowHandle = GetMainWindowHandle();
+    }
+
+    public IPlatformHandle AttachWindow(IPlatformHandle parent, Func<IPlatformHandle> createDefault)
     {
         try
         {
-            _process = StartProcess();
-            ProcessWindowHandle = GetMainWindowHandle();
-
+            if (ProcessWindowHandle == IntPtr.Zero)
+                Prepare();
             ModifyWindowStyle();
             ReParentWindow(parent);
 
@@ -137,11 +145,17 @@ public class WindowsEmbedder : INativeProcessEmbedder
             if (_process.WaitForExit(5000)) return;
 
             _process.Kill();
-            _process = null;
         }
         catch (Exception ex)
         {
             Logger.Error($"关闭第三方进程异常({_options.ProcessPath})", ex, "关闭第三方进程异常，请联系管理员！");
+        }
+        finally
+        {
+            _process?.Dispose();
+            _process = null;
+            ProcessWindowHandle = IntPtr.Zero;
+            _windowHandle = null;
         }
     }
 }

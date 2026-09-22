@@ -1,109 +1,184 @@
+using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Platform;
-using Avalonia.Threading;
+using Avalonia.VisualTree;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Contracts;
 using CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Models;
 using CodeWF.Log.Core;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CodeWF.AvaloniaControls.DockReactiveUIDemo.EmbedProcessWindows.Core;
 
 /// <summary>
-/// 原生进程窗口嵌入控件
-/// 用于将外部进程的主窗口嵌入到当前 Avalonia 应用程序中
+/// Hosts an external process window without blocking Avalonia's UI thread.
 /// </summary>
-public class ProcessEmbedHost : Avalonia.Controls.NativeControlHost
+public class ProcessEmbedHost : ContentControl
 {
-    private bool _isCreated;
-    private IPlatformHandle? _processWindowHandle;
-    private static readonly List<WeakReference<ProcessEmbedHost>> _instances = new();
+    private static readonly object InstancesLock = new();
+    private static readonly List<WeakReference<ProcessEmbedHost>> Instances = new();
 
-    /// <summary>
-    /// 进程嵌入器实例
-    /// </summary>
-    public INativeProcessEmbedder? Embedder { get; private set; }
+    private CancellationTokenSource? _initializationCancellation;
+    private Task? _initializationTask;
+    private EmbeddedNativeControlHost? _nativeHost;
+    private int _lifecycleVersion;
 
-    /// <summary>
-    /// 创建进程交互控件
-    /// </summary>
-    /// <param name="options">进程嵌入配置</param>
+    public INativeProcessEmbedder Embedder { get; }
+
     public ProcessEmbedHost(ProcessEmbedOptions options)
     {
         Embedder = ProcessEmbedderFactory.Create(options);
-        _instances.Add(new WeakReference<ProcessEmbedHost>(this));
+        RegisterInstance();
+        AttachedToVisualTree += OnAttachedToVisualTree;
+        DetachedFromVisualTree += OnDetachedFromVisualTree;
     }
 
-    /// <summary>
-    /// 创建进程交互控件
-    /// </summary>
-    /// <param name="processPath">进程路径</param>
-    /// <param name="workingDirectory">工作目录</param>
-    /// <param name="arguments">命令行参数</param>
     public ProcessEmbedHost(string processPath, string? workingDirectory = null, string? arguments = null)
+        : this(ProcessEmbedOptions.Create(processPath, workingDirectory, arguments))
     {
-        var options = ProcessEmbedOptions.Create(processPath, workingDirectory, arguments);
-        Embedder = ProcessEmbedderFactory.Create(options);
-        _instances.Add(new WeakReference<ProcessEmbedHost>(this));
     }
 
-    protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent)
+    private void RegisterInstance()
     {
-        if (_isCreated || Embedder == null)
+        lock (InstancesLock)
         {
-            return _processWindowHandle ?? base.CreateNativeControlCore(parent);
-        }
-
-        _isCreated = true;
-        _processWindowHandle = Embedder.CreateWindow(parent, () => base.CreateNativeControlCore(parent));
-
-        return _processWindowHandle;
-    }
-
-    protected override void DestroyNativeControlCore(IPlatformHandle control)
-    {
-        base.DestroyNativeControlCore(control);
-    }
-
-    private bool _isFirstLoaded = true;
-    protected override void OnLoaded(RoutedEventArgs e)
-    {
-        base.OnLoaded(e);
-        if (OperatingSystem.IsLinux() && _isFirstLoaded)
-        {
-            _isFirstLoaded = false;
-            Dispatcher.UIThread.Post(async () =>
-            {
-                Logger.Info($"子进程加载完成，刷新布局");
-                await Task.Delay(1500);
-                App.MainWin?.Width += 1;
-                await Task.Delay(150);
-                App.MainWin?.Width -= 1;
-            });
+            Instances.RemoveAll(reference => !reference.TryGetTarget(out _));
+            Instances.Add(new WeakReference<ProcessEmbedHost>(this));
         }
     }
 
-    /// <summary>
-    /// 关闭所有已创建的嵌入进程窗口
-    /// </summary>
-    public static void CloseAll()
+    private void OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        foreach (var weakRef in _instances)
+        if (_initializationTask is not null)
+            return;
+
+        var version = ++_lifecycleVersion;
+        _initializationCancellation = new CancellationTokenSource();
+        _initializationTask = PrepareAndAttachAsync(version, _initializationCancellation.Token);
+    }
+
+    private async Task PrepareAndAttachAsync(int version, CancellationToken cancellationToken)
+    {
+        try
         {
-            if (weakRef.TryGetTarget(out var instance) && instance.Embedder != null)
+            await Task.Run(Embedder.Prepare, cancellationToken);
+
+            if (cancellationToken.IsCancellationRequested || version != _lifecycleVersion ||
+                !this.IsAttachedToVisualTree())
             {
-                try
+                return;
+            }
+
+            _nativeHost = new EmbeddedNativeControlHost(Embedder);
+            Content = _nativeHost;
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("准备嵌入进程窗口异常", ex, "准备嵌入进程窗口异常，请检查进程路径和桌面会话！");
+            Embedder.Close();
+
+            if (!cancellationToken.IsCancellationRequested && version == _lifecycleVersion)
+            {
+                Content = new TextBlock
                 {
-                    instance.Embedder.Close();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error("关闭三方进程控件异常", ex, "关闭三方进程控件异常，请联系管理员！");
-                }
+                    Text = "无法嵌入外部进程窗口",
+                    TextWrapping = TextWrapping.Wrap
+                };
+            }
+        }
+        finally
+        {
+            if (version == _lifecycleVersion)
+                _initializationTask = null;
+        }
+    }
+
+    private async void OnDetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        ++_lifecycleVersion;
+        var detachedVersion = _lifecycleVersion;
+        _initializationCancellation?.Cancel();
+
+        var initializationTask = _initializationTask;
+        _initializationTask = null;
+        _initializationCancellation?.Dispose();
+        _initializationCancellation = null;
+
+        Content = null;
+
+        if (initializationTask is not null)
+        {
+            try
+            {
+                await initializationTask;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("等待嵌入进程初始化结束异常", ex, "等待嵌入进程初始化结束异常，请联系管理员！");
             }
         }
 
-        _instances.Clear();
+        if (detachedVersion == _lifecycleVersion)
+        {
+            Embedder.Close();
+            _nativeHost = null;
+        }
+    }
+
+    /// <summary>
+    /// Stops the embedded process and releases native resources.
+    /// </summary>
+    public void Close()
+    {
+        ++_lifecycleVersion;
+        _initializationCancellation?.Cancel();
+        _initializationCancellation?.Dispose();
+        _initializationCancellation = null;
+        _initializationTask = null;
+        Content = null;
+        _nativeHost = null;
+        Embedder.Close();
+    }
+
+    /// <summary>
+    /// Closes all live embedding hosts.
+    /// </summary>
+    public static void CloseAll()
+    {
+        ProcessEmbedHost[] instances;
+        lock (InstancesLock)
+        {
+            instances = new ProcessEmbedHost[Instances.Count];
+            var count = 0;
+            foreach (var reference in Instances)
+            {
+                if (reference.TryGetTarget(out var instance))
+                    instances[count++] = instance;
+            }
+
+            Array.Resize(ref instances, count);
+            Instances.Clear();
+        }
+
+        foreach (var instance in instances)
+            instance.Close();
+    }
+
+    private sealed class EmbeddedNativeControlHost(INativeProcessEmbedder embedder) : NativeControlHost
+    {
+        protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent) =>
+            embedder.AttachWindow(parent, () => base.CreateNativeControlCore(parent));
+
+        protected override void DestroyNativeControlCore(IPlatformHandle control)
+        {
+            base.DestroyNativeControlCore(control);
+        }
     }
 }

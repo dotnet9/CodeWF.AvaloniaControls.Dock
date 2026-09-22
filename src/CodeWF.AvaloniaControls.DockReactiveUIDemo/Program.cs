@@ -18,7 +18,7 @@ internal sealed class Program
         {
             File = new FileLogOptions
             {
-                DirectoryPath = Path.Combine(Environment.CurrentDirectory, "Log")
+                DirectoryPath = Path.Combine(AppContext.BaseDirectory, "Log")
             }
         });
 
