@@ -81,9 +81,8 @@ public partial class TrapezoidShapedDocumentTabStripItemBorder : Control
                 DrawTopOtherTabItemBorder(ctx, adjustedRect, radius, rect);
             }
 
-            // 底边消失（不绘制）
-            // 这里直接跳过底边路径，确保底边消失
-            ctx.EndFigure(isClosed: true);
+            // Keep the fill closed implicitly while leaving the stroke open so the bottom edge stays invisible.
+            ctx.EndFigure(isClosed: false);
         }
 
         // 绘制边框

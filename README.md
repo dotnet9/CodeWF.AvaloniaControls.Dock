@@ -9,7 +9,7 @@
 
 ## 仓库规范
 
-- 当前版本：`12.1.2.8`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
+- 当前版本：`12.1.2.9`，版本号统一维护在根目录 `Directory.Build.props` 的 `<Version>` 节点。
 - NuGet 包项目统一使用 `net8.0;net10.0;net11.0`；Demo、App、测试与内部应用项目统一使用 `net11.0` / `net11.0-windows`。
 - `CodeWF.AvaloniaControls.Dock` 提供 `GridDock` 布局适配 API，供 GraphKit 等业务组件将固定 Tool 区域映射到 Dock 网格区域。
 - 根目录 `logo.svg`、`logo.png`、`logo.ico` 是唯一图标源，子工程只通过 MSBuild `Link` 引用，不维护图标副本。
