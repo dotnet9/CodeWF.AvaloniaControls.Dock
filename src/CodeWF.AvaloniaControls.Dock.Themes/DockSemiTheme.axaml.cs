@@ -24,22 +24,16 @@ public class DockSemiTheme : Styles
         get;
         set
         {
-            try
+            if (TryGetLocaleResources(value, out var resources) && value is not null)
             {
-                if (TryGetLocaleResources(value, out var resources))
-                {
-                    field = value;
-                    Resources.BulkSetResources(resources);
-                    return;
-                }
-
+                field = value;
+            }
+            else
+            {
                 field = DefaultLocale;
-                Resources.BulkSetResources(DefaultResources);
             }
-            catch
-            {
-                field = CultureInfo.InvariantCulture;
-            }
+
+            Resources.BulkSetResources(resources);
         }
     }
 

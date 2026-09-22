@@ -10,9 +10,12 @@
     <PackageReference Include="xunit.v3" />
     <PackageReference Include="xunit.runner.visualstudio" />
     <PackageReference Include="ReactiveUI.Avalonia" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Desktop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\CodeWF.AvaloniaControls.Dock\CodeWF.AvaloniaControls.Dock.csproj" />
+    <ProjectReference Include="..\..\src\CodeWF.AvaloniaControls.Dock.Themes\CodeWF.AvaloniaControls.Dock.Themes.csproj" />
     <PackageReference Include="Dock.Model.ReactiveUI" />
   </ItemGroup>
 </Project>

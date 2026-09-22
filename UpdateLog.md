@@ -1,5 +1,10 @@
 # 变更日志
 
+## 12.1.2.8 (2026-09-22)
+
+- 修复 `DockSemiTheme.Locale` 在资源应用异常时吞掉错误并设置为 `InvariantCulture` 的问题。
+- 统一未知或空语言回退到 `en-US`，并增加中英文及回退行为测试。
+
 ## 12.1.2.7 (2026-09-22)
 
 - 移除指向 Prism 9 的失效 `Prism.Container.Abstractions` 裁剪根描述。
