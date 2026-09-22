@@ -37,6 +37,22 @@ public class ProcessEmbedOptions
     /// </summary>
     public int WindowSearchTimeoutMs { get; init; } = 30000;
 
+    internal void Validate()
+    {
+        if (string.IsNullOrWhiteSpace(ProcessPath))
+            throw new ArgumentException("进程路径不能为空", nameof(ProcessPath));
+
+        ValidatePositive(WindowReadyTimeoutMs, nameof(WindowReadyTimeoutMs));
+        ValidatePositive(WindowSearchDelayMs, nameof(WindowSearchDelayMs));
+        ValidatePositive(WindowSearchTimeoutMs, nameof(WindowSearchTimeoutMs));
+    }
+
+    private static void ValidatePositive(int value, string propertyName)
+    {
+        if (value <= 0)
+            throw new ArgumentOutOfRangeException(propertyName, value, "时间值必须大于零");
+    }
+
     /// <summary>
     /// 创建配置
     /// </summary>

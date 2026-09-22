@@ -20,6 +20,9 @@ public static class ProcessEmbedderFactory
     /// <exception cref="PlatformNotSupportedException">当前平台不支持时抛出</exception>
     public static INativeProcessEmbedder Create(ProcessEmbedOptions options)
     {
+        ArgumentNullException.ThrowIfNull(options);
+        options.Validate();
+
         if (OperatingSystem.IsWindows())
         {
             return new WindowsEmbedder(options);
