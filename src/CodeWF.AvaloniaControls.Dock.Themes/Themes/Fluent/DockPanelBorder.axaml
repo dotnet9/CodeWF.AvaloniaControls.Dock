@@ -4,6 +4,7 @@
         xmlns:controls="using:Dock.Avalonia.Controls"
         xmlns:proportional="using:Dock.Controls.ProportionalStackPanel"
         xmlns:converters="using:Dock.Avalonia.Converters"
+        xmlns:themeConverters="using:CodeWF.AvaloniaControls.Dock.Themes.Converters"
         xmlns:core="using:Dock.Model.Core"
         xmlns:dockControls="using:Dock.Model.Controls"
         x:DataType="dockControls:IDocumentDock"
@@ -53,7 +54,7 @@
             </DataTemplate>
 
             <DataTemplate x:Key="CodeWFDocumentEmptyContentTemplate"
-                          x:CompileBindings="False">
+                          x:DataType="x:Object">
               <StackPanel HorizontalAlignment="Center"
                           VerticalAlignment="Center">
                 <Image Width="256"
@@ -61,7 +62,7 @@
                        Source="avares://CodeWF.AvaloniaControls.Dock.Themes/Assets/empty-background.png"
                        Stretch="Uniform"
                        RenderOptions.BitmapInterpolationMode="HighQuality" />
-                <TextBlock Text="{Binding [0]}"
+                <TextBlock Text="{Binding ., Converter={x:Static themeConverters:EmptyContentItemConverter.First}}"
                            FontFamily="{DynamicResource CodeWFDocumentEmptyContentFontFamily}"
                            FontSize="16"
                            FontWeight="Normal"
@@ -70,7 +71,7 @@
                            TextAlignment="Center"
                            HorizontalAlignment="Center"
                            Margin="0 -30 0 8"/>
-                <TextBlock Text="{Binding [1]}"
+                <TextBlock Text="{Binding ., Converter={x:Static themeConverters:EmptyContentItemConverter.Second}}"
                            FontFamily="{DynamicResource CodeWFDocumentEmptyContentFontFamily}"
                            FontSize="12"
                            FontWeight="Normal"

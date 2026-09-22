@@ -4,5 +4,4 @@
   <assembly fullname="DryIoc" preserve="All" />
   <assembly fullname="Prism.Avalonia" preserve="All" />
   <assembly fullname="Prism.DryIoc.Avalonia" preserve="All" />
-  <assembly fullname="Prism.Container.Abstractions" preserve="All" />
 </linker>

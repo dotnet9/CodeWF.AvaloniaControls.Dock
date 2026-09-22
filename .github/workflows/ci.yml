@@ -25,6 +25,9 @@ jobs:
       - name: Build
         run: dotnet build CodeWF.AvaloniaControls.Dock.slnx --configuration Release --no-restore
 
+      - name: Publish Windows Native AOT demo
+        run: dotnet publish src/CodeWF.AvaloniaControls.DockReactiveUIDemo/CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj --configuration Release --framework net11.0-windows --runtime win-x64 --no-restore -p:PublishProfile=FolderProfile_win-x64
+
       - name: Test
         run: dotnet test tests/CodeWF.AvaloniaControls.Dock.Tests/CodeWF.AvaloniaControls.Dock.Tests.csproj --configuration Release --no-build --verbosity normal
 
