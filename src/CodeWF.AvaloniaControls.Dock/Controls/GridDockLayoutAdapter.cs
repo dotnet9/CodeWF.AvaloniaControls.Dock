@@ -132,6 +132,13 @@ public sealed class GridDockColumnLayoutAdapter : IGridDockLayoutAdapter
             throw new ArgumentException("A region contains a column outside the layout.", nameof(regions));
         }
 
+        var collapseColumns = new HashSet<int>();
+        foreach (var region in regions)
+        {
+            if (region.CollapseColumns.Any(column => !collapseColumns.Add(column)))
+                throw new ArgumentException("Regions cannot collapse the same column.", nameof(regions));
+        }
+
         ColumnCount = columnCount;
         _targetDockId = targetDockId;
         _regions = regions.ToArray();

@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-test-pack:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 11.0.x
+          dotnet-quality: preview
+
+      - name: Restore
+        run: dotnet restore CodeWF.AvaloniaControls.Dock.slnx
+
+      - name: Build
+        run: dotnet build CodeWF.AvaloniaControls.Dock.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test tests/CodeWF.AvaloniaControls.Dock.Tests/CodeWF.AvaloniaControls.Dock.Tests.csproj --configuration Release --no-build --verbosity normal
+
+      - name: Pack core library
+        run: dotnet pack src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj --configuration Release --no-build -p:GeneratePackageOnBuild=false --output artifacts/packages
+
+      - name: Pack theme library
+        run: dotnet pack src/CodeWF.AvaloniaControls.Dock.Themes/CodeWF.AvaloniaControls.Dock.Themes.csproj --configuration Release --no-build -p:GeneratePackageOnBuild=false --output artifacts/packages

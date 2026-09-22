@@ -2,6 +2,9 @@
   <Folder Name="/demos/">
     <Project Path="src/CodeWF.AvaloniaControls.DockReactiveUIDemo/CodeWF.AvaloniaControls.DockReactiveUIDemo.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CodeWF.AvaloniaControls.Dock.Tests/CodeWF.AvaloniaControls.Dock.Tests.csproj" />
+  </Folder>
   <Project Path="src/CodeWF.AvaloniaControls.Dock/CodeWF.AvaloniaControls.Dock.csproj" />
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
