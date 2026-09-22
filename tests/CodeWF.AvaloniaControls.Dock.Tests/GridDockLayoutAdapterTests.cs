@@ -25,10 +25,12 @@ public sealed class GridDockLayoutAdapterTests
     }
 
     [Fact]
-    public void RegionDefinitionRejectsOverlappingContentAndCollapseColumns()
+    public void RegionDefinitionAllowsContentAndCollapseColumnsToOverlap()
     {
-        Assert.Throws<ArgumentException>(() =>
-            new GridDockRegionDefinition([0], [0]));
+        var definition = new GridDockRegionDefinition([0], [0, 1]);
+
+        Assert.Equal(new[] { 0 }, definition.ContentColumns);
+        Assert.Equal(new[] { 0, 1 }, definition.CollapseColumns);
     }
 
     [Fact]

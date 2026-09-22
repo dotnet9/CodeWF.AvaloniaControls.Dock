@@ -29,8 +29,6 @@ public sealed class GridDockRegionDefinition
             throw new ArgumentException("Column indexes cannot be negative.", nameof(contentColumns));
         if (CollapseColumns.Any(column => column < 0))
             throw new ArgumentException("Column indexes cannot be negative.", nameof(collapseColumns));
-        if (ContentColumns.Intersect(CollapseColumns).Any())
-            throw new ArgumentException("Content and collapse columns cannot overlap.", nameof(collapseColumns));
     }
 
     public IReadOnlyList<int> ContentColumns { get; }
