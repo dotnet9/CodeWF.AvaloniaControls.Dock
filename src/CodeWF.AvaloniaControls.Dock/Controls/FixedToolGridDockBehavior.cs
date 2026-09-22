@@ -50,7 +50,10 @@ public static class FixedToolGridDockBehavior
         LayoutAdapterProperty.Changed.AddClassHandler<Control>((control, _) =>
         {
             if (GetIsEnabled(control))
+            {
+                UnsubscribeAll(control);
                 StartOwnerRefresh(control);
+            }
         });
     }
 
@@ -340,8 +343,7 @@ public static class FixedToolGridDockBehavior
 
             var matchingItems = gridDockItems.FirstOrDefault(items =>
                 ReferenceEquals(items.DataContext, Dock));
-            var itemsControl = matchingItems ?? gridDockItems.FirstOrDefault();
-            var grid = itemsControl?.ItemsPanelRoot as Grid;
+            var grid = matchingItems?.ItemsPanelRoot as Grid;
 
             return grid is { } layoutGrid &&
                    layoutGrid.ColumnDefinitions.Count == columnCount
@@ -413,6 +415,8 @@ public static class FixedToolGridDockBehavior
             _disposed = true;
             _control.LayoutUpdated -= OnLayoutUpdated;
 
+            RestoreSavedWidths();
+
             foreach (var source in _propertySources)
                 source.PropertyChanged -= OnDockChanged;
             foreach (var source in _collectionSources)
@@ -421,6 +425,21 @@ public static class FixedToolGridDockBehavior
             _propertySources.Clear();
             _collectionSources.Clear();
             _savedWidths.Clear();
+        }
+
+        private void RestoreSavedWidths()
+        {
+            if (_layoutGrid is null)
+                return;
+
+            foreach (var (column, width) in _savedWidths)
+            {
+                if (column >= 0 && column < _layoutGrid.ColumnDefinitions.Count)
+                    _layoutGrid.ColumnDefinitions[column].Width = width;
+            }
+
+            _layoutGrid.InvalidateMeasure();
+            _layoutGrid.InvalidateArrange();
         }
     }
 

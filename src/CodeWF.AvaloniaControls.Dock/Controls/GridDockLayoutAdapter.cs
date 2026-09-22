@@ -25,8 +25,12 @@ public sealed class GridDockRegionDefinition
             throw new ArgumentException("At least one content column is required.", nameof(contentColumns));
         if (CollapseColumns.Count == 0)
             throw new ArgumentException("At least one collapse column is required.", nameof(collapseColumns));
+        if (ContentColumns.Any(column => column < 0))
+            throw new ArgumentException("Column indexes cannot be negative.", nameof(contentColumns));
         if (CollapseColumns.Any(column => column < 0))
             throw new ArgumentException("Column indexes cannot be negative.", nameof(collapseColumns));
+        if (ContentColumns.Intersect(CollapseColumns).Any())
+            throw new ArgumentException("Content and collapse columns cannot overlap.", nameof(collapseColumns));
     }
 
     public IReadOnlyList<int> ContentColumns { get; }
@@ -54,6 +58,13 @@ public sealed class GridDockLayoutState
             throw new ArgumentException("Regions cannot contain null values.", nameof(regions));
         if (Regions.Any(region => region.CollapseColumns.Any(column => column < 0 || column >= columnCount)))
             throw new ArgumentException("A region contains a column outside the layout.", nameof(regions));
+
+        var collapseColumns = new HashSet<int>();
+        foreach (var region in Regions)
+        {
+            if (region.CollapseColumns.Any(column => !collapseColumns.Add(column)))
+                throw new ArgumentException("Regions cannot collapse the same column.", nameof(regions));
+        }
     }
 
     public int ColumnCount { get; }
@@ -115,8 +126,8 @@ public sealed class GridDockColumnLayoutAdapter : IGridDockLayoutAdapter
         if (regions.Any(region => region is null))
             throw new ArgumentException("Regions cannot contain null values.", nameof(regions));
         if (regions.Any(region =>
-                region.ContentColumns.Any(column => column >= columnCount) ||
-                region.CollapseColumns.Any(column => column >= columnCount)))
+                region.ContentColumns.Any(column => column < 0 || column >= columnCount) ||
+                region.CollapseColumns.Any(column => column < 0 || column >= columnCount)))
         {
             throw new ArgumentException("A region contains a column outside the layout.", nameof(regions));
         }
